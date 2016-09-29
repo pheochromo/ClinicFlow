@@ -1,0 +1,27 @@
+Expected Product Flow
+
+  Front                       |       Back
+                              |
+- feed data                   |
+- feed in changes             |
+                              |  - read in data
+                              |  - summary statistics
+                              |  - model queue
+- feed in requirements        |
+                              |  - simulations
+- produce summary statistics  |
+                              |  - schedule simulations
+                              |  - return results
+
+                              
+
+
+Tasks
+
+- front end
+- data storage + stimulation storage 
+- mathmatical modelling 
+- stmulation engine
+- optimal schedules
+- data visualization 
+- documentations
