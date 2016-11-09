@@ -1,0 +1,5 @@
+Hi
+
+The program included in here is not meant to be final code used in the project,
+but a quick attempt at an implementation to help find what would need to be tested,
+as well as potential problems with an implementation.
