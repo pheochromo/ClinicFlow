@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Display data</title>
+	</head>
+	
+	<body>
+		<table>
+			<thead>
+				<th> Name</th>
+				<th> Reserved Date</th>
+			</thead>
+			<tbody>
+				{% for row in data%}
+					<tr>
+						<td>{{ row[0] }}</td>
+						<td>{{ row[1] }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			
+		</table>
+		<form>
+			<input type="button" value ="back" onclick="history.go(-1);return true;">
+		</form>
+	</body>
+</html>

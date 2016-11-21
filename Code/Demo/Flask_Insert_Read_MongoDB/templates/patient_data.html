@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Insert patient data</title>
+        
+    </head>
+    <body>
+	<h1>Insert Patient Data</h1>
+	
+	<div id="container">
+				
+				<div id="content">
+                <form method="post" action="{{ url_for('hello') }}">
+                  <label for="Pname">Please enter patient name:</label>
+                  <input type="text" name="Pname" /><br />
+                  <label for="Rdate">Please enter Reserved Date:</label>
+                  <input type="text" name="Rdate" /><br />
+                  <input type="submit" />
+                </form>
+            </div> 
+				
+				<form method="post" action="{{ url_for('displaypatient') }}">
+					<input type ="submit" value ="display data">
+				</form>
+	</div>
+    </body>
+</html>
