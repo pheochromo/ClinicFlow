@@ -1,0 +1,4 @@
+A A 1 1 uniform 0 0
+B A 1 1 uniform 5 3
+C A,B 1 1 uniform 7 2
+D A,B 1 1 uniform 3 3
