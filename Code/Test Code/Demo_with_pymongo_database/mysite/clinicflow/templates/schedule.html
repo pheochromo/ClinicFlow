@@ -1,0 +1,34 @@
+<!-- schedule.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clinic flow schdule</title>
+  </head> 
+  <body>
+    <h1>Clinic schedule</h1>
+    <form>
+      {{result.attribute1}}
+      <input type="text" placeholder="{{result.attribute1}}">
+      </br>
+      {{result.attribute2}}
+      <input type="date" placeholder="{{result.attribute2}}">
+       </br>
+      {{result.attribute3}}
+      <input type="time" placeholder="{{result.attribute3}}">
+       </br>
+      Visit:</br>
+      {% for value  in result.provider%}
+        
+       
+
+        <input type="checkbox" name="providers" value="{{value}}"> 
+         {{value}}
+      {% endfor %}
+      </br>
+      <input type="submit" value="submit">
+    </form>
+    <a href="http://127.0.0.1:8000/setting">to_setting</a>
+    
+
+  </body>
+</html>

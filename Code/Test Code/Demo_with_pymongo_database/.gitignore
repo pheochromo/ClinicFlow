@@ -1,0 +1,4 @@
+## Uncomment to ignore
+#__pycache__
+#__init__.py
+#/mysite/db.sqlite3

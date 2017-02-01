@@ -1,0 +1,19 @@
+<!-- setting.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clinic flow setting</title>
+  </head> 
+  <body>
+    <h1>Clinic setting</h1>
+      
+      <form method="post">
+       {% csrf_token %}
+          Providers:
+          <input type="text" name="Clinic_Provider" value="{{provider}}" >
+          <input type="submit" name="Change_Provider" value="change_provider">
+      </form>
+       <a href="http://127.0.0.1:8000/schedule">to_schedule</a>
+  </body>
+
+</html>
