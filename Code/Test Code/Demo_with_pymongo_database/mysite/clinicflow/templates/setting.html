@@ -1,10 +1,14 @@
-<!-- setting.html -->
+<!-- setting.html 
 <!DOCTYPE html>
 <html>
   <head>
     <title>Clinic flow setting</title>
   </head> 
-  <body>
+  <body> -->
+  {% extends "base.html" %}
+{% load staticfiles%}
+
+{% block content %}
     <h1>Clinic setting</h1>
       
       <form method="post">
@@ -14,6 +18,21 @@
           <input type="submit" name="Change_Provider" value="change_provider">
       </form>
        <a href="http://127.0.0.1:8000/schedule">to_schedule</a>
-  </body>
+       <br>
+       <hr>
+       <br>
+       Create a schedule for date:
+       <form method="post">
+             {% csrf_token %}
+            <input type="date" name="Schedule_Date" placeholder="Date">
+            <br>
+            <input type="submit" name="Create_Schedule" value="Create">
+            
+       </form>
+       <br>
+         <a href="http://127.0.0.1:8000/schedulelists">to_schedule_lists</a>
 
-</html>
+         {% endblock %}
+ <!-- </body>
+
+</html> -->

@@ -1,0 +1,47 @@
+  {% extends "base.html" %}
+{% load staticfiles%}
+
+{% block content %}   
+ <h1>Clinic Single Schedule</h1>
+		<br>
+    	<h2> Add Patient</h2>
+    <form method='post'>
+    {% csrf_token %}
+	      Name
+	      <input type="text" name="Name" placeholder="Name">
+	      </br>
+	      
+	      Time
+	      <input type="time" name="Time" placeholder="Time">
+	       </br>
+	      Visit:</br>
+	      {% for value  in information.provider%}
+	        
+	       
+
+	        <input type="checkbox" name="Providers" value="{{value}}"> 
+	         {{value}}
+	      {% endfor %}
+	      </br>
+	      <input type="submit" name="AddPatient" value="submit">
+
+    </form>
+    <br>
+    <h2>Existed Patient</h2>
+    		<ul>
+		    	  {% for value  in patientinfo %}
+			        <li>{{value.Name}} at {{value.Time}} visit  {{value.Visit}}
+			       		<form method='post'>
+			       		 {% csrf_token %}
+			       			<input type="hidden" name="the_patient" value="{{value.Name}}">
+			       			<input type="submit" name="DeletePatient" value="delete">
+			       		</form>
+			      {% endfor %}
+
+    		</ul>
+
+    	<hr>
+    	<h2> predict result </h2>
+    	<br>
+       <a href="http://127.0.0.1:8000/schedulelists">to_schedule_lists</a>
+  {% endblock %}

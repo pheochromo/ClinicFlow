@@ -1,0 +1,199 @@
+
+/*----------------- entire userInterface begins -----------------*/
+/*css reset*/
+html,body,div,span,object,iframe,h1,h2,h3,h4,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,tr,th,td,aside,canvas,details,figure,footer,header,hgroup,menu,nav,section,time,mark,audio,video{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    background: transparent
+}
+
+html {
+    height: 100%;
+    width: 100%
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif,Arial;
+    font-size: 15px;
+    line-height: 1;
+    background-color: #ffffff; 
+}
+
+.CenterArea {
+    width: 100%;
+    position: absolute;
+    top: 73px;
+    bottom: 40px;
+    background-color: #ffffff
+}
+
+.main-display {
+    height: 100%;
+    padding-left: 240px;
+    padding-right: 310px;
+    position: relative
+}
+
+
+/*----------------- top panel begins ------------------*/
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent
+}
+
+.userInterface {
+    height: 100%;
+    width: 100%;
+    min-width: 930px;
+    min-height: 500px;
+    position: relative;
+}
+
+.header {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: #FFF;
+    box-shadow: 0px 5px 20px #dbdbdb;
+}
+
+.user {
+    float: right;
+    height: 100%;
+    width: 100px;
+    padding-right: 40px; 
+    padding-top: 25px; 
+    font-size: 16px; 
+    color: #73797b; 
+	cursor: pointer;
+}
+
+.header-container {
+    height: 100%;
+    width: 100%;
+    position: relative
+}
+
+.header-container .logo {
+    float: left;
+    height: 100%;
+    width: 184px;
+    padding-left: 25px
+}
+
+.header-container .logo h1 {
+    width: 162px;
+    height: 100%;
+    background: url(../images/logo.png) no-repeat 0 50%;
+    background-size: 170px 40px;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden
+}
+
+
+/*----------------- top panel ends ------------------*/
+
+
+/*-------- left panel begins --------*/
+
+li {
+    list-style: none
+}
+
+.left {
+    width: 210px;
+    padding: 20px 10px 0 25px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; 
+    cursor: default
+}
+
+.control-panel-container ul li i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 16px;
+    height: 16px
+}
+
+.control-panel-container {
+    padding-top: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc
+}
+
+.control-panel-container ul li {
+    height: 50px
+}
+
+.control-panel-container ul li a {
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 36px;
+    cursor: pointer;
+    border-radius: 4px;
+    position: relative;
+    color: #333;
+    text-decoration: none;
+}
+
+.control-panel-container ul .control-panel a,.control-panel-container ul .control-panel a:hover {
+    background-color: #F0F0F0; 
+    cursor: pointer
+}
+
+/*------------------ left panel ends ---------------------*/
+
+
+
+.bottom {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #73797b;
+}
+
+.bottom-contents {
+    height: 100%;
+    position: relative;
+    padding-left: 260px;
+    padding-right: 290px
+}
+
+.trademark-container {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.trademark {
+    display: block;
+    width: 200px;
+    height: 32px;
+    top: 27px; 
+    left: 25px;    
+    position: absolute;
+    font-size: 12px;
+}
+
+
+
+/*----------------- bottom panel ends ----------------------*/
+/*----------------- entire userInterface ends -----------------*/

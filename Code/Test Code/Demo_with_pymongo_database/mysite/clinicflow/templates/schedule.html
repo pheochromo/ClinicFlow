@@ -1,10 +1,8 @@
 <!-- schedule.html -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Clinic flow schdule</title>
-  </head> 
-  <body>
+  {% extends "base.html" %}
+{% load staticfiles%}
+
+{% block content %}  
     <h1>Clinic schedule</h1>
     <form>
       {{result.attribute1}}
@@ -30,5 +28,4 @@
     <a href="http://127.0.0.1:8000/setting">to_setting</a>
     
 
-  </body>
-</html>
+  {% endblock %}

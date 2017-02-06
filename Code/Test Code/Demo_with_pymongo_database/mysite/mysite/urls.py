@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 
-from clinicflow.views import manage, viewer, login, schedule, setting
+from clinicflow.views import manage, viewer, login, schedule, setting, schedulelists, singleschedule
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^viewer$', viewer, name='viewer'),  
     url(r'^schedule$', schedule, name='schedule'),  
     url(r'^setting$', setting, name='setting'), 
+    url(r'^schedulelists$', schedulelists, name='schedulelists'),
+    url(r'^singleschedule$', singleschedule, name='singleschedule'),
 ]
 
 if settings.DEBUG:

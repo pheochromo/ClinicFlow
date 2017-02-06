@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ClinicFlow</title>
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+	</head>
+	
+	<body>
+		<div class="userInterface">
+			<!--------------------------------------Top Bar ------------------------>
+			<div class="header">
+				<div class="header-container">
+
+					<div class="logo">
+						<h1>ClinicFlow</h1>
+					</div>
+
+					<div class="user">
+						{% if request.user.is_authenticated %}
+							<h1> User: {{request.user.username|title}} </h1>
+						{% else %}
+							<h1> User: Guest </h1>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<!--------------------------------------Top Bar end ------------------------>	
+			
+			
+				
+	
+		<!------------------------------------ Center Area ------------------------>
+
+		<div class="CenterArea">
+			<div class="main-display">
+			
+				<!------------------------------- left-panel begin ---------------------------->
+				<div class="left">
+					<div class="control-panel-container">
+						<ul>
+							<li class="control-panel"><a>Overview</a></li>
+							<li><a>Constraints</a></li>
+							<li><a>Simulation</a></li>
+							<li><a>Generate</a></li>
+							<li><a>Management</a></li>
+						</ul>
+					</div>
+				</div>
+				<!------------------------------- left-panel end ---------------------------->			
+			
+			{% block content %}{% endblock %}
+			</div>
+		</div>
+	
+		<!------------------------------------ Center Area end ------------------------>	
+		
+		<!------------------------------------ Bottom begin ---------------->
+
+
+			<div class="bottom">
+				<div class="bottom-contents">				
+
+					<div class="trademark-container">
+						<a class="trademark">ClinicFlow 2017</a>
+					</div>
+				
+				</div>
+			</div>
+			<!------------------------------------ Bottom end ------------------>
+		</div>	
+	</body>
+</html>
