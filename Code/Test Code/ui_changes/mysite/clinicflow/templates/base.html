@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+  <!-- google sans-serif font "Ubuntu" -->
+  <title>ClinicFlow</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+  <div class="userInterface">
+    <!-- header -->
+    <header class="header">
+      <div class="logo">
+        <a href="./index.html">
+          <img class="logo-image" alt="clinicflow logo" src="../static/images/logo.png">
+        </a>
+      </div>
+      <div class="user">
+        {% if request.user.is_authenticated %}
+        <p> User: {{request.user.username|title}} </p> {% else %}
+        <p> User: Guest </p> {% endif %}
+      </div>
+    </header>
+    <!-- center Area -->
+    <div class="center">
+      <!-- sidebar -->
+      <aside class="side-bar">
+        <section class="side-nav">
+          <a class="nav-link" href="./index.html">Dashboard</a>
+        </section>
+        <section class="side-nav">
+          <a class="nav-link" href="./index.html">Constraints</a>
+        </section>
+        <section class="side-nav">
+          <a class="nav-link" href="./schedule.html">Simulation</a>
+        </section>
+        <section class="side-nav">
+          <a class="nav-link" href="./index.html">Generate</a>
+        </section>
+        <section class="side-nav">
+          <a class="nav-link" href="./index.html">Management</a>
+        </section>
+      </aside>
+      <!-- main content -->
+      <article class="content">
+        {% block content %}{% endblock %}
+      </article>
+    </div>
+  </div>
+  <!-- footer -->
+  <footer class="footer">
+    <a class="trademark">ClinicFlow 2017</a>
+  </footer>
+</body>
+
+</html>
+
