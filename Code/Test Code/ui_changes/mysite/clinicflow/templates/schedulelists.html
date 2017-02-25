@@ -1,17 +1,17 @@
  {% extends "base.html" %} {% load staticfiles%} {% block content %}
 <article class="schedulelists">
-  <h1>Clinic schedule lists</h1>
+  <h1>Previous Schedules</h1>
   <ul id="schedulelists-list">
     {% for each in date %}
     <li><a href="http:////127.0.0.1:8000/singleschedule?date={{each}}"> {{each}} </a>
       <form id="each-schedule-list" method="post">
         {% csrf_token %}
         <input class="form-input" type="hidden" name="the_date" value="{{each}}">
-        <input class="form-input" type="submit" name="DeleteSchedule" value="Delete">
+        <input class="form-input" id="schedulelist-delete-button" type="submit" name="DeleteSchedule" value="Delete">
       </form>
       {% endfor %}
   </ul>
   <br>
-  <a class="general-button" href="http://127.0.0.1:8000/setting">To Setting</a> {% endblock %}
+  <a class="general-button" id="schedulelist-create-button" href="http://127.0.0.1:8000/setting">Create Schedule</a> {% endblock %}
 </article>
 

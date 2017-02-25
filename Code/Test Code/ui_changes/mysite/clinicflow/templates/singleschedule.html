@@ -26,7 +26,7 @@
         <form id="added-patient-list" method='post'>
           {% csrf_token %}
           <input class="form-input" type="hidden" name="the_patient" value="{{value.Name}}">
-          <input class="form-input" id="delete-button" type="submit" name="DeletePatient" value="delete">
+          <input class="form-input" id="singleschedule-delete-button" type="submit" name="DeletePatient" value="delete">
         </form>
         {% endfor %}
     </ul>
