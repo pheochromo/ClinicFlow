@@ -5,17 +5,17 @@
   <section class="schedule-section">
     <form>
       {{result.attribute1}}
-      <input type="text" placeholder="{{result.attribute1}}">
+      <input class="form-input" type="text" placeholder="{{result.attribute1}}">
       </br>
       {{result.attribute2}}
-      <input type="date" placeholder="{{result.attribute2}}">
+      <input class="form-input" type="date" placeholder="{{result.attribute2}}">
       </br>
       {{result.attribute3}}
-      <input type="time" placeholder="{{result.attribute3}}">
+      <input class="form-input" type="time" placeholder="{{result.attribute3}}">
       </br>
       Visit:</br>
       {% for value in result.provider%}
-      <input type="checkbox" name="providers" value="{{value}}"> {{value}} {% endfor %}
+      <input class="form-input" type="checkbox" name="providers" value="{{value}}"> {{value}} {% endfor %}
       </br>
       <input type="submit" value="submit">
     </form>
