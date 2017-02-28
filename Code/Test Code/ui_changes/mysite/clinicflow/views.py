@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 import pymongo
 from pymongo import MongoClient #import MongoDB
@@ -15,7 +16,7 @@ schedule_list = db.schedulelist # a list of schedule, contain date and settings
 def setting(request):
     if request.method =='POST': #if post/submit
         if request.POST.get("Change_Provider"):
-            
+
             data = request.POST.get('Clinic_Provider') # change clinic setting
             strings = data.split("/")
             while '' in strings:
@@ -28,13 +29,14 @@ def setting(request):
             patientsetting = settings.find_one({"object":"patient"})
             schedule = {"Date":datedate, "setting1": patientsetting} # store in schedule list
             schedule_list.update_one({"Date":datedate}, {'$set':schedule},upsert=True) #prevent duplicate
-    
-    result2 = settings.find_one({"object":"patient"}) #get settings 
+            return HttpResponseRedirect('./schedulelists')
+
+    result2 = settings.find_one({"object":"patient"}) #get settings
     providers =""
     for single in result2["provider"]:
         providers=providers+single+"/" # get teh value from database and store into template
     return render(request, 'setting.html', {"provider":providers})
-    
+
 def schedulelists(request): #display the list of existed schedules based on date
     if request.method =='POST':
         if request.POST.get("DeleteSchedule"): #delete a schedule based on the date
@@ -49,9 +51,9 @@ def schedulelists(request): #display the list of existed schedules based on date
     for each in result:
         datearray.append(each["Date"])# get teh date from schedule list
     datearray.sort()
-    return render(request, 'schedulelists.html', {"date":datearray})    
+    return render(request, 'schedulelists.html', {"date":datearray})
 
-    
+
 def singleschedule(request):
     date=''
     patient =[]
@@ -62,7 +64,7 @@ def singleschedule(request):
         resultdate = db[date+'result'] # create simulation result collection for that day
         result = schedule_list.find_one({'Date':date})
         result1 = result['setting1']
-        
+
         if request.method =='POST':
             if request.POST.get("AddPatient"):# if add patients
                 name = request.POST.get('Name')
@@ -73,22 +75,22 @@ def singleschedule(request):
             if request.POST.get("DeletePatient"): # if delete patients
                 the_select = request.POST.get('the_patient')
                 patientdate.delete_one({'Name': the_select})
-        
+
         patients =patientdate.find()# display the patient reserved at that day
         for single in patients:
             patient.append(single)
-    
+
     return render(request,'singleschedule.html',{'patientinfo':patient,"information": result1})
-    
+
 def schedule(request): #sample of changing setting
     result1 = settings.find_one({"object":"patient"})
     return render(request, 'schedule.html', {"result": result1})
-    
+
 def manage(request):
     return render(request, 'manage.html')
-    
+
 def viewer(request):
-    return render(request, 'viewer.html')    
-    
+    return render(request, 'viewer.html')
+
 def login(request):
-    return render(request, 'login.html')      
+    return render(request, 'login.html')
