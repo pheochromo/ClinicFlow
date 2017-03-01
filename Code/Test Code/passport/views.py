@@ -84,16 +84,40 @@ def singleschedule(request):
 def passport(request):
     provider_from_set = settings.find_one({"object":"patient"}) #get settings
     providers =provider_from_set["provider"]
-    
+    timebound1=0
+    timebound2=0
+    if 'timebound1' in request.GET and request.GET['timebound1']!= "":
+     #   date = request.GET['timebound1'].splite('/')
+     ##
+     ## only work for yyyy-mm-dd format input
+     ## get parameter don't take '/' as value
+     ##
+        date  = request.GET['timebound1'].split('-')
+        #timebound1 = int(date[0])*100+int(date[1])+int(date[2])*10000
+        timebound1 = int(date[1])*100+int(date[2])+int(date[0])*10000
+    if 'timebound2' in request.GET and request.GET['timebound2']!= "":
+      #  date = request.GET['timebound2'].splite('/')
+        date  = request.GET['timebound2'].split('-')
+        #timebound2 = int(date[0])*100+int(date[1])+int(date[2])*10000 
+        timebound2 = int(date[1])*100+int(date[2])+int(date[0])*10000 
     passport = db.passport
+    print(timebound1)
+    print(timebound2)
     if request.method =='POST':
+        
          if request.POST.get("Add_Passport"):
              reason=request.POST.get('Reason')
              reasons = reason.splitlines()
              service = request.POST.get('Service')
              services = service.splitlines()
              date = request.POST.get('Date')
-             dates = date.splitlines()
+             sdate = date.splitlines()
+             dates=[]
+             for each in sdate:
+                 single = each.split('/')
+                 value = int(single[0])*100+int(single[1])+int(single[2])*10000
+                 dates.append(value)
+             #dates = date.splitlines()
              schedule_time = request.POST.get('Scheduled_Time')
              schedule_times = schedule_time.splitlines()
              arrive_time = request.POST.get('Arrival_Time')
@@ -139,17 +163,48 @@ def passport(request):
                      one_patient.update({title[0]:title[1][i]})
                  passport.insert(one_patient)
                  i=i+1
-#==============================================================================
-#              if len(reasons) == len(services):
-#                  i=0
-#                  for line in reasons:
-#                      one_patient={'Reason':line, 'Service': services[i]}
-#                      passport.insert_one(one_patient)
-#                      i=i+1
-#==============================================================================
-         return  redirect("/passport")
-    passports = passport.find()
 
+         if timebound1 !=0 and timebound2 != 0:
+             time11=timebound1%100
+             timebound1 = int(timebound1/100)
+             time12 = timebound1%100
+             timebound1 =int(timebound1/100)
+             time1 = str(timebound1)+'-'+str(time12)+'-'+str(time11)
+             time21=timebound2%100
+             timebound2 = int(timebound2/100)
+             time22 = timebound2%100
+             timebound2 =int(timebound2/100)
+             time2 = str(timebound2)+'-'+str(time22)+'-'+str(time21)
+             return HttpResponseRedirect("/passport?timebound1="+str(time1)+"&timebound2="+str(time2))
+         elif timebound1 !=0 and timebound2==0 :
+             time11=timebound1%100
+             timebound1 = int(timebound1/100)
+             time12 = timebound1%100
+             timebound1 =int(timebound1/100)
+             time1 = str(timebound1)+'-'+str(time12)+'-'+str(time11)
+             return HttpResponseRedirect("/passport?timebound1="+str(time1))
+         elif timebound1 ==0 and timebound2 !=0:
+             time21=timebound2%100
+             timebound2 = int(timebound2/100)
+             time22 = timebound2%100
+             timebound2 =int(timebound2/100)
+             time2 = str(timebound2)+'-'+str(time22)+'-'+str(time21)
+             return HttpResponseRedirect("/passport?timebound2="+str(time2))
+         else:
+             return  HttpResponseRedirect("/passport")
+    if timebound1 !=0 and timebound2 !=0:
+        if timebound2 < timebound1:
+            passports = passport.find({'Date': {'$gte': timebound2, '$lte':timebound1}})
+        elif timebound1 < timebound2:
+            passports = passport.find({'Date': {'$gte': timebound1, '$lte':timebound2}})
+        else:
+            passports = passport.find({'Date':timebound1})
+    elif timebound1 !=0 and timebound2==0 :
+        passports = passport.find({'Date':timebound1})
+    elif timebound1 ==0 and timebound2 !=0:
+        passports = passport.find({'Date':timebound2})
+    else:
+        passports = passport.find()
 
     return render(request,'passport.html',{'passport':passports, 'providers':providers})
 
@@ -157,6 +212,15 @@ def passport(request):
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+@register.filter
+def get_date(date):
+    day = date%100
+    date = int(date/100)
+    month = date%100
+    date = int(date/100)
+    newdate =  str(date)+'/'+str(month)+'/'+str(day)
+    return newdate
+    
 def schedule(request): #sample of changing setting
     result1 = settings.find_one({"object":"patient"})
     return render(request, 'schedule.html', {"result": result1})

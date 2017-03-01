@@ -4,6 +4,12 @@
 
 {% block content %}
     <h1>Clinic Passport</h1>
+    <form method="get">
+    search by time range
+        <input type="date" name="timebound1">
+        <input type='date' name="timebound2">
+        <input type="submit" name="search_by_range" value="Search">
+    </form>
     <table>
     <tr>
       <th>Reason</th>
@@ -30,7 +36,7 @@
        <tr>
       <th>{{each.Reason}}</th>
       <th>{{each.Service}}</th>
-      <th>{{each.Date}}</th>
+      <th>{{each.Date|get_date}}</th>
       <th>{{each.Scheduled_Time}}</th>
       <th>{{each.Arrival_Time}}</th>
       <th>{{each.Surgery_Type}}</th>
