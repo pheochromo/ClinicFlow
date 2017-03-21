@@ -21,11 +21,22 @@ class PatientSchedule:
         
         patientFile.close()
 
-    def schedule(self):
-        counter = 0
+    def schedule(self,fileName):
+        counter = 1
+        arrivalFile = open(fileName,mode ='r')
+        arrMean = 5
+        arrVar = 1
+        for line in arrivalFile:
+            data = line.split()
+            if(data[0] == 'Arrivals'):
+                arrMean = data[5]
+                arrVar = data[6]
+        
         for element in self.patients:
-            self.patients[counter].assignTime(counter*10 + NP.random.poisson(5,1)) ##schedule a patient every 15 minutes
+            arrTime = int(round(counter*15 + NP.random.normal(arrMean,arrVar)))
+            self.patients[counter-1].assignTime(arrTime) ##schedule a patient every 15 minutes
             counter += 1
+        arrivalFile.close()
     
     def loadSchedule(self):
         print("loading schedule \n")
@@ -34,9 +45,9 @@ class PatientSchedule:
 #def main():
 #    file = "TestPatients.txt"
 #    newSchedule = PatientSchedule(file)
-#   newSchedule.schedule()
+#    newSchedule.schedule("NewClinicFile.txt")
 #    for person in newSchedule.patients:
-#        print(person.name, person.arrivalTime[0], person.stations)
+#        print(person.name, person.arrivalTime, person.stations)
 
     
 #if __name__ == "__main__": main()

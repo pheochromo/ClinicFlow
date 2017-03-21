@@ -37,7 +37,11 @@ class ClinicStation:
     
     def getRandomness(self):
         if(self.varianceType == "uniform"):
-             return (self.mean +random.randint(0,self.var))
+            return (self.mean +random.randint(0,self.var))
+        if(self.varianceType == "normal"):
+            return random.normal(self.mean,self.var)
+        if(self.varianceType == "exponetial"):
+            return int(round(random.exponential(1/self.mean)))
         else:
             return 0
                 

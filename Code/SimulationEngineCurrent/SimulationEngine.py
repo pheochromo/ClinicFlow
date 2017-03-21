@@ -93,7 +93,7 @@ def SimulationEngine(clinicFile,employeeFile,patientFile,employeeScheduleFile,pa
     fileName = patientFile
     patientSchedule = PatientSchedule(fileName)
     if(patientScheduleFile == "generated"):  
-        patientSchedule.schedule()
+        patientSchedule.schedule(clinicFile)
     else:
         patientSchedule.loadSchedule(patientScheduleFile)
     
