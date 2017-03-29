@@ -1,7 +1,43 @@
 
-Average Time in Clinic: 0 
-Average Time in Clinic: 0 
-Average Time in Clinic: 0 
-Average Time in Clinic: 0 
-Average Time in Clinic: 0 
-Average Time in Clinic: 0 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 15  Average Idle Time for a patient: 15 
+Average Time in Clinic: -1  Average Idle Time for a patient: -1 
+Average Time in Clinic: -1  Average Idle Time for a patient: -1 
+Average Time in Clinic: -1  Average Idle Time for a patient: -1 
+Average Time in Clinic: -1  Average Idle Time for a patient: -1 
+Average Time in Clinic: -1  Average Idle Time for a patient: -1 
+Average Time in Clinic: -1  Average Idle Time for a patient: -1 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 18  Average Idle Time for a patient: 18 
+Average Time in Clinic: 18  Average Idle Time for a patient: 18 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 15  Average Idle Time for a patient: 15 
+Average Time in Clinic: 16  Average Idle Time for a patient: 16 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 15  Average Idle Time for a patient: 15 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 19  Average Idle Time for a patient: 19 
+Average Time in Clinic: 20  Average Idle Time for a patient: 20 
+Average Time in Clinic: 19  Average Idle Time for a patient: 19 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 
+Average Time in Clinic: 19  Average Idle Time for a patient: 19 
+Average Time in Clinic: 17  Average Idle Time for a patient: 17 

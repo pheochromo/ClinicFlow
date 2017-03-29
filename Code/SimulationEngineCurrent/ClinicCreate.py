@@ -57,7 +57,7 @@ def clinicCreate():
     f = open(fileName, 'w') 
     ## read in other data from another database
     f.write('Arrivals' + ' ' + 'Arrivals' + ' ' + '1' + ' ' +  '1' + ' ' + 'normal' + ' ' + repr(apMean) + ' ' + repr(apStd) + '\n')
-    
+    previousDests = []
     for i in range(3,len(headerNames),2):
         sectionName = headerNames[i][:-7]  
         sectionName = ''.join(sectionName.split())  
@@ -69,8 +69,11 @@ def clinicCreate():
     
         secMean = secDiff.mean()[0]*60 # mean of distribution
         secStd = secDiff.std()[0] *60# std of distribution
+        previousDests.append(sectionName) #','.join(previousDests), replace the section name to create prerequisites; for no prerequesites use sectionName 
         f.write(sectionName + ' ' + sectionName + ' ' + '1' + ' ' +  '1' + ' ' + 'exponential' + ' ' + repr(secMean) + ' ' + repr(secStd))
         if(i != len(headerNames) - 2):
             f.write('\n')
     f.close()
     return fileName
+    
+## There needs to be another file that contains the qualitative data and that needs to be merged with the data file created here

@@ -1,4 +1,4 @@
-NurseAshley 0,120,210,225 Registration
+NurseAshley 0,145,210,225 Registration
 NurseBrook 0,180,255,270 RNInterview
 NurseCameron 0,160,240,255 LaboratoryECG
 NurseDevon 0,140,225,240 LaboratoryBloodwork
