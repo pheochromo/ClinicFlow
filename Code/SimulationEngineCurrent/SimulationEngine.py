@@ -52,22 +52,27 @@ def workerRun(env,worker,clinic,resources):
     yield env.timeout(worker.scheduledTime)
     print('%s arriving at %s' % (worker.name, prettyTime(startTime,env.now)))
     while(patientCompleted < patientCount):
+        found = False
         for i in range(0,len(resources)):
-            if worker.station == clinic.stations[i].name:
+            if (clinic.stations[i].name in worker.station):
                 with resources[i].request(priority=0) as req:
                     yield req
-                    print('%s starting work at %s %s' % (worker.name,clinic.stations[i].name, prettyTime(startTime,int(env.now))))
-                    clinic.stations[i].activate()
-                    resources[i].release(req)
-                    yield env.timeout(worker.breakTime(env.now))
-                    with resources[i].request(priority=0) as req2:
-                        yield req2
-                        clinic.stations[i].deactivate()
-                        resources[i].release(req2)
-                        if(patientCompleted == patientCount):
-                            break
-                        print('%s leaving work at %s %s' % (worker.name,clinic.stations[i].name, prettyTime(startTime,int(env.now))))
-                        yield env.timeout(15) # each break period is 15 minutes
+                    if (clinic.stations[i].maximum > clinic.stations[i].count):
+                        found = True
+                        print('%s starting work at %s %s' % (worker.name,clinic.stations[i].name, prettyTime(startTime,int(env.now))))
+                        clinic.stations[i].activate()
+                        resources[i].release(req)
+                        yield env.timeout(worker.breakTime(env.now))
+                        with resources[i].request(priority=0) as req2:
+                            yield req2
+                            clinic.stations[i].deactivate()
+                            resources[i].release(req2)
+                            if(patientCompleted == patientCount):
+                                break
+                            print('%s leaving work at %s %s' % (worker.name,clinic.stations[i].name, prettyTime(startTime,int(env.now))))
+                            yield env.timeout(15) #break is 10 minutes
+        if(found == False):
+            yield env.timeout(5) # each recheck station period is 5 minutes
     print('%s going home at %s' % (worker.name, prettyTime(startTime,env.now)))            
 #Use the following to rewrite this and fix it
 #http://simpy.readthedocs.io/en/latest/simpy_intro/process_interaction.html
@@ -88,14 +93,15 @@ def patientRun(env, patient,clinic,resources):
                         patient.addServiceTime(serviceTime)
                         yield env.timeout(serviceTime)
                         waitTime = randint(1,5)
-                        patient.addServiceTime(serviceTime)
-                        yield env.timeout(waitTime) #time to allow provider to prepare for next person, return to clinic
+                        #patient.addServiceTime(serviceTime)
+                        #yield env.timeout(waitTime) #time to allow provider to prepare for next person, return to clinic
                         resources[i].release(req)
                         print('%s leaving service at %s %s' % (patient.name,clinic.stations[i].name, prettyTime(startTime,int(env.now))))
                         patient.addLocation(clinic.stations[i].name) # Patient completed a location
                         if(patient.locations == []): # check if patient is finished
                             patient.completed(int(env.now) - patient.arrivalTime) #record when the patient finished
                             patientCompleted = patientCompleted + 1
+                        yield env.timeout(waitTime) #time to allow provider to prepare for next person, return to clinic
         yield env.timeout(randint(1,3))
         
     

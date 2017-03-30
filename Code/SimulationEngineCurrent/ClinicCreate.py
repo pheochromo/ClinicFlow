@@ -70,7 +70,7 @@ def clinicCreate():
         secMean = secDiff.mean()[0]*60 # mean of distribution
         secStd = secDiff.std()[0] *60# std of distribution
         previousDests.append(sectionName) #','.join(previousDests), replace the section name to create prerequisites; for no prerequesites use sectionName 
-        f.write(sectionName + ' ' + sectionName + ' ' + '1' + ' ' +  '1' + ' ' + 'exponential' + ' ' + repr(secMean) + ' ' + repr(secStd))
+        f.write(sectionName + ' ' + sectionName + ' ' + '2' + ' ' +  '1' + ' ' + 'exponential' + ' ' + repr(secMean) + ' ' + repr(secStd))
         if(i != len(headerNames) - 2):
             f.write('\n')
     f.close()
