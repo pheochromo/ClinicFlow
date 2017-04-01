@@ -12,21 +12,22 @@ class Clinic:
         self.stations = []
         for line in clinicFile:
             data = line.split()
-            temp = ClinicStation(data[0], data[1].split(','),data[2],data[3],data[4],data[5],data[6])
-            self.stations.append(temp)
+            if(data[0] != 'Arrivals'):
+                temp = ClinicStation(data[0], data[1].split(','),data[2],data[3],data[4],data[5],data[6])
+                self.stations.append(temp)
         clinicFile.close()
 
         
         
         
 #Test Harness
-#def main():
-#   file = "ClinicFile1.txt"
-#    newClinic = Clinic(file)
-#    for station in newClinic.stations:
-#        print(station.name, station.prerequesites, station.maximum, station.minimum,station.varianceType, station.mean, station.var)
+def main():
+   file = "ClinicFile1.txt"
+   newClinic = Clinic(file)
+   for station in newClinic.stations:
+       print(station.name, station.prerequesites, station.maximum, station.minimum,station.varianceType, station.mean, station.var)
  
-#if __name__ == "__main__": main()
+if __name__ == "__main__": main()
 
 
 ## ability to add constraints to optimization schedules

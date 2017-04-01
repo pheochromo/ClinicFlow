@@ -8,9 +8,8 @@ class HealthCareWorker:
         self.type = "Nurse" #distinguish between types of workers
         self.breaks = breakTimes
         self.scheduledTime =  int(self.breaks[0])  # when they are scheduled to start
-        self.station = workStation
+        self.station = workStation.split(",")
         self.breakCount = 0
-    
     def schedule(self, time):
         self.scheduledTime = time
         
