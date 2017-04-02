@@ -1,0 +1,25 @@
+<!-- schedule.html -->
+{% extends "base.html" %} {% load staticfiles%} {% block content %}
+<article class="schedule">
+  <h1>Clinic schedule</h1>
+  <section class="schedule-section">
+    <form>
+      {{result.attribute1}}
+      <input class="form-input" type="text" placeholder="{{result.attribute1}}">
+      </br>
+      {{result.attribute2}}
+      <input class="form-input" type="date" placeholder="{{result.attribute2}}">
+      </br>
+      {{result.attribute3}}
+      <input class="form-input" type="time" placeholder="{{result.attribute3}}">
+      </br>
+      Visit:</br>
+      {% for value in result.provider%}
+      <input class="form-input" type="checkbox" name="providers" value="{{value}}"> {{value}} {% endfor %}
+      </br>
+      <input type="submit" value="submit">
+    </form>
+    <a href="http://127.0.0.1:8000/setting">to_setting</a>
+    <a href="http://127.0.0.1:8000/schedulelists">to_schedule_list</a> {% endblock %}
+  </section>
+</article>

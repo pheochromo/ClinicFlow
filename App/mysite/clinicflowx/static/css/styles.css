@@ -1,0 +1,369 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-size: 100%;
+  background: transparent;
+  color: #292929;
+}
+
+html {
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  min-height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.userInterface {
+  min-height: calc(100vh - 55px);
+}
+
+
+/*----------------- top panel ------------------*/
+
+.header {
+  position: fixed;
+  display: block;
+  height: 60px;
+  width: 100%;
+  padding: 10px 0px 5px 0px;
+  background: white;
+  box-shadow: 0px 2px 10px #bdbdbd;
+  z-index: 100;
+}
+
+.logo-image {
+  float: left;
+  padding: 0px 15px 0px 20px;
+  height: 50px;
+}
+
+.user {
+  float: right;
+  padding: 20px 25px 5px 0px;
+  color: #73797b;
+  font-size: 115%;
+  cursor: pointer;
+}
+
+
+/*----------------- left panel -----------------*/
+
+.side-bar {
+  position: fixed;
+  display: block;
+  float: left;
+  padding-top: 80px;
+  height: 100%;
+  width: 14%;
+  min-width: 180px;
+  box-shadow: 0px 2px 5px #bdbdbd;
+  background: linear-gradient(to bottom, #ebebeb 60%, #f5f5f5 100%);
+}
+
+.side-nav {
+  text-align: center;
+  margin: 0px 5px 0px 5px;
+  padding: 40px 0px 40px 0px;
+  background: url(https://goo.gl/RQE80y);
+  background-size: 200px 200px;
+  background-repeat: no-repeat;
+  background-position: 40% -6.5%;
+  cursor: pointer;
+}
+
+.side-nav:hover {
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  color: #16619e;
+  box-shadow: 0px 2px 5px #bdbdbd inset;
+}
+
+.side-nav:hover a {
+  color: #16619e;
+}
+
+.nav-link:link {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 130%;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-link:active {
+  color: #1972bb;
+}
+
+
+/*----------------- content -----------------*/
+
+.content {
+  width: 76%;
+  height: 100%;
+  padding: 130px 50px 50px 300px;
+  background-color: white;
+}
+
+
+/*----------------- single schedule -----------------*/
+
+.singleschedule {
+  box-sizing: border-box;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  padding: 30px 10px 25px 10px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 170%;
+  padding: 0px 0px 0px 20px;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 135%;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+
+.singleschedule-section {
+  padding: 20px 5px 20px 5px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.form {
+  padding: 15px 10px 15px 15px;
+  background-color: #f9f9f7;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  font-size: 105%;
+  margin: 5px 5px 10px 5px;
+  border-radius: 5px;
+  border: 2px solid #0b9cd5;
+  padding: 5px 5px 5px 5px;
+}
+
+.form label {
+  font-size: 115%;
+  font-weight: 500;
+}
+
+#singleschedule-submit {
+  margin-top: 20px;
+  padding: 15px 40px 15px 40px;
+  background-color: #5d93d1;
+  color: white;
+  font-weight: 500;
+  border: 1px solid #5d93d1;
+  box-shadow: 0px 2px 5px #bdbdbd;
+  cursor: pointer;
+}
+
+#singleschedule-submit:hover {
+  background-color: #6ba1df;
+}
+
+#singleschedule-list {
+  padding: 15px 10px 15px 30px;
+  margin-bottom: 20px;
+  font-size: 105%;
+  background-color: #f9f9f7;
+  border-radius: 5px;
+}
+
+#added-patient-list {
+  display: inline;
+}
+
+#singleschedule-delete-button {
+  padding: 2px 6px 2px 6px;
+  margin-left: 20px;
+  border: 2px solid #5d93d1;
+  color: #5d93d1;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px #bdbdbd;
+}
+
+#singleschedule-delete-button:hover {
+  border: 2px solid grey;
+  color: grey;
+}
+
+#toschedule-button-div {
+  margin: 20px;
+}
+
+.general-button {
+  padding: 15px 40px 15px 40px;
+  background-color: #5d93d1;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1px solid #5d93d1;
+  box-shadow: 0px 2px 5px #bdbdbd;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.general-button:hover {
+  background-color: #6ba1df;
+  cursor: pointer;
+}
+
+
+/*----------------- schedule lists -----------------*/
+
+.schedulelists {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  padding: 30px 10px 30px 10px;
+}
+
+#schedulelists-list {
+  padding: 15px 10px 15px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 105%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#each-schedule-list {
+  display: inline;
+}
+
+#schedulelist-create-button {
+  margin: 10px;
+}
+
+#schedulelist-delete-button {
+  padding: 2px 6px 2px 6px;
+  margin-left: 20px;
+  border: 2px solid #5d93d1;
+  color: #5d93d1;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px #bdbdbd;
+}
+
+#schedulelist-delete-button:hover {
+  border: 2px solid grey;
+  color: grey;
+}
+
+
+/*----------------- schedule settings -----------------*/
+
+.settings {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  padding: 30px 10px 25px 10px;
+}
+
+.settings-section {
+  padding: 15px 10px 15px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 105%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#setting-form {
+  background-color: white;
+  padding: 0px;
+}
+
+.setting-form-div {
+  padding: 20px;
+  background-color: #f9f9f7;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+#provider-list {
+  width: 650px;
+}
+
+#change-provider-button {
+  padding: 4px 13px 4px 13px;
+  margin-left: 20px;
+  border: 2px solid #5d93d1;
+  color: #5d93d1;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px #bdbdbd;
+  text-decoration: none;
+}
+
+#change-provider-button:hover {
+  border: 2px solid grey;
+  color: grey;
+}
+
+#setting-create-button {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+
+/*----------------- schedule provider/constrains -----------------*/
+
+.schedule {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  padding: 30px 10px 25px 10px;
+}
+
+.schedule-section {
+  padding: 15px 10px 15px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 105%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+
+/*----------------- footer -----------------*/
+
+.footer {
+  position: relative;
+  box-sizing: border-box;
+  height: 55px;
+  width: 100%;
+  padding: 20px 0px 10px 40px;
+  font-weight: 400;
+  background-color: #808080;
+}
+
+
+textarea {
+  border: 1px solid black;
+}
+
+ .passbox {
+  border: 1px solid black;
+ }

@@ -1,0 +1,11 @@
+
+Jan 9th
+- Convert Time from Ints to DateTimes ?
+- Breaks in worker scheduling does not work (workers will not come back)
+- Need more clinic statisitics, output needs to be in a usable format
+- Needs to be able to accept csv and excel files as input
+- Schedulers needs to be built, right now there is a simple place holder for both employee and patient
+- Need to include other forms of randomness (exponential variables, etc)
+- Need a program to determine the randomness of each clinic module and record it to a file
+- No formal testing of requirements have been done
+

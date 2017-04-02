@@ -1,0 +1,24 @@
+ {% extends "base.html" %} {% load staticfiles%} {% block content %}
+<article class="settings">
+  <h1>Schedule Settings</h1>
+  <section class="settings-section">
+    <form method="post" class="form" id="setting-form">
+      <div class="setting-form-div">
+        {% csrf_token %}
+        <label for="provider">Providers: </label>
+        <br>
+        <input class="form-input" id="provider-list" type="text" name="Clinic_Provider" value="{{provider}}">
+        <a class="form-input" id="change-provider-button" href="http://127.0.0.1:8000/schedule">Change Providers</a>
+        <br>
+        <br>
+        <label for="provider">Create a schedule for date: </label>
+        <br> {% csrf_token %}
+        <input class="form-input" type="date" name="Schedule_Date" placeholder="Date">
+        <br>
+      </div>
+      <input class="general-button" id="setting-create-button" type="submit" name="Create_Schedule" value="Create">
+    </form>
+    {% endblock %}
+  </section>
+</article>
+

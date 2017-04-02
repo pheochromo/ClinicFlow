@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles%}
+
+{% block content %}
+<h1>Simulation Results</h1>
+{% csrf_token %}
+{% for time in patientinfo %}
+<p>    {{ time }}</p>
+{% endfor %}
+{% endblock %}
