@@ -1,0 +1,7 @@
+Worker Name: NurseAshley  Work type: Nurse  Work start time: 0  Break time schedule ['0', '145', '210', '225']  Working stations: ['Registration']
+Worker Name: NurseBrook  Work type: Nurse  Work start time: 0  Break time schedule ['0', '180', '255', '270']  Working stations: ['RNInterview']
+Worker Name: NurseCameron  Work type: Nurse  Work start time: 0  Break time schedule ['0', '160', '240', '255']  Working stations: ['LaboratoryECG']
+Worker Name: NurseDevon  Work type: Nurse  Work start time: 0  Break time schedule ['0', '140', '225', '240']  Working stations: ['LaboratoryBloodwork']
+Worker Name: DoctorEli  Work type: Nurse  Work start time: 0  Break time schedule ['0', '165', '120', '150']  Working stations: ['Anesthesiologist']
+Worker Name: TechFranky  Work type: Nurse  Work start time: 0  Break time schedule ['0', '180', '120', '160']  Working stations: ['XrayinRadiology']
+Worker Name: NurseGeorge  Work type: Nurse  Work start time: 0  Break time schedule ['0', '180', '180', '180']  Working stations: ['Registration', 'RNInterview', 'LaboratoryECG', 'LaboratoryBloodwork']

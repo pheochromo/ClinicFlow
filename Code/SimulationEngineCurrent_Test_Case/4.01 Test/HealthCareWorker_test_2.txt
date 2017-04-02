@@ -1,0 +1,4 @@
+NurseA 0,0,0,0 Registration
+NurseB 0,1800,1800,2700 RNInterview
+NurseC 0,16,24,25 LaboratoryECG
+NurseD 0,40,225,2400 LaboratoryBloodwork

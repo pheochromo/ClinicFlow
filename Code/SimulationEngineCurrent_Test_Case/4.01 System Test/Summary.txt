@@ -1,0 +1,7 @@
+System test for Main.py
+
+Discovery:
+RNinterview, X-ray and Anesthesiologist servicing time are too short(almosl <= 1min)
+Break time error (service exist when the provider is resting)
+Flexible provider setting (the format of nurses change their station need to be discussed.)
+

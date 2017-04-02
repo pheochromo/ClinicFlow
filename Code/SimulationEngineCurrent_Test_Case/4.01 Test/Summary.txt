@@ -1,0 +1,6 @@
+Unit test for Clinic.py, ClinicStation.py, ClinicCreate.py
+
+Discovery:
+Unexpected input can cause error.
+Some variable are hard coded. 
+

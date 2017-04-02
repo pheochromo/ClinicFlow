@@ -1,0 +1,7 @@
+Arrivals Arrivals 1 1 normal -0.29174028268551283 2.3924217394163332
+Registration Registration 2 1 exponential 10 1.8370753084966731
+RNInterview RNInterview 2 1 exponential 0.73117223313687152 0.42447599189639101
+LaboratoryECG LaboratoryECG 2 1 exponential 0.28118448637316579 0.4501155689862455
+LaboratoryBloodwork LaboratoryBloodwork 2 1 exponential 0.28010597302504836 0.17162556614020963
+Anesthesiologist Anesthesiologist 2 1 exponential 10 0.35373810618811924
+XrayinRadiology XrayinRadiology 2 1 exponential 10 0.68121776229524544

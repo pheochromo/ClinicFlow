@@ -1,0 +1,6 @@
+NurseE  Registration   
+NurseF 0,180,180,180
+IndexError   
+IndexError
+NurseG , Registration,
+ValueError

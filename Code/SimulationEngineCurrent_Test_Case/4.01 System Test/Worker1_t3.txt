@@ -1,0 +1,2 @@
+NurseAshley 0,80,120,220 Registration,RNInterview,LaboratoryECG,LaboratoryBloodwork,Anesthesiologist,XrayinRadiology
+NurseBrook 0,90,110,220 Registration,RNInterview,LaboratoryECG,LaboratoryBloodwork,Anesthesiologist,XrayinRadiology

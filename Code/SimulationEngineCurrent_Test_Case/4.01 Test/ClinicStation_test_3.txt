@@ -1,0 +1,6 @@
+Registration  1 1 uniform 5 2
+RNInterview  1 1 uniform 10 10
+LaboratoryECG  1 1 uniform 5 5
+LaboratoryBloodwork  1 1 uniform 5 5
+Anesthesiologist  1 1 uniform 20 10
+X-Ray  1 1 uniform 20 20

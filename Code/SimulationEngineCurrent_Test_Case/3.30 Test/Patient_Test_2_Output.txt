@@ -1,0 +1,3 @@
+name: Patient7 initial scheduled time: 0 initial arrival time: 0 initial station: ['LaboratoryECG', 'LaboratoryBloodwork'] initial location: ['LaboratoryECG', 'LaboratoryBloodwork'] initial completion time: -1 initial service time: 0
+name: Patient8 initial scheduled time: 0 initial arrival time: 0 initial station: ['RNInterview', 'Anesthesiologist', 'XrayinRadiology'] initial location: ['RNInterview', 'Anesthesiologist', 'XrayinRadiology'] initial completion time: -1 initial service time: 0
+name: Patient9 initial scheduled time: 0 initial arrival time: 0 initial station: ['Registration'] initial location: ['Registration'] initial completion time: -1 initial service time: 0

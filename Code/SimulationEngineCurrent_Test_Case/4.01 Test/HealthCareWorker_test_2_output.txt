@@ -1,0 +1,4 @@
+Worker Name: NurseA  Work type: Nurse  Work start time: 0  Break time schedule ['0', '0', '0', '0']  Working stations: ['Registration']
+Worker Name: NurseB  Work type: Nurse  Work start time: 0  Break time schedule ['0', '1800', '1800', '2700']  Working stations: ['RNInterview']
+Worker Name: NurseC  Work type: Nurse  Work start time: 0  Break time schedule ['0', '16', '24', '25']  Working stations: ['LaboratoryECG']
+Worker Name: NurseD  Work type: Nurse  Work start time: 0  Break time schedule ['0', '40', '225', '2400']  Working stations: ['LaboratoryBloodwork']

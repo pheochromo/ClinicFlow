@@ -1,0 +1,3 @@
+Patient67 8:20 ['LaboratoryECG', 'LaboratoryBloodwork']
+Patient68 8:36 ['RNInterview', 'Anesthesiologist', 'XrayinRadiology']
+Patient69 8:50 ['Registration']

@@ -1,0 +1,233 @@
+NurseAshley arriving at 8:00
+NurseBrook arriving at 8:00
+NurseCameron arriving at 8:00
+NurseDevon arriving at 8:00
+DoctorEli arriving at 8:00
+TechFranky arriving at 8:00
+NurseGeorge arriving at 8:00
+NurseAshley starting work at Registration 8:00
+NurseBrook starting work at RNInterview 8:00
+NurseCameron starting work at LaboratoryECG 8:00
+NurseDevon starting work at LaboratoryBloodwork 8:00
+DoctorEli starting work at Anesthesiologist 8:00
+Patient1 arriving at 8:20
+Patient1 starting service at Registration 8:20
+Patient1 leaving service at Registration 8:25
+Patient1 starting service at RNInterview 8:28
+Patient2 arriving at 8:34
+Patient2 starting service at Registration 8:34
+Patient2 leaving service at Registration 8:41
+Patient1 leaving service at RNInterview 8:43
+Patient2 starting service at RNInterview 8:46
+Patient1 starting service at LaboratoryECG 8:46
+Patient3 arriving at 8:52
+Patient3 starting service at Registration 8:52
+Patient1 leaving service at LaboratoryECG 8:55
+Patient3 leaving service at Registration 8:57
+Patient2 leaving service at RNInterview 8:58
+Patient1 starting service at LaboratoryBloodwork 9:00
+Patient3 starting service at RNInterview 9:00
+Patient2 starting service at LaboratoryECG 9:01
+Patient4 arriving at 9:05
+Patient4 starting service at Registration 9:05
+Patient1 leaving service at LaboratoryBloodwork 9:08
+Patient2 leaving service at LaboratoryECG 9:08
+Patient2 starting service at LaboratoryBloodwork 9:11
+Patient4 leaving service at Registration 9:12
+Patient3 leaving service at RNInterview 9:13
+Patient4 starting service at RNInterview 9:14
+Patient3 starting service at LaboratoryECG 9:16
+Patient5 arriving at 9:19
+Patient2 leaving service at LaboratoryBloodwork 9:19
+Patient5 starting service at Registration 9:19
+Patient3 leaving service at LaboratoryECG 9:21
+Patient3 starting service at LaboratoryBloodwork 9:24
+Patient4 leaving service at RNInterview 9:25
+Patient5 leaving service at Registration 9:26
+Patient4 starting service at LaboratoryECG 9:29
+Patient5 starting service at RNInterview 9:29
+Patient3 leaving service at LaboratoryBloodwork 9:34
+Patient6 arriving at 9:35
+Patient6 starting service at Registration 9:35
+Patient3 starting service at Anesthesiologist 9:35
+Patient4 leaving service at LaboratoryECG 9:38
+Patient5 leaving service at RNInterview 9:40
+Patient6 leaving service at Registration 9:40
+Patient4 starting service at LaboratoryBloodwork 9:41
+Patient6 starting service at RNInterview 9:41
+Patient5 starting service at LaboratoryECG 9:42
+Patient4 leaving service at LaboratoryBloodwork 9:47
+Patient5 leaving service at LaboratoryECG 9:47
+Patient7 arriving at 9:50
+Patient7 starting service at Registration 9:50
+Patient5 starting service at LaboratoryBloodwork 9:52
+Patient7 leaving service at Registration 9:55
+Patient5 leaving service at LaboratoryBloodwork 9:58
+Patient6 leaving service at RNInterview 10:00
+Patient7 starting service at RNInterview 10:00
+Patient3 leaving service at Anesthesiologist 10:03
+Patient6 starting service at LaboratoryECG 10:03
+Patient4 starting service at Anesthesiologist 10:03
+Patient8 arriving at 10:07
+Patient8 starting service at Registration 10:07
+Patient8 leaving service at Registration 10:12
+Patient6 leaving service at LaboratoryECG 10:13
+Patient7 leaving service at RNInterview 10:16
+Patient8 starting service at RNInterview 10:16
+Patient6 starting service at LaboratoryBloodwork 10:17
+Patient7 starting service at LaboratoryECG 10:17
+Patient9 arriving at 10:21
+Patient9 starting service at Registration 10:21
+Patient6 leaving service at LaboratoryBloodwork 10:23
+Patient7 leaving service at LaboratoryECG 10:25
+NurseDevon leaving work at LaboratoryBloodwork 10:25
+NurseCameron leaving work at LaboratoryECG 10:25
+Patient9 leaving service at Registration 10:27
+NurseAshley leaving work at Registration 10:27
+Patient4 leaving service at Anesthesiologist 10:29
+DoctorEli leaving work at Anesthesiologist 10:29
+Patient7 starting service at Anesthesiologist 10:29
+Patient10 arriving at 10:34
+Patient8 leaving service at RNInterview 10:36
+NurseBrook leaving work at RNInterview 10:36
+NurseGeorge starting work at RNInterview 10:36
+Patient9 starting service at RNInterview 10:36
+NurseDevon starting work at LaboratoryBloodwork 10:40
+NurseCameron starting work at LaboratoryECG 10:40
+NurseAshley starting work at Registration 10:42
+Patient8 starting service at LaboratoryECG 10:42
+Patient10 starting service at Registration 10:43
+Patient11 arriving at 10:49
+Patient7 leaving service at Anesthesiologist 10:49
+Patient8 leaving service at LaboratoryECG 10:49
+Patient10 leaving service at Registration 10:49
+DoctorEli starting work at Anesthesiologist 10:49
+Patient11 starting service at Registration 10:49
+Patient9 leaving service at RNInterview 10:52
+Patient8 starting service at LaboratoryBloodwork 10:54
+Patient10 starting service at RNInterview 10:54
+Patient11 leaving service at Registration 10:55
+Patient9 starting service at LaboratoryECG 10:56
+Patient8 leaving service at LaboratoryBloodwork 11:00
+Patient7 starting service at LaboratoryBloodwork 11:00
+Patient9 leaving service at LaboratoryECG 11:01
+Patient8 starting service at Anesthesiologist 11:03
+Patient10 leaving service at RNInterview 11:05
+Patient11 starting service at RNInterview 11:05
+Patient7 leaving service at LaboratoryBloodwork 11:06
+Patient9 starting service at LaboratoryBloodwork 11:06
+Patient12 arriving at 11:07
+Patient12 starting service at Registration 11:07
+Patient10 starting service at LaboratoryECG 11:10
+Patient12 leaving service at Registration 11:13
+Patient9 leaving service at LaboratoryBloodwork 11:14
+Patient10 leaving service at LaboratoryECG 11:18
+Patient13 arriving at 11:19
+Patient13 starting service at Registration 11:19
+Patient10 starting service at LaboratoryBloodwork 11:19
+Patient11 leaving service at RNInterview 11:21
+Patient12 starting service at RNInterview 11:21
+Patient11 starting service at LaboratoryECG 11:24
+Patient13 leaving service at Registration 11:25
+Patient10 leaving service at LaboratoryBloodwork 11:25
+Patient8 leaving service at Anesthesiologist 11:32
+Patient11 leaving service at LaboratoryECG 11:32
+Patient9 starting service at Anesthesiologist 11:32
+Patient14 arriving at 11:35
+Patient14 starting service at Registration 11:35
+Patient11 starting service at LaboratoryBloodwork 11:36
+Patient12 leaving service at RNInterview 11:38
+Patient13 starting service at RNInterview 11:38
+Patient12 starting service at LaboratoryECG 11:39
+Patient14 leaving service at Registration 11:40
+Patient11 leaving service at LaboratoryBloodwork 11:43
+Patient12 leaving service at LaboratoryECG 11:44
+Patient12 starting service at LaboratoryBloodwork 11:49
+Patient15 arriving at 11:50
+Patient15 starting service at Registration 11:50
+Patient9 leaving service at Anesthesiologist 11:55
+Patient12 leaving service at LaboratoryBloodwork 11:55
+Patient15 leaving service at Registration 11:55
+Patient11 starting service at Anesthesiologist 11:55
+Patient13 leaving service at RNInterview 11:58
+Patient14 starting service at RNInterview 11:58
+Patient13 starting service at LaboratoryECG 12:03
+Patient16 arriving at 12:05
+Patient16 starting service at Registration 12:05
+Patient16 leaving service at Registration 12:10
+Patient13 leaving service at LaboratoryECG 12:13
+Patient11 leaving service at Anesthesiologist 12:15
+Patient12 starting service at Anesthesiologist 12:15
+Patient14 leaving service at RNInterview 12:17
+Patient15 starting service at RNInterview 12:17
+Patient13 starting service at LaboratoryBloodwork 12:18
+Patient17 arriving at 12:20
+Patient17 starting service at Registration 12:20
+Patient14 starting service at LaboratoryECG 12:21
+Patient13 leaving service at LaboratoryBloodwork 12:25
+Patient17 leaving service at Registration 12:27
+Patient15 leaving service at RNInterview 12:29
+Patient16 starting service at RNInterview 12:29
+Patient14 leaving service at LaboratoryECG 12:30
+Patient15 starting service at LaboratoryECG 12:32
+Patient18 arriving at 12:35
+Patient18 starting service at Registration 12:35
+Patient14 starting service at LaboratoryBloodwork 12:35
+Patient12 leaving service at Anesthesiologist 12:36
+Patient13 starting service at Anesthesiologist 12:36
+Patient15 leaving service at LaboratoryECG 12:39
+Patient18 leaving service at Registration 12:41
+Patient14 leaving service at LaboratoryBloodwork 12:44
+Patient15 starting service at LaboratoryBloodwork 12:44
+Patient16 leaving service at RNInterview 12:47
+Patient17 starting service at RNInterview 12:47
+Patient16 starting service at LaboratoryECG 12:49
+Patient19 arriving at 12:50
+Patient19 starting service at Registration 12:50
+Patient15 leaving service at LaboratoryBloodwork 12:54
+Patient16 leaving service at LaboratoryECG 12:56
+Patient19 leaving service at Registration 12:57
+Patient16 starting service at LaboratoryBloodwork 12:58
+Patient17 leaving service at RNInterview 12:59
+Patient18 starting service at RNInterview 12:59
+Patient13 leaving service at Anesthesiologist 13:03
+Patient14 starting service at Anesthesiologist 13:03
+Patient17 starting service at LaboratoryECG 13:04
+Patient16 leaving service at LaboratoryBloodwork 13:06
+NurseDevon leaving work at LaboratoryBloodwork 13:06
+NurseAshley leaving work at Registration 13:07
+Patient18 leaving service at RNInterview 13:09
+NurseGeorge leaving work at RNInterview 13:09
+NurseBrook starting work at RNInterview 13:09
+Patient19 starting service at RNInterview 13:09
+Patient17 leaving service at LaboratoryECG 13:11
+NurseCameron leaving work at LaboratoryECG 13:11
+Patient18 starting service at LaboratoryECG 13:11
+Patient19 leaving service at RNInterview 13:20
+Patient18 leaving service at LaboratoryECG 13:20
+NurseDevon starting work at LaboratoryBloodwork 13:21
+NurseAshley starting work at Registration 13:22
+Patient17 starting service at LaboratoryBloodwork 13:22
+NurseGeorge starting work at LaboratoryECG 13:24
+Patient14 leaving service at Anesthesiologist 13:29
+DoctorEli leaving work at Anesthesiologist 13:29
+Patient15 starting service at Anesthesiologist 13:29
+Patient17 leaving service at LaboratoryBloodwork 13:32
+Patient19 starting service at LaboratoryBloodwork 13:32
+Patient19 leaving service at LaboratoryBloodwork 13:38
+Patient18 starting service at LaboratoryBloodwork 13:38
+Patient19 starting service at LaboratoryECG 13:44
+Patient18 leaving service at LaboratoryBloodwork 13:45
+Patient19 leaving service at LaboratoryECG 13:50
+Patient15 leaving service at Anesthesiologist 13:51
+DoctorEli starting work at Anesthesiologist 13:51
+NurseBrook leaving work at RNInterview 15:34
+NurseDevon leaving work at LaboratoryBloodwork 15:46
+NurseAshley leaving work at Registration 15:47
+NurseGeorge leaving work at LaboratoryECG 15:49
+NurseBrook starting work at RNInterview 15:49
+NurseCameron starting work at LaboratoryECG 15:50
+NurseDevon starting work at LaboratoryBloodwork 16:01
+NurseAshley starting work at Registration 16:02
+DoctorEli leaving work at Anesthesiologist 16:16
+DoctorEli starting work at Anesthesiologist 16:31

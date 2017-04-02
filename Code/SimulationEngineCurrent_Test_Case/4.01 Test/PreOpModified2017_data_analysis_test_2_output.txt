@@ -1,0 +1,14 @@
+Arrivals Arrivals 1 1 normal -0.33433433433433479 2.5299802600277723
+Registration Registration 2 1 exponential 0.058519108280254674 2.4156446759362562
+RNInterview RNInterview 2 1 exponential 0.70861774744027362 0.4166237588360987
+LaboratoryECG LaboratoryECG 2 1 exponential 0.29974747474747465 0.18114787619741368
+LaboratoryBloodwork LaboratoryBloodwork 2 1 exponential 0.27387914230019489 0.17456283682475437
+Anesthesiologist Anesthesiologist 2 1 exponential 0.53631907308377913 0.30859900562227982
+XrayinRadiology XrayinRadiology 2 1 exponential 1.1984463276836161 0.77925613318841458
+
+Station Name: Registration  Station Prerequesites: ['Registration']  Maximum Capacity: 2  Minimum Capacity: 1  Variance Type: exponential  Mean: 0.058519108280254674  Variance: 2.415644675936256
+Station Name: RNInterview  Station Prerequesites: ['RNInterview']  Maximum Capacity: 2  Minimum Capacity: 1  Variance Type: exponential  Mean: 0.7086177474402736  Variance: 0.4166237588360987
+Station Name: LaboratoryECG  Station Prerequesites: ['LaboratoryECG']  Maximum Capacity: 2  Minimum Capacity: 1  Variance Type: exponential  Mean: 0.29974747474747465  Variance: 0.18114787619741368
+Station Name: LaboratoryBloodwork  Station Prerequesites: ['LaboratoryBloodwork']  Maximum Capacity: 2  Minimum Capacity: 1  Variance Type: exponential  Mean: 0.2738791423001949  Variance: 0.17456283682475437
+Station Name: Anesthesiologist  Station Prerequesites: ['Anesthesiologist']  Maximum Capacity: 2  Minimum Capacity: 1  Variance Type: exponential  Mean: 0.5363190730837791  Variance: 0.3085990056222798
+Station Name: XrayinRadiology  Station Prerequesites: ['XrayinRadiology']  Maximum Capacity: 2  Minimum Capacity: 1  Variance Type: exponential  Mean: 1.1984463276836161  Variance: 0.7792561331884146

@@ -1,0 +1,4 @@
+Unit test for Patient.py and PatientSchedule.py
+
+Discovery:
+Unexpected input can cause error.

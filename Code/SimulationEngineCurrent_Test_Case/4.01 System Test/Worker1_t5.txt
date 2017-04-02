@@ -1,0 +1,7 @@
+NurseAshley 0,145,145,145 Registration
+NurseBrook 0,145,145,145 RNInterview
+NurseCameron 0,145,145,145 LaboratoryECG
+NurseDevon 0,145,145,145 LaboratoryBloodwork
+DoctorEli 0,145,145,145 Anesthesiologist
+TechFranky 0,145,145,145 XrayinRadiology
+NurseGeorge 0,145,145,145 Registration,RNInterview,LaboratoryECG,LaboratoryBloodwork

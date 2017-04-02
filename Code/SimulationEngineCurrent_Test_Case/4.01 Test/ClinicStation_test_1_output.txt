@@ -1,0 +1,6 @@
+Station Name: Registration  Station Prerequesites: ['Registration']  Maximum Capacity: 1  Minimum Capacity: 1  Variance Type: uniform  Mean: 5.0  Variance: 2.0
+Station Name: RNInterview  Station Prerequesites: ['Registration', 'RNInterview']  Maximum Capacity: 1  Minimum Capacity: 1  Variance Type: uniform  Mean: 10.0  Variance: 10.0
+Station Name: LaboratoryECG  Station Prerequesites: ['Registration', 'RNInterview', 'LaboratoryECG']  Maximum Capacity: 1  Minimum Capacity: 1  Variance Type: uniform  Mean: 5.0  Variance: 5.0
+Station Name: LaboratoryBloodwork  Station Prerequesites: ['Registration', 'RNInterview', 'LaboratoryBloodwork']  Maximum Capacity: 1  Minimum Capacity: 1  Variance Type: uniform  Mean: 5.0  Variance: 5.0
+Station Name: Anesthesiologist  Station Prerequesites: ['Registration', 'RNInterview', 'Anesthesiologist']  Maximum Capacity: 1  Minimum Capacity: 1  Variance Type: uniform  Mean: 20.0  Variance: 10.0
+Station Name: X-Ray  Station Prerequesites: ['Registration', 'RNInterview', 'LaboratoryECG', 'LaboratoryBloodwork']  Maximum Capacity: 1  Minimum Capacity: 1  Variance Type: uniform  Mean: 20.0  Variance: 20.0
