@@ -2,6 +2,7 @@
 
 % Packages
 \usepackage{tikz}
+\usetikzlibrary{shapes,fit}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{enumerate}
@@ -25,7 +26,7 @@ Karl Knopf \#001437217\\
 Weilin Hu \#001150873\\
 Yunfeng Li \#001335650
 }
-\date{January 11 2017}
+\date{April 1 2017}
 
 
 \begin{document}
@@ -77,6 +78,7 @@ The final deadline for the project is mid April 2017. The detailed deliverable a
 \toprule
 Date         & Comment     \\ \hline
 Jan 11, 2017 & First draft \\ \hline
+Apr 1, 2017 & Second draft \\ \hline
 \end{tabular}
 \end{table}
 \newpage
@@ -87,7 +89,90 @@ Jan 11, 2017 & First draft \\ \hline
 
 The product will be delivered in a web application format. This maximizes its accessibility and allows it to be device agnostic. The core simulation component is written in Python 3, and makes use of the discrete event simulation libraries provided as part of the SimPy package. To maintain consistency in development language, we opted to use the Django framework for the web interface to our application. Data to be inputted and generated will be stored in a MongoDB database, and will use the provided Python MongoDB Drivers to interface between the view and data.
 
+\section{System Architecture}
+\subsection{MVC Architecture}
+Our product is designed using a MVC (Model-View-Controller) system architecture.
 
+\begin{figure}[!htb]
+	\begin{center}
+		\begin{tikzpicture}
+		[auto,
+		block/.style ={rectangle, draw=blue, thick, fill=blue!20, text width=7em,align=center, rounded corners, minimum height=2em},
+		line/.style ={draw, thick, -latex',shorten >=2pt},
+		cloud/.style ={draw=red, thick, ellipse,fill=red!20,
+		minimum height=1em},nodedec/.style={shape=circle,inner sep=2pt,draw,thick},
+		arrowdec/.style={->}]	
+		\draw (0,-2) node[block] (USER) {\textbf{User}};
+		\path (3,1) node[block] (WEBGUI) {\textit{Controls}}
+		      (1,4) node[block] (SIM) {\textit{Simulation Engine}}
+		      (0,6) node[block] (CRE) {\textit{Clinic Create}}
+		      (0,9) node[block] (DATA) {\textit{Database}}
+		     (-4,3) node[block] (DIS) {\textit{Display}}
+		     (-5,1) node[block] (VIS) {\textit{Visualization}}
+		     ;
+		
+		\node[draw=red, fit=(WEBGUI) (SIM)](FIt1) {\textbf{Controller}};
+		\node[draw=green, fit=(CRE) (DATA)](FIt2) {\textbf{Model}};
+		\node[draw=cyan, fit=(DIS) (VIS)](FIt3) {\textbf{View}};
+		
+		\path
+		(USER) edge[arrowdec] node[right,near start] {uses} (WEBGUI)
+		(WEBGUI) edge[arrowdec,bend left=45] node[left,near end] {uses} (SIM)
+		(SIM) edge[arrowdec] node[left] {manipulates} (CRE)
+		(SIM) edge[arrowdec,bend right=45] node[right,near start] {manipulates} (DATA)
+		(WEBGUI) edge[arrowdec,bend right=65] node[right,near end] {manipulates} (DATA)
+		(CRE) edge[arrowdec, bend left = 45] node[right, near start] {updates} (DATA)
+		(DATA) edge[arrowdec,bend right = 30] node[left] {updates} (DIS)
+		(DATA) edge[arrowdec,bend right = 55] node[left] {updates} (VIS)
+		(WEBGUI) edge[arrowdec] node[left, very near start] {updates} (DIS)
+		(DIS) edge[arrowdec, bend left = 40] node[right, very near end] {uses} (VIS)
+		(DIS) edge[arrowdec] node[right] {sees} (USER)
+		(VIS) edge[arrowdec] node[left] {sees} (USER)
+		;	
+		\end{tikzpicture}
+	\end{center}
+	\caption{Breakdown of MVC Design} \label{MVC}
+\end{figure} 
+\newpage 
+The \textbf{Controller} can be broken up into two primary components: \textit{Controls}, which represents the how the user interfaces with the product and \textit{Simulation Engine}, which manages and runs the clinic simulation. The \textbf{Model} also can be broken into two primary components: \textit{ClinicCreate}, which manipulates the database information into a form usable to \textit{Simulation Engine} and the \textit{Database}, which manages all data base operations. The \textbf{View} can be broken down into two major components: \textit{Display}, which handles the GUI for the website, and \textit{Visualization} which displays the simulation data to the users.
+
+\subsection{Controls}
+\textit{Controls} is a grouping of modules that are used by the user to interact with the system. They allow the user to enter input, issue commands to the simulation engine and change what is displayed by the view. It is primarily written in python 3 and uses the pymongo package to interact with MongoDB .\\
+\textit{Controls} interacts with the \textit{Simulation Engine} and
+\textit{Database} using the simengine() method. It also interacts with the display using the methods found in clinicflowx/views.py . \\
+The component \textit{Controls} allows the system to fufill both functional and non-functional requirements. It controls the interaction between elements in the program, meaning it determines what is going to be run. It also must do so in a way that is satisfactory to the end user. \\
+\subsection{Simulation Engine}
+\textit{Simulation Engine} is a grouping of modules that are used by the program
+to create and run the simulations for a clinic. It manipulates the data
+from the \textit{Clinic Create} to create the simulation. It then is able to generate multiple simulations, and commit the results the to \textit{Database}. \textit{Simulation Engine} is primarily written in Python 3, and it uses the SimPy discrete event simulation package. \\
+\textit{Simulation Engine} interacts with others modules through the method SimulationEngine.py . This method calls the other methods needed to run a simulation of the clinic. It takes as input: 
+\begin{enumerate}
+\item a dataset that represents the clinic's information
+\item a dataset that represents the provider's schedule
+\item a dataset that represents the patient's schedule
+\item a target destination for the output data
+\end{enumerate}
+As output, it uses (or creates if it does not exist) a file containing all of the information generated by the simulation. It does this via AddSimResult.py . \\
+The component \textit{Simulation Engine} exists primarily to fulfill the functional requirements, namely actually being able to create and record a simulation. It also addresses many of the nonfunctional requirements, such as simulation speed. \\
+\subsubsection{Data Analysis}
+\textit{Simulation Engine} also has to solve the problem of how we implemented a discrete event simulation to provide realitic results. 
+To allow it to be able to do this, we had to do background research into the clinic, and do analysis on the clinic's existing data sets. \\
+
+\subsection{Clinic Create}
+\textit{Clinic Create} is a grouping of modules that take the data from the \textit{Database} and create useable files and tables for \textit{Simulation Engine}. It maintains some of the clinic information, and general rules. \textit{Clinic Create} is written in Python 3.\\
+It takes input from other functions in the cliniccreate() method, and this method also provides files to \textit{Simulation Engine} to allow that module to function. \\
+\textit{ClinicCreate} exists as a group of helpers for other methods. It does not solve any requirements itself, but it contributes to other modules being able to fulfill their requirements. \\
+\subsection{Database}
+\textit{Database} is a grouping of modules that manage the database functions. It manages the tables, and it able to create and modify existing data tables. \textit{Database} uses a  MongoDB NoSQL framework. \\
+This is cluster of database creation and management functions. They exist primarily in ClinicMongoDB.py . It does not contain input and output functions, but it manages contructs that get used by other modules. \\
+\subsection{Display}
+\textit{Display} is a grouping of modules that manage the web display to the user. It displays the simulation results and information from \textit{Database}. It controls what the user sees. \textit{Display} is primarily written in Python 3, html and css. \\
+It shows the html pages to the user. It also takes requests from \textit{Controls} to update and change the pages displayed. \\
+\textit{Display} exists to fulfill the function requirements involving showing the user results. It also must fulfill many non-functional requirements related to usabaility. \\
+\subsection{Visualization}
+\textit{Visualization} is a grouping of modules that create
+the visualizations of the data that are displayed to the users. 
+It gets the data from \textit{Database} and give the visualizations to \textit{Display}. \textit{Visualization} was primarily written in ...
 
 \section{User Interface Design}
 
@@ -147,7 +232,7 @@ While managers and viewers will both be able to view past generated schedules, o
 
 
 
-\section{System Architecture}
+\section{Simulation Engine}
 
 \subsection{Design Description}
 The simulation engine is the core component set which is responsible for running the simulation of the clinic. The patients and their associated data are the entities that are tracked by the simulation, the clinic workers are the available resources that can service the patients, while the clinic environment acts as the constraints under which the patients flow through the system. This lends itself to a natural tree like organization structure. The modules thus have low coupling and high cohesion, with details pertinent to their operation being compartmentalized. \textit{SimulationEngine} and Simulation run the simulation events, \textit{PatientSchedule},\textit{ HealthCareSchedule}, and \textit{Clinic} maintain the objects used in the simulation, while \textit{Patient}, \textit{HealthCareWorker}, and \textit{ClinicModule} keep track of the data if individual units in the simulation.
