@@ -1,0 +1,46 @@
+ {% extends "base.html" %} {% load staticfiles%} {% block content %}
+ <script src ="../static/js/validateSingleSchedule.js"></script>
+<article class="singleschedule">
+  <h1 id="singleschedule-h1">Clinic Single Schedule</h1>
+  <br>
+  <section class="singleschedule-section">
+    <h2> Add Patient</h2>
+    <form onsubmit="return checkSingleSchedule();" method='post' class="form" name="patientinfo_form" >
+      {% csrf_token %}
+      <label for="name">Name: </label>
+      <input class="form-input" type="text" id="name" name="Name" placeholder="Name">
+       <span id="name_error_alert"></span>
+      </br>
+      <label for="time">Time: &nbsp </label>
+      <input class="form-input" type="time" id="time" name="Time" placeholder="Time">
+      <span id="time_error_alert"></span>
+      </br>
+      <label for="visit">Visit: &nbsp&nbsp</label>
+      {% for value in information.provider%}
+      <input class="form-input" type="checkbox" id="visit" name="Providers" value="{{value}}"> {{value}} {% endfor %}
+      </br>
+      <span id="visit_error_alert"></span>
+      </br>
+      <input class="form-input" id="singleschedule-submit" type="submit" name="AddPatient" value="Submit">
+    </form>
+    <br>
+    <h2>Existing Patient</h2>
+    <ul id="singleschedule-list">
+      {% for value in patientinfo %}
+      <li>{{value.Name}} at {{value.Time}} visit {{value.Visit}}
+        <form id="added-patient-list" method='post'>
+          {% csrf_token %}
+          <input class="form-input" type="hidden" name="the_patient" value="{{value.Name}}">
+          <input class="form-input" id="singleschedule-delete-button" type="submit" name="DeletePatient" value="delete">
+        </form>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h2> predict result </h2>
+    <br>
+    <div id="toschedule-button-div">
+      <a class="general-button" href="http://127.0.0.1:8000/schedulelists">to schedule lists</a> {% endblock %}
+    </div>
+  </section>
+</article>
+

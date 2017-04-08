@@ -1,0 +1,10 @@
+I made some simple validation for inputs of our front end.
+The js folder contains the javascriptfile for validation, and this folder should be located under static folder.
+
+I changed passport.html, setting.html, singlechedule.html under template folder. 
+I fixed some errors.
+
+I modified a little bit in views to prevent the duplicated submit after refreshing under clinicflow folder. 
+
+I modified urls.py from mysite folder.
+I think the schedule page is duplicate with singleschedule. Thus I remove it from our url and make schedulelist as dashboard

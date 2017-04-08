@@ -1,0 +1,102 @@
+<!-- schedule.html -->
+{% extends "base.html" %}
+{% load staticfiles%}
+
+{% block content %}
+ <script src ="../static/js/validatePassport.js"></script>
+    <h1>Clinic Passport</h1>
+    <form method="get" name="searching_form" >
+    search by time range
+        <input type="date" id="time1" name="timebound1" placeholder="yyyy-mm-dd" class="form-input">
+        <input type='date' id="time2" name="timebound2" placeholder="yyyy-mm-dd" class="form-input">
+        <input type="submit" name="search_by_range" value="Search" class = "general-button" onclick="return checkSearchingDate();">
+        </br>
+        <span id="time1_error_alert"></span><span id="time2_error_alert"></span>
+        </br>
+    </form>
+    <table>
+    <tr>
+      <th>Reason</th>
+      <th>Service</th>
+       <th>Date</th>
+       <th>Scheduled Appointment Time</th>
+       <th>Arrival Time</th>
+       <th>Day Surgery/Admitted  Surgery</th>
+       <th>Departure Time</th>
+      {% for provider in providers %}
+       {%   with timein=provider|add:"_Time_In" %}
+         <th>{{timein}}</th>
+         {% endwith %}
+           {%   with timeout=provider|add:"_Time_Out" %}
+          <th>{{timeout}}</th>
+           {% endwith %}
+             {%   with timecomment=provider|add:"_Comment" %}
+           <th>{{timecomment}}</th>
+           {% endwith %}
+      {% endfor %}
+
+    </tr>
+      {% for each in passport %}
+       <tr>
+      <th>{{each.Reason}}</th>
+      <th>{{each.Service}}</th>
+      <th>{{each.Date|get_date}}</th>
+      <th>{{each.Scheduled_Time}}</th>
+      <th>{{each.Arrival_Time}}</th>
+      <th>{{each.Surgery_Type}}</th>
+      <th>{{each.Departure_time}}</th>
+       {% for provider in providers %}
+           {%   with timein=provider|add:"_Time_In" %}
+             <th>{{each|get_item:timein }}</th>
+             {% endwith %}
+               {%   with timeout=provider|add:"_Time_Out" %}
+              <th>{{each|get_item:timeout}}</th>
+               {% endwith %}
+                 {%   with timecomment=provider|add:"_Comment" %}
+               <th>{{each|get_item:timecomment}}</th>
+               {% endwith %}
+      {% endfor %}
+    </tr>
+         {% endfor %}
+        </table>
+    <form method="post">
+     {% csrf_token %}
+    Reason for Visit
+    <textarea name="Reason"></textarea>
+    <br>
+    Service
+    <textarea name="Service"></textarea>
+    <br>
+    Date
+    <textarea name="Date"></textarea>
+    <br>
+    Scheduled Appointment Time
+    <textarea name="Scheduled_Time"></textarea>
+    <br>
+    Arrival Time
+    <textarea name="Arrival_Time"></textarea>
+    <br>
+    Day Surgery/Admitted  Surgery
+    <textarea name="Surgery_Type"></textarea>
+    <br>
+    Departure Time
+    <textarea name="Departure_time"></textarea>
+    <br>
+    {% for a in providers %}
+      {{a}} Time in
+      <textarea name="{{a}}_Time_In"></textarea>
+      <br>
+      {{a}} Time out
+      <textarea name="{{a}}_Time_Out"></textarea>
+      <br>
+      {{a}} Comment
+      <textarea name="{{a}}_Comment"></textarea>
+      <br>
+    {% endfor %}
+    
+    <input type="submit" name="Add_Passport" value="add_passport"  class = "general-button">
+    
+    </form>
+
+
+{% endblock %}
