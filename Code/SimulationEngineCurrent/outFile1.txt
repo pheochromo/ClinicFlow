@@ -1,0 +1,21 @@
+
+Average Time in Clinic: 284  Average Idle Time for a patient: 227 
+Average Time in Clinic: 259  Average Idle Time for a patient: 207 
+Average Time in Clinic: 306  Average Idle Time for a patient: 252 
+Average Time in Clinic: 247  Average Idle Time for a patient: 201 
+Average Time in Clinic: 275  Average Idle Time for a patient: 214 
+Average Time in Clinic: 300  Average Idle Time for a patient: 250 
+Average Time in Clinic: 248  Average Idle Time for a patient: 196 
+Average Time in Clinic: 337  Average Idle Time for a patient: 282 
+Average Time in Clinic: 348  Average Idle Time for a patient: 291 
+Average Time in Clinic: 257  Average Idle Time for a patient: 206 
+Average Time in Clinic: 298  Average Idle Time for a patient: 234 
+Average Time in Clinic: 313  Average Idle Time for a patient: 250 
+Average Time in Clinic: 306  Average Idle Time for a patient: 242 
+Average Time in Clinic: 295  Average Idle Time for a patient: 234 
+Average Time in Clinic: 286  Average Idle Time for a patient: 230 
+Average Time in Clinic: 330  Average Idle Time for a patient: 267 
+Average Time in Clinic: 347  Average Idle Time for a patient: 284 
+Average Time in Clinic: 280  Average Idle Time for a patient: 222 
+Average Time in Clinic: 297  Average Idle Time for a patient: 235 
+Average Time in Clinic: 281  Average Idle Time for a patient: 222 

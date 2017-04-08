@@ -9,3 +9,7 @@ Jan 9th
 - Need a program to determine the randomness of each clinic module and record it to a file
 - No formal testing of requirements have been done
 
+Apr 8
+- Needs better commenting
+- needs to be convert into django form
+- 

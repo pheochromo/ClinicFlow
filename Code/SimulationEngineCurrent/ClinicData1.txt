@@ -1,0 +1,7 @@
+Arrivals Arrivals 1 1
+Registration Registration 1 1 1
+RNInterview RNInterview,Registration 1 1 1
+LaboratoryECG LaboratoryECG,RNInterview,Registration 1 1 1
+LaboratoryBloodwork LaboratoryBloodwork,RNInterview,Registration 1 1 1
+Anesthesiologist Anesthesiologist,RNInterview,Registration 1 1 2
+XrayinRadiology XrayinRadiology,LaboratoryBloodwork,LaboratoryECG 1 1 2

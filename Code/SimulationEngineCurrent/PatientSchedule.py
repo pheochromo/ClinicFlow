@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-
-@author: karl_
+PatientSchedule reads in the patient information from a file and creates a patient
+schedule object that contains all of the patients for the simulation. 
 """
 from Patient import Patient
 import numpy as NP   
 
 class PatientSchedule:
+    #constructor for the patient schedule
     def __init__(self,fileName):
         patientFile = open(fileName,mode ='r')
         self.patients = []
@@ -20,12 +21,13 @@ class PatientSchedule:
             self.patients.append(temp)
         
         patientFile.close()
-
+    
+    #schedules the patients, they should arrive every 15 minutes
     def schedule(self,fileName):
-        counter = 1
+        counter = 0
         arrivalFile = open(fileName,mode ='r')
-        arrMean = 5
-        arrVar = 1
+        arrMean = 5 #default value 
+        arrVar = 1 #default value
         for line in arrivalFile:
             data = line.split()
             if(data[0] == 'Arrivals'):
@@ -33,13 +35,10 @@ class PatientSchedule:
                 arrVar = data[6]
         
         for element in self.patients:
-            arrTime = int(round(counter*15 + NP.random.normal(arrMean,arrVar)))
-            self.patients[counter-1].assignTime(arrTime) ##schedule a patient every 15 minutes
+            arrTime = (counter* 15) + int(float(arrMean))+ NP.random.randint(-1 * float(arrVar)/2,float(arrVar)/2);
+            self.patients[counter].assignTime(arrTime) ##schedule a patient every 15 minutes
             counter += 1
         arrivalFile.close()
-    
-    def loadSchedule(self):
-        print("loading schedule \n")
         
 # Test Harness
 #def main():

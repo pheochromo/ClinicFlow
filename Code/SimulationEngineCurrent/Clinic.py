@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Loads the clinic data
-@author: karl_
+Clinic loads the clinic data
+
+It takes the clinic file as an input, and creates a clinic object composed of the various clinic stations
 """
 
 from ClinicStation import ClinicStation
@@ -21,13 +22,10 @@ class Clinic:
         
         
 #Test Harness
-def main():
-   file = "ClinicFile1.txt"
-   newClinic = Clinic(file)
-   for station in newClinic.stations:
-       print(station.name, station.prerequesites, station.maximum, station.minimum,station.varianceType, station.mean, station.var)
+#def main():
+#   file = "ClinicFile1.txt"
+#   newClinic = Clinic(file)
+#   for station in newClinic.stations:
+#       print(station.name, station.prerequesites, station.maximum,station.minimum,station.varianceType, station.mean, station.var)
  
-if __name__ == "__main__": main()
-
-
-## ability to add constraints to optimization schedules
+#if __name__ == "__main__": main()
