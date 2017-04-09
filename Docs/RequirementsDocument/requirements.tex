@@ -41,6 +41,7 @@
 \hline
 \textbf{Date}  & \textbf{Comments} \\ \hline
 October 11, 2016 &  first draft. \\ 
+April 9, 2017 & first revision \\
 \hline
 \end{tabular}
 \caption{Revision History Table}
@@ -58,7 +59,8 @@ This document uses Volere Template for its organization.
 \section{Project Drivers}
 
 \subsection{The Purpose of the Project}
-This project aims to produce a tool which allows parties in the pre-operative clinic sector to optimize scheduling of patients amongst different procedures at the clinic, as well as arrival time and date to the clinic. Demand for the solution stems from the lack of relevant products, and the reliance of clinic staff on intuitive and error prone manual scheduling. With this tool, prior patient temporal data will be feed in and used to build a model of the variable involved. A simulation engine will then be used to produce an optimized scheduling of patients under inputted constraints. This would allow clinic staff to reduce scheduling errors, as well as conserve resources by automating the scheduling process.
+This project aims to produce a tool which allows parties in general clinic sector simulate and analyze various schedules for their clinic. Demand for the solution stems from the lack of relevant products, and the reliance of clinic staff on intuitive and error prone manual scheduling. With this tool, prior patient temporal data will be feed in and used to build a model of the variable involved. A simulation engine will then be used to produce feedback, giving the clinic information on how potential schedule changes could affect their overall operative times.
+
 \subsection{The Stakeholders}
 \subsubsection{The Client}
 Prospective clients of this product would include any clinics providing a set of different procedures, admitting patients to undergo some subset of those procedures, and who wish to automate their scheduling processes. Other potential clients include operators of any systems which make available a set of processes of different durations, which hope to automate scheduling of multiple concurrent uses of said services under various constraints.
@@ -70,16 +72,16 @@ This group includes the individual components to be scheduled through the system
 Other Stakeholders of this project include:
 \begin{itemize}
   \item     Supervisors: Dr. Wenbo He, Dr. Douglas Down, Steve Metham
-  \item 	Clinic manager
+  \item 	Clinic manager: 
 \end{itemize}
 
 \section{Project Constraints}
 \subsection{Mandated Constraints}
 \subsubsection{Cost Constraints}
-There is no immediate financial cost associated with project development. Clinic employees may have to devote some time for requirements gathering and product testing sessions. If however the system is successful and to be put in place permanently, use of a dedicated server will be required. For this, a cloud hosting and compute service such as Amazon Web Services would suffice. Financial cost for hosting and data access should be minimal, while compute costs will be determined during development, and dependant on algorithm performance.
+There is no immediate financial cost associated with project development. Clinic employees may have to devote some time for requirements gathering and product testing sessions. If however the system is successful and to be put in place permanently, use of a dedicated server will be required. For this, a cloud hosting and compute service such as Amazon Web Services would suffice. Financial cost for hosting and data access should be minimal, while compute costs (the run time of the program) will be determined during development, and dependant on algorithm performance.
 \newline
 \subsubsection{Quality Constraints}
-One measure of project success is the quality of results. Since program output will be used in a live clinic environment, it is important that the proposed optimal schedule be verifiable in production. This requires that schedules be tested in situ, and performance compared to manually scheduled historical data. This proof is necessary to implement use of the product in field.
+One measure of project success is the quality of results. Since program output will be used in a live clinic environment, it is important that the proposed feedback be verifiable in production. This requires that changes made to schedules be tested in situ, and performance compared to manually scheduled historical data. This proof is necessary to implement use of the product in field.
 \newline\
 \subsubsection{Risks}
 Building on the quality considerations above, one evident risk would be failure of generated schedules to demonstrate improvements over control (previous method of scheduling). This may cause bottlenecks or backlogs in patients processing, placing additional stress on clinic employees and institution finances. 
@@ -107,17 +109,24 @@ Clinic constraints and business rules will also be provided by the client. This 
 
 \subsection{Relevant Facts and Assumptions} 
 \subsubsection{Relevant Facts}
-N/A 
-\newline
+\begin{itemize}
+	\item NA
+\end{itemize}
+%\newline
 \subsubsection{Assumptions}
-N/A
+\begin{itemize}
+	\item NA
+\end{itemize}
 
 \section{Functional Requirements} 
 \subsection{The Scope of the Product}
-A desktop application or web-interface application can allow users to insert necessary data, such historical patient procedure durations, doctor and nurse shift hours, and other constraints such as break allotments or soft constraints such as employee shift end times. Based on provided data and inputs, the system will generate patient schedules for both arrival time into the clinic, and between procedures within the clinic. This tool will be designed with the intention to be implementable in multiple health care institutions for automating and managing patient scheduling
-\subsubsection{Product Boundary}
-Users gather the information from patients, doctors and clinic departments as input into the application, and receive schedules as outputs from the application. The inputs include historical patient data (arrival time, procedure time, departure time), doctor work hours, and other constraints. The application stores the inputs into a database, and extracts the data when generating schedules. The schedule generator uses this data to produce schedules, and stores them into the database to be recalled at a later point. Users can update the database and adjust schedules at any time, rerunning the simulation engine to produce an updated prediction of daily clinic flow statistics.
+A web-interface application can allow users to insert necessary data, such historical patient procedure durations, doctor and nurse shift hours, and other constraints such as break allotments or soft constraints such as employee shift end times. Based on provided data and inputs, the system will
+simulate a "day" in the clinic and record important information about the simulation.  This tool will be designed with the intention to be implementable in multiple health care institutions, so other clinics would able to make use of the tool.
 
+\subsubsection{Product Boundary}
+Users gather the information from patients, doctors and clinic departments as input into the application, and receive data sets and charts as outputs from the application. The inputs include historical patient data (arrival time, procedure time, departure time), doctor work hours, and other constraints. The application stores the inputs into a database, and extracts the data when generating simulations. The simulation results are then stored in the data base to be recalled at a later point. Users can update the database and adjust schedules at any time, rerunning the simulation engine to produce an updated prediction of daily clinic flow statistics.
+
+%%% NEEDS TO BE CHANGED
 \begin{figure}[H]
   \centering
 \includegraphics[scale=0.9]{product_boundary.png}
@@ -137,10 +146,9 @@ PUC\# & PUC Name & Actors & Summary \\
 3 & Store Information & User & Save the entered data to database \\
 4 & Display Data & User & View the data \\
 5 & Update Data & User & Changer the data inside database \\
-6 & Generate Schedules & User & Assign patients to procedure slots \\
-7 & Store Schedules & User & Save generated schedules into database \\
-8 & Display Schedules & User & View existed schedules \\
-9 & Adjust Schedules & User & Change the existed schedules \\
+6 & Generate Simulation & User & Assign patients to procedure slots \\
+7 & Store Simulation & User & Save generated simulations into database \\
+8 & Display Simulation Results & User & View existed simulations \\
 10 & Log out & User & Leave the system and close the authority  \\
 \hline
 \end{tabular}
@@ -172,83 +180,92 @@ Users can update and modify the data inside database at any moment. Users can cr
 
 \noindent\textbf{\textit{Requirement 4}}\newline
 \textit{Description:}\newline
-The product shall match the available time of patients and doctors to generate an optimal schedule. \newline\newline
-\textit{Fit Criterion:}\newline 
-The product extracts information from database, and match time table of doctors with the available time of patients. Base on an algorithm, the product can generate schedules based on a first in first out query or create schedules for all patients as a pooled schedule. The generated schedules will be stored into the database. \newline
-
-\noindent\textbf{\textit{Requirement 5}}\newline
-\textit{Description:}\newline
 The product shall be able to show the data inside database to user in an informative way. \newline\newline
 \textit{Fit Criterion:}\newline 
 Users can open and view details of all data inside database. The data includes the information from patients, information from doctors, and previously generated schedules. \newline
 
+\noindent\textbf{\textit{Requirement 5}}\newline
+\textit{Description:}\newline
+The product shall allow users to adjust generated visuals. \newline\newline
+\textit{Fit Criterion:}\newline 
+The user can adjust the previously generated visualizations of the simulation results. The user could update the times displayed, or look at one section of the graph. \newline
+
 \noindent\textbf{\textit{Requirement 6}}\newline
-\textit{Description:}\newline
-The product shall allow users to adjust generated schedules. \newline\newline
-\textit{Fit Criterion:}\newline 
-The user can adjust the previously generated schedules by changing the time of the schedules. The user can update the available times of patients or doctors, and regenerate schedules. \newline
-
-\noindent\textbf{\textit{Requirement 7}}\newline
-\textit{Description:}\newline
-The product shall alert the user of any time conflicts between patients and doctors. \newline\newline
-\textit{Fit Criterion:}\newline 
-The product should monitor the process of generating schedule and adjusting schedules.When a insolvable conflict appears, they product should remind the user that such conflicts exist. \newline
-
-\noindent\textbf{\textit{Requirement 8}}\newline
-\textit{Description:}\newline
-The product shall provide the most optimized schedules to the users first. \newline\newline
-\textit{Fit Criterion:}\newline 
-The product must consider the  arrival time, waiting time, service time of different procedure for a patient in clinic. The product should try to minimize the total time patients spend in the clinic. Meanwhile, the product should minimize the idle time of doctors. \newline
-
-\noindent\textbf{\textit{Requirement 9}}\newline
 \textit{Description:}\newline
 The simulations generated by the program should be realistic. The results should accurately approximate
  \newline\newline
 \textit{Fit Criterion:}\newline 
-The results should accurately approximate a real day in the clinic. There should not be wild deviations from reality, such as patients waiting an unresonable amount of time. This also means that things like the First Come- First Served prinicple that is implemented in the clinic is enforced by the program. \newline
+The results should accurately approximate a real day in the clinic. There should not be wild deviations from reality, such as patients waiting an unresonable amount of time. This also means that things like the First Come- First Served prinicple that is implemented in the clinic is enforced by the program. The user should be able to look at the results of a single simulation and trace the flow of each patient through the clinic, seeing that they all follow a logical path\newline
 
-\noindent\textbf{\textit{Requirement 10}}\newline
+\noindent\textbf{\textit{Requirement 7}}\newline
 \textit{Description:}\newline
 The program should be able to handle any resonable set of patients for a given run.
 \newline\newline
 \textit{Fit Criterion:}\newline 
 A reasonable amount of patients would be the amount of expected patients that the clinic would see in a single day. For the Pre-Op clinic, this would be around 25 people at most.  \newline
 
-\noindent\textbf{\textit{Requirement 11}}\newline
+\noindent\textbf{\textit{Requirement 8}}\newline
 \textit{Description:}\newline
 The program should be able to handle any reasonable schedule for provider break times.
 \newline\newline
 \textit{Fit Criterion:}\newline 
 A reasonable schedule for provider break times would involve the program beign able to handle the periodic breaks each provider must take during the day to comply with worker's regulations. The program must also be able to handle lunch breaks, and extended breaks where a provider moves to a different part of the hospital.  \newline
 
-\noindent\textbf{\textit{Requirement 12}}\newline
+\noindent\textbf{\textit{Requirement 9}}\newline
 \textit{Description:}\newline
 The program should be able to generate useful and quality data for each run of the simulation. It should be able to display the results of the simulation in a readable way.
 \newline\newline
 \textit{Fit Criterion:}\newline 
 The data gathered by the simulation for a single run should be data that the clinic can actually use to improve their schedules. It should not be data on irrelevant subjects, or things they have no ability to change. The program should also be able to convert the discrete time step used into a more readable form for a human. \newline
 
-\noindent\textbf{\textit{Requirement 13}}\newline
+\noindent\textbf{\textit{Requirement 10}}\newline
 \textit{Description:}\newline
 The program should be able to run multiple simulations of the same clinic and generate different valid results.
 \newline\newline
 \textit{Fit Criterion:}\newline 
 There should be sufficient variation in the output of the simulation, as no two days in the clinic are identical. If the simulations are unable to generate this reasonable variation then they are not of real worth to the clinic.  \newline
 
-\noindent\textbf{\textit{Requirement 14}}\newline
+\noindent\textbf{\textit{Requirement 11}}\newline
 \textit{Description:}\newline
 The program should be able to add or subtract modules from the clinic. 
 \newline\newline
 \textit{Fit Criterion:}\newline 
 There should not be a fixed clinic structure for the simulations. Modules in the clinic are fluid in reality, with modules being added and subtracted every revision cycle. If our program can not include this feature, it would be unable to used in the long term. This requirement would also allow the program to be used for another clinic at another time.\newline
 
-\noindent\textbf{\textit{Requirement 15}}\newline
+\noindent\textbf{\textit{Requirement 12}}\newline
 \textit{Description:}\newline
 The simulation engine should use the real data to populate the variation for its simulations. It should be able to use different data to change the variation of each simulation
 \newline\newline
 \textit{Fit Criterion:}\newline 
-The program should be able to pull data from the database, and process that data to find measures of variation (such as means and standard deviations) of the data set. It should then be able to use those measures to change the variance in the simulation. \newline
+The program should be able to pull data from the database, and process that data to find measures of variation (such as means and standard deviations) of the data set. It should then be able to use those measures to change the variance in the simulation \newline
 
+\noindent\textbf{\textit{Requirement 13}}\newline
+\textit{Description:}\newline
+The system should be fault tolerant. It should be able to handle any errors in the simulation engine.
+\newline\newline
+\textit{Fit Criterion:}\newline 
+The program should be able to at least be able to determine if the results of the simulation are completely reasonable (i.e. the simulation shows no wait time for patients). There should also be error handling features present in case something goes wrong in the transfer of data between sub-systems. \newline
+
+\noindent\textbf{\textit{Requirement 14}}\newline
+\textit{Description:}\newline
+The system should be able to store the previous simulations in the data base for future access.
+\newline\newline
+\textit{Fit Criterion:}\newline 
+The program should have a set of methods to store and access simulation results on the data base. It needs to be able to store a reasonable amount of previous simulations ($\approx 100$).  \newline
+
+\noindent\textbf{\textit{Requirement 15}}\newline
+\textit{Description:}\newline
+The system should be able to store the state of the program when a user logs out. Then when the user logs back in, they should be able to return to that same state.
+\newline\newline
+\textit{Fit Criterion:}\newline 
+The program should have a set of methods to store the current state of system for a particular user on the database. Then when that user logs back into the system, the program should be able to return to that state.\newline
+
+\noindent\textbf{\textit{Requirement 16}}\newline
+\textit{Description:}\newline
+The system should be able to return to a main menu if the simulation fails in any way.
+\newline\newline
+\textit{Fit Criterion:}\newline 
+The program should have a set of methods to make sure that if there is an error in the simulation engine, then the program will not crash and will return to the previous menu. The program should be able to abandon a simulation if it proves to difficult to compute. \newline
 
 \section{Nonfunctional Requirements}
 \subsection{Look and Feel Requirements}
@@ -280,14 +297,14 @@ Design the software so that the language may be eventually changed.
 The program should respond quickly to user input. The application should run the simulation in reasonable time, given the data size.
 \newline \newline 
 \textit{Fit Criterion:}\newline 
-Interactions between user and system shall have a maximum response time of 2 seconds. Each simulation should take between 30 seconds and 30 minutes (guesses), depending on the data size.
+Interactions between user and system shall have a maximum response time of 2 seconds. Each simulation should take a resonable amount of time depending on the data size. An approximation of this would be around a minute per 100 data values at maximum. This might not be reasonable for larger data sets, as the computation cost compound.
 
 \subsubsection{Reliability and Availability Requirements}
 \textit{Description:}\newline
-The product shall be available for use 24 hours per day, 365 days per year.
+The product shall be available for use as frequently as possible.
 \newline \newline 
 \textit{Fit Criterion:}\newline 
-The product should not need any downtime to function. If the system is web based, then it should have 99\% up time.
+The product should not need any downtime to function. If the system is web based, then it should try to have 99\% up time. Ideally it would always be able to be run outside of server and program maintenance time. It should at a minimum be available during the working hours of the hospital adminstrative staff (8:00am - 5:00pm Mon/Fri). 
 
 \subsubsection{Scalability or Extensibility Requirements}
 \textit{Description:}\newline
@@ -310,7 +327,7 @@ A warning message will be provided to the user if their selected operation can b
 Changes to system will be done within one week of being presented to the maintenance team. Changes will be applied to the application as soon as they are available.
 \newline \newline 
 \textit{Fit Criterion:}\newline 
-There is only a delay of a week between the report of an error in the software, and a fix being applied. There is no downtime between the creation of a fix and its application to the program.
+There is only a delay of a week between the report of an error in the software, and a fix being applied. There should be minimal down time between the creation of a fix and its application to the program.
 
 \subsubsection{Supportability Requirements}
 \textit{Description:}\newline
@@ -318,6 +335,12 @@ The user of the software should have direct access to the support team, and be a
 \newline \newline 
 \textit{Fit Criterion:}\newline 
 A system to allow the client to report directly to the team shall be implemented.
+
+\textit{Description:}\newline
+There should be a member of the support team assigned to the project for at least one year after the completion of the project
+\newline \newline 
+\textit{Fit Criterion:}\newline 
+A member of the support team (taken from the development team) shall continue to support the product for a year after project completion or until the product is no longer in use, which ever comes first.
 
 \subsubsection{Adaptability Requirements}
 \textit{Description:}\newline
@@ -348,22 +371,19 @@ The implementation and working environment dependencies:
   \item HTML, CSS and JavaScript will be used to write the graphical user interface.
   \item PHP will be used as an interface to the database due to its simplicity
   \item MongoDB will also be used due to its simplicity and non-essentiality of a relational model for data storage. 
-  \item The simulation and optimization engine will be written in Python. Specifically, the SimPy package will be used for discrete event simulation components.
+  \item The simulation and optimization engine will be written in Python 3. Specifically, the SimPy package will be used for discrete event simulation components.
   \item The application can be installed locally on a computer, or it can be  
   	accessed from a remote server.
 \end{itemize}
 
 \subsection{Off the Shelf Solutions}
 \subsubsection{Ready Made Products}
-There are many commercial scheduling software existing in the market, however, they do not offer scheduling optimization and patient flow simulation functions.
+There are many commercial simulation software existing in the market, however, they do not offer the level of customization and patient flow simulation functions.
 
 \subsubsection{Reusable Components}
 Because the source code of commercial software is not available, there is no reusable component.
 
 \subsection{Costs}
-The product will be open-source, but if it is installed on a server, maintenance fees and Internet fee may apply.
-
-\subsection{Alternative Ideas}
-The current protocol for scheduling involves patients being immediately given a time to arrive at the clinic. This sets the system up for inefficiencies because the total set of patients to be scheduled are not known ahead of time. The potential therefore exists to implement a scheduling protocol whereby patients are placed into a pool instead of immediately being given an appointment time. Once the pool reaches a threshold, all patients in the pool are scheduled together. This allow the system to make a far more optimal daily schedule since all patients to be scheduled are known ahead of time. Performance of this alternative scheduling method can be compared to the current method using both the presently proposed tool, as well as in production.
+The product will be open-source, but if it is installed on a server, maintenance fees and Internet fee may apply. There is currently a small fund set up by the development team to pay for expected server access and maintenance costs associated with the project. If the costs exceed the expected amounts, additional funds must be accquired or the project will have to finish early.
 
 \end{document}
