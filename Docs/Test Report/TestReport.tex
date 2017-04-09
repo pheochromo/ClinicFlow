@@ -87,25 +87,26 @@ Yunfeng Li \#001335650
 
 \subsection{Introduction}
 
-\subsection{Definitions and Acronyms} 
+\subsection{Definitions and Terms} 
 \begin{center}
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.65\textwidth}}
 \caption{Definitions and Acronyms}\label{Table_Acronyms}\\
 \toprule
 
-\bf Acronym & \bf Definition\\\midrule
+\bf Term & \bf Definition\\\midrule
 Provider & Someone who works in the clinic environment (a nurse, doctor, technician)\\\midrule
-
+Module & A section of the clinic \\ \midrule
+Passport & Time record of patients inside the clinic \\ 
 \bottomrule
 \end{longtable}
 \end{center}
 
 \section{Unit Testing}
 \subsection{Overview}
-	As the programs will be written in the Python 3 programming language, we can use the unittest framework. We will define test cases, with inputs and expected outputs and then be able to run this for each module in the system. We have not yet specified the names of each module and the functions contained, but we do have a general idea of what modules we would want and what they should do. These tests will be refined once specific function names and information is known.
+	As the programs will be written in the Python 3 programming language, we can use the unittest framework. We will define test cases, with inputs and expected outputs and then be able to run this for each module in the system. 
 
-\subsection{Patient Scheduling} 
-	We intend to have a module in the program that will take in a file containing patients in the clinic, and produce a schedule for them. First we must test if scheduling system can take appropriate inputs. The initial inputs for this test would be that the program has nothing loaded into it currently. First test the class of initializing patient information by collecting data from inputs. This parameter should read the stored information which includes identification and reserved services.
+\subsection{Patient Scheduling: PatientSchedule.py} 
+	We have a module in the program that will take in a file containing patients in the clinic, and produce a schedule for them. First we must test if scheduling system can take appropriate inputs. The initial inputs for this test would be that the program has nothing loaded into it currently. First test the class of initializing patient information by collecting data from inputs. This parameter should read the stored information which includes identification and reserved services.
 
 		\subsubsection{Test Inputs}
 		\begin{center}
@@ -199,8 +200,8 @@ Provider & Someone who works in the clinic environment (a nurse, doctor, technic
 	
 	
 		
-\subsection{Healthcare Worker Scheduling} 
-We intend to have a module in the program that will take in a file containing the names and break schedule of the providers. It will then generate a schedule object that the simulation can use.
+\subsection{Healthcare Worker Scheduling: HealthCareSchedule.py} 
+We have a module in the program that will take in a file containing the names and break schedule of the providers. It will then generate a schedule object that the simulation can use.
 		\subsubsection{Test Inputs}
 		\begin{center}
 			\begin{longtable}{c>{\raggedright\arraybackslash}p{8.8cm} }
@@ -272,8 +273,8 @@ We intend to have a module in the program that will take in a file containing th
 			\end{center}
 		
 
-\subsection{Modules} 
-Clinics can have a variety of sections (which we shall call modules)  such as Blood taking or xray. Each section can be unique or have multiples. We are going to model each clinic in a data file, which will be read into the system when a simulation is run for that clinic.
+\subsection{Clinic: Clinic.py} 
+Clinics can have a variety of sections (which we shall call modules)  such as Blood taking or xray. Each section can be unique or have multiples. We model each clinic in a data file, which will be read into the system when a simulation is run for that clinic.
 		
 		\subsubsection{Test Inputs}
 		\begin{center}
@@ -344,8 +345,8 @@ We must also check that the functions in this module create a valid network of m
 			\end{longtable}
 		\end{center}
 	
-We analysis the clinic passport data to evaluate the average processing time 
-and processing time variance in each module. 
+We have analysis for  the clinic passport data and evaluate the average processing time 
+as well as the processing time variance in each module. 
 
 	\subsubsection{Test Inputs}
 	\begin{center}
@@ -417,7 +418,7 @@ in a usable form for the rest of the system.
 		\end{longtable}
 	\end{center}
 
-\subsection{Simulation Engine} 
+\subsection{Simulation Engine: SimulationEngine.py} 
 The system relies on the simulation engine to generate any results. This module must be able to take in the previous schedules and data, and use that to run a discrete event simulation using those schedules. The pass criteria for this engine should be that it is capable of generating realistic schedules. To do this, we ran data set through the engine and randomly selected patients to check to see if they followed a logical path through the clinic.
 	
 	
@@ -2972,113 +2973,6 @@ The application allows administrator account user and viewer account user to vie
 \quad
 
 \includegraphics[scale=0.5]{sample2.png}
-
-\subsection{Simulation Results}
-
-u24\\
-
-u24,8:09,arrive,P\\
-u24,Registration,8:09,start serivce,P\\
-u24,Registration,8:15,leave service,P\\
-u24,RNInterview,8:15,start serivce,P\\
-u24,RNInterview,8:26,leave service,P\\
-u24,LaboratoryECG,8:26,start serivce,P\\
-u24,LaboratoryECG,8:35,leave service,P\\
-u24,Anesthesiologist,8:50,start serivce,P\\
-u24,Anesthesiologist,9:19,leave service,P\\
-
-\quad
-
-u62\\
-
-u62,7:01,arrive,P\\
-u62,Registration,7:01,start serivce,P\\
-u62,Registration,7:07,leave service,P\\
-u62,RNInterview,7:07,start serivce,P\\
-u62,RNInterview,7:17,leave service,P\\
-u62,LaboratoryECG,7:17,start serivce,P\\
-u62,LaboratoryECG,7:26,leave service,P\\
-u62,LaboratoryBloodwork,7:26,start serivce,P\\
-u62,LaboratoryBloodwork,7:35,leave service,P\\
-u62,Anesthesiologist,7:35,start serivce,P\\
-u62,Anesthesiologist,7:58,leave service,P\\
-
-\quad
-
-u82\\
-
-u82,13:06,arrive,P\\
-u82,Registration,13:06,start serivce,P\\
-u82,Registration,13:11,leave service,P\\
-u82,RNInterview,13:11,start serivce,P\\
-u82,RNInterview,13:22,leave service,P\\
-u82,LaboratoryECG,13:22,start serivce,P\\
-u82,LaboratoryECG,13:30,leave service,P\\
-
-
-u87\\
-
-u87,7:53,arrive,P\\
-u87,Registration,7:53,start serivce,P\\
-u87,Registration,7:59,leave service,P\\
-u87,RNInterview,7:59,start serivce,P\\
-u87,RNInterview,8:10,leave service,P\\
-u87,LaboratoryECG,8:10,start serivce,P\\
-u87,LaboratoryECG,8:16,leave service,P\\
-u87,LaboratoryBloodwork,8:16,start serivce,P\\
-u87,LaboratoryBloodwork,8:23,leave service,P\\
-u87,Anesthesiologist,8:23,start serivce,P\\
-u87,Anesthesiologist,8:50,leave service,P\\
-u87,X-Ray,8:50,start serivce,P\\
-u87,X-Ray,9:10,leave service,P\\
-
-\quad
-
-u123\\
-
-u123,9:19,arrive,P\\
-u123,Registration,9:19,start serivce,P\\
-u123,Registration,9:25,leave service,P\\
-u123,RNInterview,9:25,start serivce,P\\
-u123,RNInterview,9:44,leave service,P\\
-u123,LaboratoryBloodwork,9:44,start serivce,P\\
-u123,LaboratoryBloodwork,9:50,leave service,P\\
-u123,Anesthesiologist,9:50,start serivce,P\\
-u123,Anesthesiologist,10:15,leave service,P\\
-
-(*missing X-Ray part)
-
-\quad
-
-u472\\
-
-u472,8:36,arrive,P\\
-u472,Registration,8:36,start serivce,P\\
-u472,Registration,8:42,leave service,P\\
-u472,RNInterview,8:42,start serivce,P\\
-u472,RNInterview,8:59,leave service,P\\
-u472,LaboratoryECG,8:59,start serivce,P\\
-u472,LaboratoryECG,9:08,leave service,P\\
-u472,LaboratoryBloodwork,9:08,start serivce,P\\
-u472,LaboratoryBloodwork,9:17,leave service,P\\
-u472,Anesthesiologist,9:19,start serivce,P\\
-u472,Anesthesiologist,9:43,leave service,P\\
-
-\quad
-
-u588\\
-
-u588,12:32,arrive,P\\
-u588,Registration,12:32,start serivce,P\\
-u588,Registration,12:39,leave service,P\\
-u588,RNInterview,12:39,start serivce,P\\
-u588,RNInterview,12:56,leave service,P\\
-u588,LaboratoryECG,12:56,start serivce,P\\
-u588,LaboratoryECG,13:03,leave service,P\\
-u588,LaboratoryBloodwork,13:03,start serivce,P\\
-u588,LaboratoryBloodwork,13:11,leave service,P\\
-
-
 
 \newpage
 \section{Schedule}
