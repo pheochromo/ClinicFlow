@@ -157,7 +157,32 @@ The component \textit{Simulation Engine} exists primarily to fulfill the functio
 \subsubsection{Data Analysis}
 \textit{Simulation Engine} also has to solve the problem of how we implemented a discrete event simulation to provide realitic results. 
 To allow it to be able to do this, we had to do background research into the clinic, and do analysis on the clinic's existing data sets. \\
+Plots were created to understand the types of underlying variance in each of the sections of the clinic, as well as the variance in arrival times. For arrival times, we investigated the distribution of the differences between the scheduled arrival times and the actual arrival times. 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8cm]{ScheduledVersusActual}
+	\caption{A plot of the distribution of scheduled arrivals versus actual arrivals}
+\end{figure}
+The X-axis in the above figure is the "bin" in which each difference was placed. 10 represents no difference between scheduled and actual arrivals, with 0 being -30 minutes the largest difference. The Y-axis in the above figure is the frequency of which each of these bins occur. \\
+The above figure tells us that most people arrive around the time when they are scheduled, and that the variance appears to be approximately normal( Gaussian). \\
+Next we looked at the first class of modules, that have fairly standard service times. To get an idea of the variance in these service times, we looked at the difference between the start time of the module and the finish time. The following plot is for"Registration", a typical example of this type of module: \\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8cm]{RegistrationVariance}
+	\caption{A plot of the distribution of time spent in "Registration"}
+\end{figure}
+The X-axis in the above figure is the "bin" in which each time length is placed. 0 represents 0 to 3 minutes spent in the module, with each remaining bin representing another 0-3 minutes. The Y-axis in the above figure is the frequency of which each of these bins occur. \\
+From the above figure, we can see that most patients finish these modules quickly and with a consistent service time. There are a few patients who take longer. This suggests that we should use an exponential model for the variance in this module. Other modules of this class show a similar variance distribution. \\
+Finally we investigated another class of modules, which have a more extreme spread of variance in the service times. This is because these modules contain more complicated proceedures that have no standard service time. To get an idea of the variance in these service times, we looked at the difference between the start time of the module and the finish time. The following plot is for"XRayinRadiology", a typical example of this type of module: \\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8cm]{RadVariance}
+	\caption{A plot of the distribution of time spent in "XRayinRadiology"}
+\end{figure}
+The X-axis in the above figure is the "bin" in which each time length is placed. 0 represents 0 to 3 minutes spent in the module, with each remaining bin representing another 0-3 minutes. The Y-axis in the above figure is the frequency of which each of these bins occur. \\
+From the above figure, we can see that there is a large amount of variation between the amount of time any one patient would spend in this module. Some patients finish within 3 minutes, while most spend around 15 minutes. This suggests that we should try to model this variance with a different distribution, such as a normal (Gaussian) distribution. \\
+In our implementation, we were able to take advantage of the results of this analysis to improve our models. We were able to use Python 3's libraries to generate random numbers as part of distributions built from the data sets we were provided on the clinic. We were also able to catergorize each module into one of two types (simple or complex). The variance of the arrival times was hard to model properly, so many method were tried before the final version used in the simulation engine was selected.
 \subsection{Clinic Create}
 \textit{Clinic Create} is a grouping of modules that take the data from the \textit{Database} and create useable files and tables for \textit{Simulation Engine}. It maintains some of the clinic information, and general rules. \textit{Clinic Create} is written in Python 3.\\
 It takes input from other functions in the cliniccreate() method, and this method also provides files to \textit{Simulation Engine} to allow that module to function. \\
@@ -174,33 +199,35 @@ It shows the html pages to the user. It also takes requests from \textit{Control
 the visualizations of the data that are displayed to the users. 
 It gets the data from \textit{Database} and give the visualizations to \textit{Display}. \textit{Visualization} was primarily written in ...
 
-\section{User Interface Design}
+\section{Display: User Interface Design}
+\subsection{Overview}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+	% Design of Simulation Engine
+	\node[draw] (LOG) at (0,5) {Login};
+	\node[draw] (MAIN) at (0,3) {Main};
+	\node[draw] (PI) at (-5,0) {Patient information};
+	\node[draw] (SC) at (5,0) {Simulate clinic};
+	\node[draw] (CI) at (-3,-2) {Clinic information};
+	\node[draw] (GS) at (3,-2) {Generate schedule};
+	
+	\draw[-,draw=black] (MAIN) to (LOG);
+	\draw[-,draw=black] (SC) to (MAIN);
+	\draw[-,draw=black] (PI) to (MAIN);
+	\draw[-,draw=black] (CI) to (MAIN);
+	\draw[-,draw=black] (GS) to (MAIN);
+	\end{tikzpicture}
+	\caption{User Interface Design}
+\end{figure}
 
 \subsection{Navigation flow}
 The first page presented to the user is the login page. The user must login as a manager or a authentic viewer before further operation. After logging in, the user will be redirected to the main menu page. The main menu page can direct user to the patient information page, clinic information page, generate schedule page and simulate schedule page. The user who log in as a viewer can only view patient information and generated schedules. Meanwhile the manager account would have viewer capabilities, in addition to being able to add/change patient information, add or change clinic attribute data, run simulations on specific patient data, or generate schedules based on patient data.
 
 \noindent \newline
-Each page has a navigation bar which let user transfer to different page. Each page has a logout button, thus the user can quit the system at any time. 
-
-\begin{figure}[!h]
-\centering
-    \begin{tikzpicture}
-    % Design of Simulation Engine
-    \node[draw] (LOG) at (0,5) {Login};
-    \node[draw] (MAIN) at (0,3) {Main};
-    \node[draw] (PI) at (-5,0) {Patient information};
-    \node[draw] (SC) at (5,0) {Simulate clinic};
-    \node[draw] (CI) at (-3,-2) {Clinic information};
-    \node[draw] (GS) at (3,-2) {Generate schedule};
-
-    \draw[-,draw=black] (MAIN) to (LOG);
-    \draw[-,draw=black] (SC) to (MAIN);
-    \draw[-,draw=black] (PI) to (MAIN);
-    \draw[-,draw=black] (CI) to (MAIN);
-    \draw[-,draw=black] (GS) to (MAIN);
-    \node at (0.0, -4.0) {\textit{ Figure 1: Simulation Engine Uses Diagram}};
-    \end{tikzpicture}
-\end{figure}
+Each page has a navigation bar which let user transfer to different page. Each page has a logout button, thus the user can quit the system at any time. \\
 
 \subsection{Login}
 The user has to log in with the correct account and password before using the system. The login page has straight forward design which allows users to easily log in. This page contains internal validation to protect the system. This page can distinguish the user as a manager or a viewer, and gives the user corresponding authority. 
@@ -244,8 +271,8 @@ Simpy is a Process-based discrete-event simulation framework which works with Py
 \centering
     \begin{tikzpicture}
     % Design of Simulation Engine
-    \node[draw] (SE) at (0,5) {SimulationEngine.py};
-    \node[draw] (SIM) at (0,3) {Simulation.py};
+    \node[draw] (SIM) at (0,5) {SimulationEngine.py};
+    %\node[draw] (SIM) at (0,3) {Simulation.py};
     \node[draw,fill=black,text=white] (PSC) at (-5,0) {PatientSchedule.py};
     \node[draw,fill=gray,text=white] (HSC) at (0,0) {HealthCareSchedule.py};
     \node[draw,fill=blue,text=white] (CLI) at (5,0) {Clinic.py};
@@ -253,34 +280,54 @@ Simpy is a Process-based discrete-event simulation framework which works with Py
     \node[draw,fill=gray,text=white] (HCW) at (0,-2) {HealthCareWorker.py};
     \node[draw,fill=blue,text=white] (CLM) at (5,-2) {ClinicStation.py};
 
-    \draw[->,draw=black] (SIM) to (SE);
+   % \draw[->,draw=black] (SIM) to (SE);
     \draw[->,draw=black] (CLI) to (SIM);
     \draw[->,draw=black] (PSC) to (SIM);
     \draw[->,draw=black] (HSC) to (SIM);
     \draw[->,draw=black] (PAT) to (PSC);
     \draw[->,draw=black] (HCW) to (HSC);
     \draw[->,draw=black] (CLM) to (CLI);
-    \node at (0.0, -4.0) {\textit{ Figure 1: Simulation Engine Uses Diagram}};
-
+   % \node at (0.0, -4.0) {\textit{ Figure 1: Simulation Engine Uses Diagram}};
     \end{tikzpicture}
+    \caption{Simulation Engine Uses Diagram}
 \end{figure}
 
 
 \subsection{SimulationEngine.py}
+\subsubsection{SimulationEngine(clinicFile,employeeFile,patientFile,outFile)}
 \begin{itemize}  
 \item Acts as a top level for the program
 \item Handles File I/O for simulation
-\item Uses Simulation.py to run a simulation
-\item May be merged with Simulation.py for lower coupling
+\item Uses HealthCareSchedule, PatientSchedule and Clinic tables
+\item Calls the simulation function
+\item It helps meet the following requirements:
+%\item Manages the simulation of the clinic
+%\item Uses SimPy
+%\item Has methods for workerRun and patientRun to create "threads" for the objects
+%\item Also contains the simulation resources
+%\item Uses HealthCareSchedule, PatientSchedule and Clinic
 \end{itemize}
-
-\subsection{Simulation.py}
-\begin{itemize}  
-\item Manages the simulation of the clinic
-\item Uses SimPy
-\item Has methods for workerRun and patientRun to create "threads" for the objects
-\item Also contains the simulation resources
-\item Uses HealthCareSchedule, PatientSchedule and Clinic
+\subsubsection{Simulation(env,clinic,workerSchedule,patientSchedule,outfile)}
+\begin{itemize}
+	\item Manages the simulation of the clinic
+	\item Uses SimPy to run a discrete event simulation
+	\item Is called by SimulationEngine(), and uses workerRun() and patientRun() to create the simulation
+	\item This function also handles the data analysis for the simulation results
+	\item It helps meet the functional requirements related to the simulation:
+\end{itemize}
+\subsubsection{workerRun(env,worker,clinic,resources)}
+\begin{itemize}
+	\item Is the function that represents the "logic" that the worker threads follow
+	\item Is used by Simulation to simulate the health care providers
+	\item It helps meet the functional requirements related to the workers:
+	It helps the simulation be realisitic
+\end{itemize}
+\subsubsection{patientRun(env, patient,clinic,resources)}
+\begin{itemize}
+	\item Is the function that represents the "logic" that the patient threads follow
+	\item Is used by Simulation to simulate the patients
+	\item It helps meet the functional requirements related to the patients:
+	It helps the simulation be realisitic
 \end{itemize}
 
 \subsection{Clinic.py}
