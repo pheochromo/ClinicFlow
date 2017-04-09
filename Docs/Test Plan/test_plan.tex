@@ -69,7 +69,6 @@ Yunfeng Li \#001335650
 \ref{Login_SystemTests} & Login System Tests \\
 \ref{DataStorage_SystemTests} & Database Storage System Tests \\
 \ref{DataManipulation_SystemTests} & View, Modify and Delete Data System Tests \\
-\ref{ScheduleGeneration_SystemTests} & Schedule Generation System Tests \\
 \ref{ViewSchedule_SystemTests} & View Schedule and Modify Schedule System Tests \\
 \ref{Usability Tests} & Usability Tests \\
 \ref{Performance Tests} & Performance Tests \\
@@ -90,32 +89,32 @@ This document details our approach to testing ClinicFlow. This software will be 
 \caption{Definitions and Acronyms}\label{Table_Acronyms}\\
 \toprule
 
-\bf Acronym & \bf Definition\\\midrule
-Thing & def\\\midrule
-
+\bf Phrase & \bf Definition\\\midrule
+Module & A unit or section in a clinic \\\midrule
+Provider & A health care worker (A doctor, nurse,technician) \\\midrule
 \bottomrule
 \end{longtable}
 \end{center}
 
 \section{Unit Testing}
 \subsection{Overview}
-	As the programs will be written in the Python 3 programming language, we can use the unittest framework. We will define test cases, with inputs and expected outputs and then be able to run this for each module in the system. We have not yet specified the names of each module and the functions contained, but we do have a general idea of what modules we would want and what they should do. These tests will be refined once specific function names and information is known.
+	As the programs will be written in the Python 3 programming language, we can use the unittest framework. We will define test cases, with inputs and expected outputs and then be able to run this for each module in the system. We have not yet specified the names of each module and the functions contained, but we do have a general idea of what modules we would want and what they should do. 
 
-\subsection{Patient Scheduling} 
-	We intend to have a module in the program that will take in a file containing patients in the clinic, and produce a schedule for them. First we must test if scheduling system can take appropriate inputs.
+\subsection{PatientSchedule.py} 
+	This is the module in the program that will take in a file containing patients in the clinic, and produce a schedule for them. First we must test if scheduling system can take appropriate inputs.
 		\subsubsection{Test Inputs}
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Patient Schedule-Input}}\label{PatientInput_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & No patient dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & No patient dataset & No patient dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) patient dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) patient dataset & No patient dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} &Incorrectly formatted patient dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} &Incorrectly formatted patient dataset & No patient dataset present\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
@@ -124,13 +123,13 @@ Thing & def\\\midrule
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Patient Schedule- Scheduling}}\label{PatientSchedule_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset & No patient dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset with many repeats\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset with many repeats & No patient dataset present\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
@@ -141,32 +140,32 @@ Thing & def\\\midrule
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Patient Schedule-Output}}\label{PatientOutput_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset & No patient dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset with many repeats\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample patient dataset with many repeats & no patient dataset present \\
 				\bottomrule
 			\end{tabular}
 		\end{table}
 		
-\subsection{Healthcare Worker Scheduling} 
-We intend to have a module in the program that will take in a file containing the names and times available of the health care workers at the clinic, and it will be able to generate a schedule for them. We should first test to see if the module is able to accept the appropriate input.
+\subsection{HealthcareSchedule.py} 
+This is the module in the program that will take in a file containing the names and times available of the health care workers at the clinic, and it will be able to generate a schedule for them. We should first test to see if the module is able to accept the appropriate input.
 		\subsubsection{Test Inputs}
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{HealthCare Schedule-Input}}\label{HealthCareInput_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & No health care dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & No health care dataset & no health care dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset & no healthcare dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} &Incorrectly formatted health care dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} &Incorrectly formatted health care dataset & no healthcare dataset present\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
@@ -175,13 +174,13 @@ We intend to have a module in the program that will take in a file containing th
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Health Care Schedule- Scheduling}}\label{HealthCareSchedule_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset & no health care dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset with many repeats\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset with many repeats & no health care data set present\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
@@ -192,89 +191,90 @@ We intend to have a module in the program that will take in a file containing th
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Health Care Schedule-Output}}\label{HealthCareOutput_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs} & \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) health care dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) health care dataset & no health care dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset with many repeats\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample health care dataset with many repeats & no health care data set present\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
 
-\subsection{Modules} 
-Clinics can have a variety of sections (which we shall call modules)  such as Blood taking or xray. Each section can be unique or have multiples. We are going to model each clinic in a data file, which will be read into the system when a simulation is run for that clinic.
+\subsection{Clinic.py} 
+Clinics can have a variety of modules such as Blood taking or x-ray. Each section can be unique or have multiples. This program module uses clinic information from a data file, which will be read into the system when a simulation is run for that clinic.
 		\subsubsection{Test Inputs}
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Clinic Modules-Input}}\label{ClinicModuleInput_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & No module dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & No clinic dataset &no clinic dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) module dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) clinic dataset & no clinic dataset present\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} &Incorrectly formatted module dataset\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} &Incorrectly formatted clinic dataset & no clinic dataset present \\
 				\bottomrule
 			\end{tabular}
 		\end{table}
-We must also check that the functions in this module create a valid network of modules for the clinic. 
+We must also check that the functions in this program module create a valid network of modules for the clinic. 
 		\subsubsection{Test Inputs}
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Clinic Module-Output}}\label{ClinicModuleOutput_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) clinic module system with no repeats\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) clinic module system with no repeats & no clinic data set present.\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) clinic module system with many repeats\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Sample (valid) clinic module system with many repeats & no clinic data set present.\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
 
-\subsection{Simulation Engine} 
-The system relies on the simulation engine to generate any results. This module must be able to take in the previous schedules and data, and use that to run a discrete event simulation using those schedules. It should be able to run at different time steps.
+\subsection{SimulationEngine.py} 
+The system relies on the simulation engine to generate any results. This module must be able to take in the previous schedules and data, and use that to run a discrete event simulation using those schedules. We need to test both under normal conditions and under extraordinary conditions. 
 		\subsubsection{Test Inputs}
-		\begin{table}[H]
-			\centering
-			\caption{Unit Tests - \texttt{Simulation Engine}}\label{SimulationEngine_unit}
-			\begin{tabular}{lll}
-				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
-				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Proper datasets and a short timestep\\
-				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Proper datasets and a longer timestep\\
-				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & A dataset with a loop in the modules\\
-				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & A dataset with unreachable modules\\
-				\bottomrule
-			\end{tabular}
-		\end{table}
+		\begin{center}
+			\begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3cm}}
+			\caption{Unit Tests - \texttt{Simulation Engine}}\\
+			\toprule
+			{\bf Test \#}  & {\bf Inputs}&{\bf Initial State} \\
+			\\\midrule	
+			\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Proper datasets under normal conditions. 25 patients in simulation. & no simulation data stored.\\
+			\\\midrule
+			\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Proper datasets under normal conditions. 50 patients in simulation. & no simulation data stored.\\
+			\\\midrule
+			\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Proper datasets under normal conditions. Only 2 flexable workers. & no simulation data stored\\
+			\\\midrule
+			\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Proper datasets, but all breaks are simulataneous. & no simulation data stored\\
+			\\\midrule
+			\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Changed datasets to larger numbers. & no simulation data stored.\\				\bottomrule
+	
+		\end{longtable}
+	\end{center}			
 		
 \subsection{Summary Output} 
-The final goal of this product is to generate output which aids clinic employees in decision making. For this, the output must be formatted in a way which conveys a quick and thorough understanding of simulation results and recommended schedule. There will be multiple formats, including visualizations of components and schedule output, as well as formats in text.
+The final goal of this product is to generate output which aids clinic employees in decision making. For this, the output must be formatted in a way which conveys a quick and thorough understanding of simulation results and recommended schedule. There will be multiple formats, including visualizations of components as well as formats in text.
 		\subsubsection{Test Inputs}
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Summary Output}}\label{SummaryOutput_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Genuine data\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Genuine data & No previous output.\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Skewed data\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Skewed data & No previous output.\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Invalid data\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Invalid data & No previous output. \\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Missing Data\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Missing Data & No previous output. \\
 				\bottomrule
 			\end{tabular}
 		\end{table}
@@ -286,15 +286,15 @@ The target users of this product includes clinic managers and/or other organizat
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{User Interface}}\label{UserInterface_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Base case\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Base case & no previous interactions \\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Invalid interaction / value input\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Invalid interaction / value input & no previous interactions\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Aberrant user behaviour \\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Aberrant user behaviour & no previous interactions\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
@@ -305,20 +305,19 @@ It is important that the data is able to be saved and recalled. Detailed simulat
 		\begin{table}[H]
 			\centering
 			\caption{Unit Tests - \texttt{Data Storage}}\label{DataStorage_unit}
-			\begin{tabular}{lll}
+			\begin{tabular}{llll}
 				\toprule
-				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}\\
+				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Valid simulation output data\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Valid simulation output data & no current data stored.\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Missing data\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Missing data & no current data stored\\
 				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Incorrectly formatted data input\\
-				\\\midrule
-				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Missing Data\\
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Incorrectly formatted data input & no current data stored\\
 				\bottomrule
 			\end{tabular}
 		\end{table}
+	
 \section{System Testing}
 \subsection{Login} 
 The purpose of user login is to ensure that only valid users allowed to in access the system. There are two types of account. One is the  administrator account which has full authority to manipulate the data and control all operable functions of the system. Another one is the viewer account which only can view the information.  Testing retrieves the input account and password and match with the account information in an existing database to determine whether the user is valid and what the user can do.
@@ -326,7 +325,7 @@ The purpose of user login is to ensure that only valid users allowed to in acces
 \begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
 \caption{System Tests: Login}\label{Login_SystemTests}\\
 \toprule
-\bf \# & \bf Initial State & \bf Inputs & \bf Outputs \\\midrule
+\bf \# & \bf Initial State & \bf Inputs & \bf Pass Criteria  \\\midrule
 \stepcounter{TestCounter}\arabic{TestCounter} 
 & Login Page
 Empty input field of account and password.
@@ -367,7 +366,7 @@ The application should allow administrator account user to insert data such as p
 	\begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
 		\caption{System Tests: Data Storage}\label{DataStorage_SystemTests}\\
 		\toprule
-		\bf \# & \bf Initial State & \bf Inputs & \bf Outputs \\\midrule
+		\bf \# & \bf Initial State & \bf Inputs & \bf Pass Criteria \\\midrule
 		\stepcounter{TestCounter}\arabic{TestCounter} 
 		& Application main page, admin account.
 		& Click Add Data.
@@ -408,7 +407,7 @@ Administrator account user can view, modify and delete existed data in database.
 	\begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
 		\caption{System Tests: Data Manipulation}\label{DataManipulation_SystemTests}\\
 		\toprule
-		\bf \# & \bf Initial State & \bf Inputs & \bf Outputs \\\midrule
+		\bf \# & \bf Initial State & \bf Inputs & \bf Pass Criteria  \\\midrule
 		\stepcounter{TestCounter}\arabic{TestCounter} 
 		& Application main page, admin and viewer account .
 		& Click View Data.
@@ -463,50 +462,14 @@ Administrator account user can view, modify and delete existed data in database.
 		\bottomrule
 	\end{longtable}
 \end{center}
-\subsection{Schedule Generation} 
-The application retrieves data from databases and generates schedules based on back end algorithms. Generating schedule is a critical part in the application, because the Clinic needs accurate schedules without conflicts to maintain the efficiency and minimize the wasting of time for both parties. Thus the generated schedule should be examined carefully by the users. 
-\begin{center}
-	\begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
-		\caption{System Tests: Schedule Generation}\label{ScheduleGeneration_SystemTests}\\
-		\toprule
-		\bf \# & \bf Initial State & \bf Inputs & \bf Outputs \\\midrule
-		\stepcounter{TestCounter}\arabic{TestCounter} 
-		& Application main page, admin account
-		& Click generate schedule
-		& Redirect to generate page schedule
-		\\\midrule
-		\stepcounter{TestCounter}\arabic{TestCounter} 
-		& Application generate schedule page 
-		& Select the type of schedule, click start generating.
-		& Create a schedule and display it to user. Saved the schedule into corresponding database.
-		\\\midrule
-		\stepcounter{TestCounter}\arabic{TestCounter} 
-		& Application generate schedule page
-		& Insert several data of patients reserve same day, same time, different clinic slots. Select the type of schedule, click start generating.
-		& Create a schedule and display it to user. The patients can be issued to same time. Saved the schedule into corresponding database.
-		\\\midrule
-		\stepcounter{TestCounter}\arabic{TestCounter} 
-		& Application generate schedule page
-		& Insert several data of patients reserve same day, same time, same clinic slots. Select the type of schedule, click start generating.
-		& Create a schedule and display it to user. The patients should be spreaded to different time periods. Saved the schedule into corresponding database.
-		\\\midrule
-		\stepcounter{TestCounter}\arabic{TestCounter} 
-		& Application main page, view account
-		& Click generate schedule
-		& Stay at same page.
-		Generate schedule does not exist.
-		\\\midrule
-		\bottomrule
-	\end{longtable}
-\end{center}
 
 \subsection{View Schedule and Modify Schedule}
-The application allows administrator account user and viewer account user to view the generated schedules. Administrator account user also has the permission to adjust the schedule. Testing ensures that the changed schedule doesn’t have conflicts. 
+The application allows administrator account user and viewer account user to view the schedules. Administrator account user also has the permission to adjust the schedule. Testing ensures that the changed schedule doesn’t have conflicts. 
 \begin{center}
 	\begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
 		\caption{System Tests: View Schedule and Modify Schedule}\label{ViewSchedule_SystemTests}\\
 		\toprule
-		\bf \# & \bf Initial State & \bf Inputs & \bf Outputs \\\midrule
+		\bf \# & \bf Initial State & \bf Inputs & \bf Pass Criteria  \\\midrule
 		\stepcounter{TestCounter}\arabic{TestCounter} 
 		& Application main page, admin and viewer account.
 		& Click view schedule. 
@@ -515,7 +478,7 @@ The application allows administrator account user and viewer account user to vie
 		\stepcounter{TestCounter}\arabic{TestCounter} 
 		& Application view schedule page, admin and viewer account.
 		& Select type and date of the schedule. Click view.
-		& Stay at same page. The page displays the existed schedule.
+		& Stay at same page. The page displays the existing schedule.
 		\\\midrule
 		\stepcounter{TestCounter}\arabic{TestCounter} 
 		& Application view schedule page, admin account.
@@ -564,7 +527,7 @@ The application allows administrator account user and viewer account user to vie
 	\begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
 		\caption{Usability Tests}\label{Usability Tests}\\
 		\toprule
-		\bf \# & \bf Description & \bf Type & \bf Criterion & Tester(s) \\\midrule
+		\bf \# & \bf Description & \bf Type & \bf Pass Criterion & Tester(s) \\\midrule
 		\stepcounter{TestCounter}\arabic{TestCounter} 
 		& We will list the most frequently performed tasks, and the development
 		team will use the product to complete them. We count the number of
@@ -600,7 +563,7 @@ The application allows administrator account user and viewer account user to vie
 	\begin{longtable}{c>{\raggedright\arraybackslash}p{4.8cm} >{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{3cm}}
 		\caption{Performance Tests}\label{Performance Tests}\\
 		\toprule
-		\bf \# & \bf Description & \bf Type & \bf Criterion & Tester(s) \\\midrule
+		\bf \# & \bf Description & \bf Type & \bf Pass Criterion & Tester(s) \\\midrule
 		\stepcounter{TestCounter}\arabic{TestCounter} 
 		& The development team will use the product to complete the most frequently performed tasks.
 		We will calculate the time from the start-up of the application to the completion of the work.
@@ -633,10 +596,9 @@ The application allows administrator account user and viewer account user to vie
 
 \section{Automated Testing}
 Automatic tests can be used to repeatedly compare results with previous test runs. It will be used to supplement the performance testing, by generating data sets including patients, arrival times, procedure stations, and employees. These tests can help find the limits on performance and possible unforeseen issues in certain combinations of data inputs.
-\subsection{Automated System Testing}
-
+%\subsection{Automated System Testing}
 \subsection{Automated Unit Testing}
-
+There should be automated testing of the simulation engine. This testing should occur every time a simulation is run to determine if that trial is a valid trial. It should be applied to the SimulationEngine.py module, as that is where in the program the simulation occurs. 
 \newpage
 \section{Schedule}
 
@@ -655,7 +617,7 @@ Automatic tests can be used to repeatedly compare results with previous test run
 2017-03-22 & Unit Tests & Test Report Revision 0 & Developement Team \\\midrule
 2017-03-22 & System Tests & Test Report Revision 0 & Developement Team \\\midrule
 2017-03-22 & Non-Functional Tests & Test Report Revision 0 & Developement Team \\\midrule
-2017-04-04 & All Tests & Final Documentation & Developement Team \\\midrule
+2017-04-09 & All Tests & Final Documentation & Developement Team \\\midrule
 
 \bottomrule
 \end{longtable}
