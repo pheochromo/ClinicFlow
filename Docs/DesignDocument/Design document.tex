@@ -301,11 +301,10 @@ Simpy is a Process-based discrete-event simulation framework which works with Py
 \item Uses HealthCareSchedule, PatientSchedule and Clinic tables
 \item Calls the simulation function
 \item It helps meet the following requirements:
-%\item Manages the simulation of the clinic
-%\item Uses SimPy
-%\item Has methods for workerRun and patientRun to create "threads" for the objects
-%\item Also contains the simulation resources
-%\item Uses HealthCareSchedule, PatientSchedule and Clinic
+	\begin{itemize}
+	\item The program should use real data
+	\item The program should be able to run multiple simulations and generate different results.
+	\end{itemize}
 \end{itemize}
 \subsubsection{Simulation(env,clinic,workerSchedule,patientSchedule,outfile)}
 \begin{itemize}
@@ -313,67 +312,177 @@ Simpy is a Process-based discrete-event simulation framework which works with Py
 	\item Uses SimPy to run a discrete event simulation
 	\item Is called by SimulationEngine(), and uses workerRun() and patientRun() to create the simulation
 	\item This function also handles the data analysis for the simulation results
-	\item It helps meet the functional requirements related to the simulation:
+	\item It helps meet the following functional requirements related to the simulation:
+	\begin{itemize}
+		\item The program should use real data
+		\item The simulations should be realistic
+		\item The program should be able to handle reasonable schedules
+		\item The program should be able to generate resonable data
+	\end{itemize}
 \end{itemize}
 \subsubsection{workerRun(env,worker,clinic,resources)}
 \begin{itemize}
 	\item Is the function that represents the "logic" that the worker threads follow
 	\item Is used by Simulation to simulate the health care providers
 	\item It helps meet the functional requirements related to the workers:
-	It helps the simulation be realisitic
+	\begin{itemize}
+		\item It helps the simulation be realisitic
+		\item It should be able to handle any provider break time schedule
+	\end{itemize}
 \end{itemize}
 \subsubsection{patientRun(env, patient,clinic,resources)}
 \begin{itemize}
 	\item Is the function that represents the "logic" that the patient threads follow
 	\item Is used by Simulation to simulate the patients
 	\item It helps meet the functional requirements related to the patients:
-	It helps the simulation be realisitic
+	\begin{itemize}
+		\item It helps the simulation be realisitic
+		\item It should be able to handle any patient schedule
+	\end{itemize}
 \end{itemize}
 
 \subsection{Clinic.py}
+\subsubsection{Clinic}
 \begin{itemize}  
-\item Contains the information about the clinic
+\item Class file that contains the information about the clinic
 \item Constructor method reads in clinic data from file
 \item Uses ClinicStation
+\item It helps meet the following functional requirements :
+\begin{itemize}
+	\item It should be able to add and subtract clinic modules
+\end{itemize}
 \end{itemize}
 
 \subsection{ClinicStation.py}
 \begin{itemize}  
 \item Contains information about an individual station in the clinic
-\item Contains methods for activating and deactivating a station
-\item Contains a method for getting a random number, generated from that particular station randomness
+\item Contains methods for activating (activate(self)) and deactivating (deactivate(self) )a station
+\item Contains a method for getting a random number, generated from that particular station randomness (getRandomness(self))
+\item Contains a toString method to be able to see clinic information ( str (self))
+\end{itemize}
+\subsubsection{ init (self,newName,prereqs,newMax,newMin,varType,avg,dev)}
+\begin{itemize}
+	\item The constructor method for the clinic module
+	\item Stores all of information required for each clinic module
+	\item It helps meet the following functional requirements :
+	\begin{itemize}
+		\item It should be able to add and subtract clinic 
+		\item The simulation should be realistic
+	\end{itemize}
+\end{itemize}
+\subsubsection{getRandomness(self)}
+\begin{itemize}
+	\item A method to generate a random variation for each usage of the clinic
+	\item Should be based on information passed to the class during construction
+	\item It helps meet the following functional requirements :
+	\begin{itemize}
+		\item The simulation should be realistic
+		\item The simulation should be able to run multiple simulations and get different results.
+	\end{itemize}
 \end{itemize}
 
 \subsection{HealthCareSchedule.py}
 \begin{itemize}  
 \item Contains information about the provider's schedule in the clinic
-\item Contains methods for generating a schedule and for reading a schedule from a file
 \item Uses HealthCareWorker.py
+\item It helps meet the following functional requirements :
+\begin{itemize}
+	\item The simulation should be realistic
+	\item The simulation should be able to use any resonable schedule for provider breaks
+\end{itemize}
 \end{itemize}
 
 \subsection{HealthCareWorker.py}
 \begin{itemize}  
 \item Contains information about a particular provider in the clinic
-\item Contains methods to change the worker's scheduled times, and which station they are at
-\item Has a toString method for ease of use
+\item Contains methods to change the worker's scheduled times (schedule(self, time)), and which station they are at (changeStation(self,newLoc))
+\item Has a toString ( str (self))method for ease of use
 \end{itemize}
-
+\subsubsection{ init (self,newName,breakTimes,workStation)}
+\begin{itemize}
+	\item The constructor method for the HealthCareWorker
+	\item Takes in information from another function to create the class
+	\item It helps meet the following functional requirements :
+	\begin{itemize}
+		\item The simulation should be realistic
+		\item The simulation should be able to use any resonable schedule for provider breaks
+	\end{itemize}
+\end{itemize}
+\subsubsection{breakTime(self,currentTime)}
+\begin{itemize}
+	\item Method to handle the break times for each provider
+	\item Returns the next break time for this provider
+	\item It helps meet the following functional requirements :
+	\begin{itemize}
+		\item The simulation should be realistic
+		\item The simulation should be able to use any resonable schedule for provider breaks
+	\end{itemize}
+\end{itemize}
 \subsection{PatientSchedule.py}
 \begin{itemize}  
 \item Contains information about the patient's schedule in the clinic
-\item Contains methods for generating a schedule and for reading a schedule from a file
+\item Contains methods for generating a schedule 
 \item Uses Patient.py
+\item It helps meet the following functional requirements :
+\begin{itemize}
+	\item The simulation should be realistic
+	\item The simulation should be able to handle any realistic set of patients
+\end{itemize}
+\end{itemize}
+\subsubsection{schedule(self,fileName)}
+\begin{itemize}
+	\item Takes in a file containing patient schedule information, and creates the patient objects associated with all the information contained within the file
+	\item Tries to assign patients every 15 minutes, like in the clinic
+	\item Also reads in the variation information for arrivals
+	\item It helps meet the following functional requirements :
+	\begin{itemize}
+		\item The simulation should be realistic
+		\item The simulation should be able to handle any realistic set of patients
+		\item The simulation should be able to generate different results each simulation
+		\item The simulation should use real data
+	\end{itemize}
 \end{itemize}
 
 \subsection{Patient.py}
 \begin{itemize}  
 \item Contains information about a patient in the clinic
-\item Has methods to adjust the patient's schedule, and help keep track of their actions throughout the clinic
-\item Has a toString method for ease of use
+\item Has methods to adjust the patient's schedule(assignTime(self,time)), and help keep track of their actions throughout the clinic (completed(self, time) and addServiceTime(self,time))
+\item Has a toString ( str (self)) method for ease of use
+\item It helps meet the following functional requirements :
+\begin{itemize}
+	\item The simulation should be realistic
+	\item The simulation should be able to handle any realistic set of patients
+	\item The simulation should generate useful data 
+\end{itemize}
 \end{itemize}
 
+\section{Clinic Create}
+\subsection{Design Description}
+Clinic Create is the component of the overall design responisble for taking the database files and converting them into a useful form for the Simulation Engine. It handles removal of incomplete data tuples and calculates the mean and variation of the various clinic modules. \\
+\subsubsection{ClinicCreate.py}
+\begin{itemize}
+	\item Uses pandas and numpy python packages for data analysis
+	\item Reads in the data filesfrom the database, and uses ClinicMerge.py
+	\item Calculates the mean and variance for each arrivals and for each clinic module
+	\item Uses the file returned by ClinicMerge.py to create a complete clinic file, with proper variance so the simulation engine can generate realistic results
+	\item It helps meet the following functional requirements :
+\begin{itemize}
+	\item The simulation should be realistic
+	\item The simulation should generate useful data 
+	\item The simulation should use real data to create the variation
+	\item The simulation should be able to generate different results for each simulation run
+\end{itemize}
+\end{itemize}
 
-
+\subsubsection{ClinicMerge.py}
+\begin{itemize}
+	\item Takes a database file with qualitative clinic information and converts it into a form usable by ClinicCreate.py
+	\item It helps meet the following functional requirements :
+	\begin{itemize}
+		\item The simulation should be realistic
+		\item The simulation should be able to generate different results for each simulation run
+	\end{itemize} 
+\end{itemize}
 
 \section{Database Structure}
 
