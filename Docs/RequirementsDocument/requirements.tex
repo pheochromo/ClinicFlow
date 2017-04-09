@@ -65,7 +65,7 @@ This project aims to produce a tool which allows parties in general clinic secto
 
 \subsection{The Stakeholders}
 \subsubsection{The Client}
-Prospective clients of this product would include any clinics providing a set of different procedures, admitting patients to undergo some subset of those procedures, and who wish to automate their scheduling processes. Other potential clients include operators of any systems which make available a set of processes of different durations, which hope to automate scheduling of multiple concurrent uses of said services under various constraints.
+Prospective clients of this product would include any clinics providing a set of different procedures, admitting patients to undergo some subset of those procedures, and who wish to improve their scheduling processes. Other potential clients include operators of any systems which make available a set of processes of different durations, which hope to automate scheduling of multiple concurrent uses of said services under various constraints.
 \subsubsection{The Users}
 Intended Users include employees of clinics or systems described above. In both cases, users are under time/resource constraint to perform their assigned scheduling functions.
 \subsubsection{The Patients}
@@ -74,7 +74,7 @@ This group includes the individual components to be scheduled through the system
 Other Stakeholders of this project include:
 \begin{itemize}
   \item     Supervisors: Dr. Wenbo He, Dr. Douglas Down, Steve Metham
-  \item 	Clinic manager: 
+  \item 	Clinic manager: Stacey Shepherd
 \end{itemize}
 
 \section{Project Constraints}
@@ -100,24 +100,31 @@ The final deadline for the project is mid April 2017. The detailed deliverable a
   \item User’s Guide - Revision 0: March 1, 2017
   \item Test Plan - Revision 0: March 22, 2017
   \item Final Demonstration: Mid-April, 2017
-  \item Final Documentation: April 5, 2017
+  \item Final Documentation: April 9, 2017
 \end{itemize}
 
 \subsection{Required resources}
 \subsubsection{Available Data}
 Historical patient arrival and procedure duration times will be provided by the client. These will be used to build the model for the variables such as deviation between patient scheduled and actual arrival times, and average and standard deviation of performed procedures.\newline\
 Clinic constraints and business rules will also be provided by the client. This includes facts such as the number and shift of clinic employees, as well as rules such and allotted break times and intended shift end times for specific employees.
-\newline\
+\newline
 
 \subsection{Relevant Facts and Assumptions} 
 \subsubsection{Relevant Facts}
 \begin{itemize}
-	\item NA
+	\item There are hundreds, if not thousands of clinics in Canada that could use this software
 \end{itemize}
 %\newline
 \subsubsection{Assumptions}
 \begin{itemize}
-	\item NA
+	\item That clinics all operate during the day and during regular business hours, otherwise a more dynamic time conversion would be needed
+	\item That the clinic would not want to store more data than our servers would be able to hold.
+	\item That a health care provider can only work at one module at once, and not conduct two or more simultaneously
+	\item That a patient will need the modules they are scheduled to receive, not an additional amount or a lower amount
+	\item That all providers arrive on time, and are able to work right away
+	\item That all providers will stay until the closing of the clinic
+	\item That all patients will stay until they finish the clinic, and not leave early
+	\item That there will be no down time in modules due to equipment failure, or other external effects
 \end{itemize}
 
 \section{Functional Requirements} 
