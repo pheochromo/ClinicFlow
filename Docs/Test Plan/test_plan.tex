@@ -64,7 +64,6 @@ Yunfeng Li \#001335650
 \ref{HealthCareOutput_unit}& Health Care Scheduling Output Unit Tests \\
 \ref{ClinicModuleInput_unit}& Module Input Unit Tests \\
 \ref{ClinicModuleOutput_unit} &Module Output Unit Tests \\
-\ref{SimulationEngine_unit} & Simulation Engine Unit Tests \\
 
 \ref{Login_SystemTests} & Login System Tests \\
 \ref{DataStorage_SystemTests} & Database Storage System Tests \\
@@ -83,15 +82,15 @@ Yunfeng Li \#001335650
 \subsection{Introduction}
 This document details our approach to testing ClinicFlow. This software will be used in a live clinic environment, so it is particularly important to ensure its robustness, reliability, and performance. We begin by testing individual components, modules and methods therein. This allows us to catch errors early in development, and help guide the design process. Next we will perform system testing, where we verify the correct operation of various user tasks. We must also perform user testing to make sure that the product is usable by clinic nurses and managers.
 
-\subsection{Definitions and Acronyms} 
+\subsection{Definitions and Terms} 
 \begin{center}
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.65\textwidth}}
 \caption{Definitions and Acronyms}\label{Table_Acronyms}\\
 \toprule
-
-\bf Phrase & \bf Definition\\\midrule
+\bf Term & \bf Definition\\\midrule
 Module & A unit or section in a clinic \\\midrule
-Provider & A health care worker (A doctor, nurse,technician) \\\midrule
+Provider & A health care worker (A doctor, nurse,technician) \\
+
 \bottomrule
 \end{longtable}
 \end{center}
@@ -310,6 +309,8 @@ It is important that the data is able to be saved and recalled. Detailed simulat
 				\multirow{2}{*}{\bf Test \#}  & \multicolumn{1}{c}{\bf Inputs}& \multicolumn{1}{c}{\bf Initial State}\\
 				\\\midrule
 				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Valid simulation output data & no current data stored.\\
+				\\\midrule
+				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Valid simulation output data & a lot of data stored.\\
 				\\\midrule
 				\refstepcounter{TestCounter}\arabic{TestCounter}\label{GetPoint_0} & Missing data & no current data stored\\
 				\\\midrule
