@@ -41,13 +41,13 @@ Yunfeng Li \#001335650
 \section{Introduction}
 
 \subsection{Purpose}
-The Josef Brant Hospital pre-operative clinic (the client) schedules upwards of 50 patients per day. The appointment times are digitized, yet manually chosen by clinic staff. Once at the clinic, each patient undergoes a varying set of procedures with different durations. While staff have a good feeling of how to schedule patients, mistakes and inefficiencies often occur considering the numerous constraints and temporal variation of events. The client has approached us to explore the potential of optimizing the scheduling process. This would help staff both foresee potential scheduling errors and free themselves up to do other work, maximizing profit and minimizing surplus capacity.
+The Josef Brant Hospital pre-operative clinic (the client) schedules upwards of 50 patients per day. The appointment times are digitized, yet manually chosen by clinic staff. Once at the clinic, each patient undergoes a varying set of procedures with different durations. While staff have a good feeling of how to schedule patients, mistakes and inefficiencies often occur considering the numerous constraints and temporal variation of events. The client has approached us to explore the potential of simulating the flow of the clinic to help them understand the underlying problems at the clinic.
 
 \subsection{Description}
-This project aims to produce a tool which allows parties in the preoperative clinic sector to optimize the scheduling of patients amongst different procedures at the clinic, as well as by arrival time and date. Demand for the solution stems from a lack of relevant products, and the reliance of clinic staff on intuitive and error prone manual scheduling. With this tool, prior patient temporal data will be fed in and used to build a model of all the variables involved. A simulation engine will then be created to produce an optimized scheduling of patients under inputted constraints. This would allow clinic staff to reduce scheduling errors, as well as conserve resources by automating the scheduling process.
+This project aims to produce a tool which allows parties in the preoperative clinic sector to simulate the flow of patients amongst different procedures at the clinic. Demand for the solution stems from a lack of relevant products, and the reliance of clinic staff on intuitive and error prone manual scheduling. With this tool, prior patient temporal data will be fed in and used to build a model of all the variables involved. A simulation engine will then be created to produce data that could be used by the providers to optimize scheduling. This would allow clinic staff to reduce scheduling errors, as well as test the possible additions of new modules to the clinic.
 
 \subsection{Scope}
-A desktop application or web-interface application can allow users to insert necessary data, such historical patient procedure durations, doctor and nurse shift hours, and other constraints such as break allotments or soft constraints such as employee shift end times. Based on provided data and inputs, the system will generate patient schedules for both arrival time into the clinic, and between procedures within the clinic. This tool will be designed with the intention to be implementable in multiple health care institutions for automating and managing patient scheduling.
+A desktop application or web-interface application can allow users to insert necessary data, such historical patient procedure durations, doctor and nurse shift hours, and other constraints such as break allotments or soft constraints such as employee shift end times. Based on provided data and inputs, the system will generate simulations of the clinic. This tool will be designed with the intention to be implementable in multiple health care institutions for helping to manage patient scheduling.
 \newpage
 
 
@@ -79,11 +79,10 @@ The final deadline for the project is mid April 2017. The detailed deliverable a
 Date         & Comment     \\ \hline
 Jan 11, 2017 & First draft \\ \hline
 Apr 1, 2017 & Second draft \\ \hline
+Apr 9, 2017 & Third draft \\ \hline
 \end{tabular}
 \end{table}
 \newpage
-
-
 
 \section{Overall Structure}
 
@@ -212,52 +211,84 @@ It gets the data from \textit{Database} and give the visualizations to \textit{D
 	\node[draw] (PI) at (-5,0) {Patient information};
 	\node[draw] (SC) at (5,0) {Simulate clinic};
 	\node[draw] (CI) at (-3,-2) {Clinic information};
-	\node[draw] (GS) at (3,-2) {Generate schedule};
 	
 	\draw[-,draw=black] (MAIN) to (LOG);
 	\draw[-,draw=black] (SC) to (MAIN);
 	\draw[-,draw=black] (PI) to (MAIN);
 	\draw[-,draw=black] (CI) to (MAIN);
-	\draw[-,draw=black] (GS) to (MAIN);
 	\end{tikzpicture}
 	\caption{User Interface Design}
 \end{figure}
 
 \subsection{Navigation flow}
-The first page presented to the user is the login page. The user must login as a manager or a authentic viewer before further operation. After logging in, the user will be redirected to the main menu page. The main menu page can direct user to the patient information page, clinic information page, generate schedule page and simulate schedule page. The user who log in as a viewer can only view patient information and generated schedules. Meanwhile the manager account would have viewer capabilities, in addition to being able to add/change patient information, add or change clinic attribute data, run simulations on specific patient data, or generate schedules based on patient data.
+The first page presented to the user is the login page. The user must login as a manager or a authentic viewer before further operation. After logging in, the user will be redirected to the main menu page. The main menu page can direct user to the patient information page, clinic information page and simulate schedule page. The user who log in as a viewer can only view patient information and generated schedules. Meanwhile the manager account would have viewer capabilities, in addition to being able to add/change patient information, add or change clinic attribute data, run simulations on specific patient data.
 
 \noindent \newline
-Each page has a navigation bar which let user transfer to different page. Each page has a logout button, thus the user can quit the system at any time. \\
+Each page has a navigation bar which let user transfer to different page. Each page has a logout button, thus the user can quit the system at any time.
 
 \subsection{Login}
 The user has to log in with the correct account and password before using the system. The login page has straight forward design which allows users to easily log in. This page contains internal validation to protect the system. This page can distinguish the user as a manager or a viewer, and gives the user corresponding authority. 
+ \\
+It helps meet the following requirements:
+\begin{itemize}
+	\item The program should verify the users
+	\item The non-functional security requirements are enforced here
+\end{itemize} 
 
 \subsection{Main Menu}
-This page outlines general information such as today’s reservation schedule, today’s patients in list, and patients need schedule for next day which can give the user a quick overview. This page can guide the user to patient information,clinic information, clinic simulation, and schedule generation pages.
+This page outlines general information such as today’s reservation schedule, today’s patients in list, and patients need schedule for next day which can give the user a quick overview. This page can guide the user to patient information,clinic information, clinic simulation, and schedule generation pages. \\
+It helps meet the following requirements:
+\begin{itemize}
+	\item The program should return to the main menu in case of errors
+	\item The application should have a clean design
+\end{itemize}
 
 \subsection{Patient Information}
 The manager account user can insert patient specific information such as name/id, appointment time, and required procedures into the system’s database. There is a list of empty fields for the user to fill up. The fields for appointment time and procedures are vital and must be entered in order to add the patient to the system, while other fields may be optional . The save button will validate the inputs before saving the patient data into database. The validation function will check the inputs to ensure the data consistency. If errors occur, the system will retain the inputs and inform the user of the source of error. Bulk patient data import is also supported through import of standardized csv files.
 
 \noindent \newline
 Both manager and view accounts are able to also see information on all patients current in the system. This will be presented both as list and timetable formats. Search and filter functionality will be included to allow users to target a particular subset of patients. Modification of existing records is also allowed, but only be the manager account.
+\\
+It helps meet the following requirements:
+\begin{itemize}
+	\item The user should be able to enter information
+	\item The user should be able to manage the data
+	\item The program should verify the users
+	\item The program should be able to use real data to populate the simulation
+	\item The program should display the database information to the user in a useful way
+	\item The program should store the user's state
+	\item The program should be easy to use
+	\item The program should be scalable
+	\item The program should be fault tolerant
+\end{itemize}
+
 
 \subsection{Clinic Information}
 This page will give an overview of the attributes that model the clinic. This includes employee numbers, break times, starting times, etc. Both manager and view accounts will have access to this page, but only manager accounts will be able to edit the information therein and save it to the database. Multiple profiles for clinic information are also supported. This allows the user to simulate the clinic under models and compare the results.
+\\
+It helps meet the following requirements:
+\begin{itemize}
+	\item The program should verify the users
+	\item The program should be able to use real data to populate the simulation
+	\item The program should display the database information to the user in a useful way
+	\item The program should store the user's state
+	\item The program should be easy to use
+\end{itemize}
 
 \subsection{Simulate Clinic}
 This page will be the interface to the simulation engine. The user will be able to run a simulation of the clinic given the data provided in the patient and clinic information sections of the application. The results of the current simulation and its summary statistics, as well as those of previous simulations, will be displayed here. The user is able to choose the day, and clinic data profile to use in the simulation. This page will also allow users to modify patient or clinic attributes (such as number of nurses available) to quickly see their effects on simulated clinic operation. 
 
 \noindent \newline
 While managers and viewers will both be able to see past results, only managers have the authority to run simulations.
-
-\subsection{Generate Schedule}
-This page allows users to generate optimized patient arrival schedules based on patient and clinic information data. Users can select the day and clinic profile to generate schedules for. Top results will be displayed with their summary statistics in an easily comparable format. Past generated schedules are also viewable, and sorted by the date. The schedule will clearly present the arrive time and patients’ first visit room.  Manager has the permission to delete or update existing schedules. The manager account user can add a patient’s reservation into the existed schedule. The backend system will simulate the procedure and time expense of the patient inside clinic. The system also will alert the use to any potential issues such as a patient having to wait too long.
-
-\noindent \newline
-While managers and viewers will both be able to view past generated schedules, only managers have the authority to generate new schedules.
-
-
-
+\\
+It helps meet the following requirements:
+\begin{itemize}
+	\item The program should display the database information to the user in a useful way
+	\item The program should be able to use any reasonable patient schedule
+	\item The program should be able to use any reasonable
+	\item The program should store the user's state
+	\item The program should be easy to use
+\end{itemize}
 
 \section{Simulation Engine}
 
@@ -484,7 +515,7 @@ Clinic Create is the component of the overall design responisble for taking the 
 	\end{itemize} 
 \end{itemize}
 
-\section{Database Structure}
+\section{Database: Database Structure}
 
 \subsection{Implementation Details}
 MongoDB will be used as a database to store all input data related to modeling the clinic, as well as output data generated from simulation. The database will also be used to recall previously stored data. MongoDB does not have a rigid structure, but its simplicity is well suited for this project. All data sets will be stored in a corresponding MongoDB collection. All data has a key attribute to improve searching efficiency and avoid duplication.
@@ -542,22 +573,47 @@ Final patient end time & 17:00        \\ \hline
 \subsection{Sanitation}
 Simulation engine relies on the format and accuracy of data. The patterns of data must match the pattern inside simulation engine to ensure the simulation engine runs properly. Upon insertion or modification of data, a validation process verifies the inputs or changes before storing into database. Invalid inputs or changes would be rejected and the system would inform the reason for rejection. If no error in input or changes is detected, the system should allow the updates. 
 
+\subsection{Requirements}
+The Database section helps meet the following requirements :
+\begin{itemize}
+	\item The program should allow the user to enter data 
+	\item The user should be able to manage the data
+	\item The system should store previous simulations in the data base
+	\item The system should be scalable
+\end{itemize} 
 
-\section{Web Application Design}
+
+\section{Controls: Web Application Design}
 
 \subsection{Frameworks}
 The Django framework is used in this project. It provides the users with a way to access the simulation engine, which includes import data, running the simulation and utilizing other functions, and presents the simulation results in a concise and clear manner. At the same time, It helps to organize the backend structure of the project, even though it also supports the front end user interface. The following is a breakdown of the framework as it applies to our project.
 
-\begin{itemize}  
-\item models.py: 
-integrates the simulation engine. It also deals with data flow from database to the simulation engine, and sends the corresponding outputs of the engine to the views.py. Other modules may be required to interact with the MongoDB as a database interface.
-\item views.py, static folder and templates folder: 
-when the users send requests to the presetting URL address, it acts as a router and directs the users to pages that are generated from the template html in the templates folder. Since the static template HTML will be merged into the simulation results by a dynamic mechanism, the users can view the simulation results and operate the simulation engine instantly.
-\item test.py: 
-for the later testing cases, it ensures the backend works correctly and meets the design requirements.
-\item  urls.py: 
-stores the settings of the URL address for users to visit.
-\end{itemize}
+\subsection{models.py}
+These files integrate the \textit{Simulation Engine}. They also deal with data flow from database to the simulation engine, and sends the corresponding outputs of the engine to the views.py. Other modules may be required to interact with the MongoDB as a database interface. \\
 
+It helps meet the following requirements :
+\begin{itemize}
+	\item The simulation should generate realisitic simulations, and present that information in a usable way. 
+	\item The system should be fault tolerant
+\end{itemize} 
+
+\subsection{views.py}
+It consists of static folder and templates folders. When the users send requests to the presetting URL address, it acts as a router and directs the users to pages that are generated from the template html in the templates folder. Since the static template HTML will be merged into the simulation results by a dynamic mechanism, the users can view the simulation results and operate the simulation engine instantly. \\ 
+
+It helps meet the following requirements :
+\begin{itemize}
+	\item The user should be able to manage the data on the system
+	\item The system should be able to store the state of the program
+	\item The system should be responsive and quick to use
+\end{itemize} 
+
+\subsection{test.py}
+To be used for testing cases, it ensures the backend works correctly and meets the design requirements.\\
+It helps meet the following requirements :
+\begin{itemize}
+	\item The system should be fault tolerant
+\end{itemize} 
+\subsection{urls.py}
+This stores the settings of the URL address for users to visit.
 
 \end{document}
