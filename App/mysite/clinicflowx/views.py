@@ -16,7 +16,9 @@ def setting(request):
     if request.method =='POST': #if post/submit
         if request.POST.get("Change_Provider"):
             data = request.POST.get('Clinic_Provider') # change clinic setting
-            strings = data.split("/")
+            strings = []
+            if data:
+                strings = data.split("/")
             while '' in strings:
                 strings.remove('')
             old = settings.find_one({"object":"patient"})
