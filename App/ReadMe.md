@@ -20,8 +20,6 @@ Install all packages in requirements.txt
 
     ``sudo service mongod start``
 
-    ``sudo service mongod start``
-
 2. Initialize DB (first time or reset), under App/ folder:
 
     ``python3 ClinicMongoDB.py``
