@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
+import json
 
 from .SimulationEngine import *
 
@@ -45,21 +46,20 @@ def simengine(request):
     #f = open("TestPatients.txt", "w")
     #f.write(patient)
     #f.close()
+    db[date+'result'].delete_many({})
+    mysim = SimulationEngine("ClinicFile1.txt", "Worker1.txt", date, "generated", "generated", "outFile1.txt")
 
-    mysim = SimulationEngine("ClinicFile1.txt", "Worker1.txt", date, "generated", "outFile1.txt")
-    avgtime = mysim.avgtime
+    stats = db[date+'result'].find_one({"Name":"clinicStats"})
+    # test = db[date+'result'].find_one({"Name":"stationDuration"})
+    # print(str(test))
+    durationList = []
+    durations = db[date+'result'].find({"Name":"stationDuration"})
+    for duration in durations:
+        temptime1 = duration['startTime'].split(":")
+        temptime2 = duration['endTime'].split(":")
+        durationList.append([duration['patientName'], duration['stationName'], [0,0,0,temptime1[0], temptime1[1], 0], [0,0,0,temptime2[0], temptime2[1],0]])
+        json_list = json.dumps(durationList)
 
-    # with open('outFile1.txt', 'r') as myfile:
-    #     resultData=myfile.read().replace('\n', '')
 
-    results = {'AvgTime':avgtime[0]}
-    resultdate.insert_one(results)
 
-    print("\n\n final: ")
-
-    myresults = resultdate.find({'AvgTime':{'$exists':True}})
-    timeresults = []
-    for time in myresults:
-       timeresults.append(time['AvgTime'])
-
-    return render(request,'result.html',{'patientinfo':timeresults,"information": result1})
+    return render(request,'result.html',{"averageClinicTime":stats['averageClinicTime'], "averageDownTime": stats['averageDownTime'], "durations":json_list})

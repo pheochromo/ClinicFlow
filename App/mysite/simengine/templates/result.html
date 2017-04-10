@@ -1,10 +1,53 @@
 {% extends "base.html" %}
 {% load staticfiles%}
 
+
+
 {% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <h1>Simulation Results</h1>
 {% csrf_token %}
-{% for time in patientinfo %}
+<!-- {% for time in patientinfo %}
 <p>    {{ time }}</p>
-{% endfor %}
+{% endfor %} -->
+<p>Average time spent in clinic: {{ averageClinicTime }} </p>
+<p>Average down time: {{ averageDownTime }} </p>
+<div id="example5.1"></div>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["timeline"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+
+    var container = document.getElementById('example5.1');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'string', id: 'Patient' });
+    dataTable.addColumn({ type: 'string', id: 'Station' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    var durations = {{durations|safe}};
+    console.log(durations);
+    durations.forEach(function(duration) {
+        console.log([[duration[0], duration[1], Date.apply(this, duration[2]), Date.apply(this, duration[3])]]);
+        dataTable.addRows([[duration[0], duration[1], new (Function.prototype.bind.apply(Date, [null].concat(duration[2]))), new (Function.prototype.bind.apply(Date, [null].concat(duration[3])))]]);
+        // dataTable.addRows([["hi", "bye", new Date(1,2,3,4,5), new Date(5,4,3,2,1)]]);
+    });
+    // {% for duration in durations %}
+        // duration = {{duration|safe}};
+        // console.log(duration);
+    //     // console.log({{duration}})
+    //     // console.log(thisDuration)
+        // dataTable.addRows([[ duration[0], duration[1], Date.apply(this, duration[2]), Date.apply(this, duration[3])]]);
+    // {% endfor %}
+
+    var options = {
+      timeline: { colorByRowLabel: true }
+    };
+
+    chart.draw(dataTable, options);
+
+    // console.log({{durations|safe}})
+  }
+
+</script>
 {% endblock %}

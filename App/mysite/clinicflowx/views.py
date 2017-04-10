@@ -5,6 +5,7 @@ from django.template.defaulttags import register
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.models import User
 
 import pymongo
 from pymongo import MongoClient #import MongoDB
@@ -16,9 +17,9 @@ result = db.result # temporarily store the data of simulation
 schedule_list = db.schedulelist # a list of schedule, contain date and settings
 
 def setting(request):
-    if not request.user.is_staff:
-        raise PermissionDenied
-    else: 
+    # if not request.user.is_staff:
+    #     raise PermissionDenied
+    # else:
         if request.method =='POST': #if post/submit
             if request.POST.get("Change_Provider"):
                 data = request.POST.get('Clinic_Provider') # change clinic setting
@@ -41,15 +42,15 @@ def setting(request):
         return render(request, 'setting.html', {"provider":providers})
 
 def schedulelists(request): #display the list of existed schedules based on date
-    if not request.user.is_staff:
-        raise PermissionDenied
-    else: 
+    # if not request.user.is_staff:
+    #     raise PermissionDenied
+    # else:
         if request.method =='POST':
             if request.POST.get("DeleteSchedule"): #delete a schedule based on the date
                 theDate = request.POST.get('the_date')
                 schedule_list.delete_one({'Date':theDate})#delete it from schedule list
                 patientdate = db[theDate+'patient']#drop the collection data of patient information of the day
-                resultdate = db[theDate+'result'] #drop the collectioni data of simulated result of the day
+                resultdate = db[theDate+'result'] #drop the collection data of simulated result of the day
                 patientdate.drop()
                 resultdate.drop()
         result = schedule_list.find()
@@ -61,9 +62,9 @@ def schedulelists(request): #display the list of existed schedules based on date
 
 
 def singleschedule(request):
-    if not request.user.is_staff:
-        raise PermissionDenied
-    else: 
+    # if not request.user.is_staff:
+    #     raise PermissionDenied
+    # else:
         date=''
         patient =[]
         result1 ={}
@@ -84,7 +85,7 @@ def singleschedule(request):
                 if request.POST.get("DeletePatient"): # if delete patients
                     the_select = request.POST.get('the_patient')
                     patientdate.delete_one({'Name': the_select})
-                return  HttpResponseRedirect("/singleschedule?date="+date)
+
             patients = patientdate.find()# display the patient reserved at that day
             for single in patients:
                 patient.append(single)
@@ -92,9 +93,9 @@ def singleschedule(request):
         return render(request,'singleschedule.html',{'patientinfo':patient,"information": result1})
 
 def passport(request):
-    if not request.user.is_staff:
-        raise PermissionDenied
-    else: 
+    # if not request.user.is_staff:
+    #     raise PermissionDenied
+    # else:
         provider_from_set = settings.find_one({"object":"patient"}) #get settings
         providers =provider_from_set["provider"]
         timebound1=0
@@ -234,16 +235,12 @@ def get_date(date):
     newdate =  str(date)+'/'+str(month)+'/'+str(day)
     return newdate
 
-def schedule(request): #sample of changing setting    
+def schedule(request): #sample of changing setting
     if not request.user.is_staff:
         raise PermissionDenied
-    else: 
+    else:
         result1 = settings.find_one({"object":"patient"})
-        return render(request, 'schedule.html', {"result": result1})    
-
-def schedule(request): #sample of changing setting
-    result1 = settings.find_one({"object":"patient"})
-    return render(request, 'schedule.html', {"result": result1})
+        return render(request, 'schedule.html', {"result": result1})
 
 def manage(request):
     return render(request, 'manage.html')
@@ -252,13 +249,17 @@ def viewer(request):
     return render(request, 'viewer.html')
 
 def login(request):
+    # if request.method =='POST': #if post/submit
+    #     if request.POST.get("Change_Provider"):
+    #         data = request.POST.get('Clinic_Provider') # change clinic setting
+    #         strings = data.split("/")
+    #         while '' in strings:
+    #             strings.remove('')
+
     return render(request, 'login.html')
-    
-def index(request):
-    return render(request, 'login.html')      
-    
+
 def forbidden(request):
-    return render(request, '403.html')    
-    
+    return render(request, '403.html')
+
 def page_not_found(request):
-    return render(request, '404.html')        
+    return render(request, '404.html')

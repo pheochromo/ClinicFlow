@@ -5,7 +5,7 @@ Created on Fri Jan  6 09:24:24 2017
 @author: karl_
 """
 import random
-import numpy
+import numpy as np
 
 class ClinicStation:
     def __init__(self,newName,prereqs,newMax,newMin,varType,avg,dev):
@@ -37,7 +37,11 @@ class ClinicStation:
     
     def getRandomness(self):
         if(self.varianceType == "uniform"):
-             return (self.mean +random.randint(0,self.var))
+            return (self.mean +random.randint(0,self.var))
+        if(self.varianceType == "normal"):
+            return int(round(random.normal(self.mean,self.var)))
+        if(self.varianceType == "exponential"):
+            return int(round( np.random.exponential(1/self.mean)))
         else:
             return 0
                 

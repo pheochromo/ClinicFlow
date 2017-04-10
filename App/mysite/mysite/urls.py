@@ -22,17 +22,19 @@ from clinicflowx.views import *
 from simengine.views import *
 
 urlpatterns = [
-    url(r'^$', index, name='index'),      
-    url(r'^login/', auth_views.login, {'template_name': 'login.html'}, name='login'), 
-    url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),       
+    url(r'^$', schedulelists, name='schedulelists'),
+    url(r'^login/', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^login$', login, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^manage$', manage, name='manage'),
     url(r'^viewer$', viewer, name='viewer'),
+    url(r'^schedule$', schedule, name='schedule'),
     url(r'^setting$', setting, name='setting'),
     url(r'^schedulelists$', schedulelists, name='schedulelists'),
     url(r'^singleschedule$', singleschedule, name='singleschedule'),
     url(r'^simulation$', simulation, name='simulation'),
     url(r'^simengine$', simengine, name='simengine'),
-    url(r'^passport$', passport, name='passport'),      
+    url(r'^passport$', passport, name='passport'),
 ]
 
 handler403 = 'clinicflowx.views.forbidden'

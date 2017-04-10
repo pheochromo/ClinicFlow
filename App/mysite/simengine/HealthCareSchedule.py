@@ -9,8 +9,8 @@ import numpy as NP   # not working properly
 
 class HealthCareSchedule:
     def __init__(self,fileName):
-
         file_name = os.path.join(os.path.dirname(__file__), fileName)
+
         healthFile = open(file_name,mode ='r')
         self.healthcare = []
         for line in healthFile:

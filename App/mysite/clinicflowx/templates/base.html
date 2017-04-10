@@ -19,9 +19,6 @@
           <img class="logo-image" alt="clinicflow logo" src="../static/images/logo.png">
         </a>
       </div>
-      <div>
-        <a href="{% url 'logout' %}">Logout</a>      
-      </div>
       <div class="user">
         {% if request.user.is_authenticated %}
         <p> User: {{request.user.username|title}} </p> {% else %}
@@ -41,9 +38,9 @@
         <section class="side-nav">
           <a class="nav-link" href="./passport">Passports</a>
         </section>
-        <section class="side-nav">
+        <!-- <section class="side-nav">
           <a class="nav-link" href="./index">Comparisons</a>
-        </section>
+        </section> -->
         <section class="side-nav">
           <a class="nav-link" href="./setting">Settings</a>
         </section>
