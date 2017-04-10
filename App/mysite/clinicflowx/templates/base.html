@@ -19,6 +19,9 @@
           <img class="logo-image" alt="clinicflow logo" src="../static/images/logo.png">
         </a>
       </div>
+      <div>
+        <a href="{% url 'logout' %}">Logout</a>      
+      </div>
       <div class="user">
         {% if request.user.is_authenticated %}
         <p> User: {{request.user.username|title}} </p> {% else %}

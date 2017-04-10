@@ -16,25 +16,27 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 from clinicflowx.views import *
 from simengine.views import *
 
 urlpatterns = [
-    #url(r'^admin/', admin.site.urls),
-    #url(r'^$', schedule, name='schedule'),
-    url(r'^$', schedulelists, name='schedulelists'),
-    url(r'^login$', login, name='login'),
+    url(r'^$', index, name='index'),      
+    url(r'^login/', auth_views.login, {'template_name': 'login.html'}, name='login'), 
+    url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),       
     url(r'^manage$', manage, name='manage'),
     url(r'^viewer$', viewer, name='viewer'),
-    #url(r'^schedule$', schedule, name='schedule'),
     url(r'^setting$', setting, name='setting'),
     url(r'^schedulelists$', schedulelists, name='schedulelists'),
     url(r'^singleschedule$', singleschedule, name='singleschedule'),
     url(r'^simulation$', simulation, name='simulation'),
     url(r'^simengine$', simengine, name='simengine'),
-    url(r'^passport$', passport, name='passport'),
+    url(r'^passport$', passport, name='passport'),      
 ]
+
+handler403 = 'clinicflowx.views.forbidden'
+handler404 = 'clinicflowx.views.page_not_found'
 
 if settings.DEBUG:
     import debug_toolbar
