@@ -1,0 +1,1002 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{tabularx}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{caption}
+
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{multirow}
+\captionsetup[table]{skip=2pt}
+
+\usepackage{geometry}                                       
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm} 
+
+\newcounter{TestCounter}
+\setcounter{TestCounter}{0}
+
+\newcounter{ResultCounter}
+\setcounter{ResultCounter}{0}
+
+\title{
+ClinicFlow
+\\\vspace{10mm}
+\Large \textbf{Test Plan}
+\vspace{40mm}
+}
+\author{ Maxim Vasiliev (400043983)
+\\
+Susie Yu \quad (000955758)
+\\
+Karl Knopf \quad (001437217)
+\\
+Weilin Hu \quad (001150873)
+\\
+Yunfeng Li \quad (001335650)
+}
+\date{\today}
+
+% Document adapted from https://github.com/studouglas/GEANT4-GPU/blob/master/Documentation/TestPlan/Test%20Plan.tex 
+% and http://itq.ch/pdf/Roadmap%20for%20Testing.pdf
+
+\hypersetup{
+bookmarks=true, 
+colorlinks=true, 
+linkcolor=black, 
+citecolor=green, 
+filecolor=magenta, 
+urlcolor=cyan 
+}
+
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\setlength\parindent{0pt}
+
+
+
+
+\section{Introduction}
+
+
+This document details our approach to testing ClinicFlow. This software will be used in a live clinic environment, so it is particularly important to ensure its robustness, reliability, and performance. We begin by testing individual components, modules and methods therein. This allows us to catch errors early in development, and help guide the design process. Next we will perform system testing, where we verify the correct operation of various user tasks. We must also perform user testing to make sure that the product is usable by clinic nurses and managers.\\
+
+\quad
+
+
+\textbf{Definitions and Acronyms} 
+
+\vspace{-5pt}
+\begin{itemize}
+\setlength{\parskip}{4pt}
+\setlength{\itemsep}{2pt}
+\item Module: A unit or section in a clinic
+\item Provider: A health care worker (A doctor, nurse,technician) 
+\end{itemize}
+
+\textbf{Tester} 
+
+\vspace{-5pt}
+\begin{itemize}
+\setlength{\parskip}{4pt}
+\setlength{\itemsep}{2pt}
+\item Testing Team
+\end{itemize}
+
+
+
+\quad
+
+\quad
+
+\quad
+
+\section{Unit Testing}
+
+As the programs will be written in the Python 3 programming language, we can use the unittest framework. We will define test cases, with inputs and expected outputs and then be able to run this for each module in the system. We have not yet specified the names of each module and the functions contained, but we do have a general idea of what modules we would want and what they should do. 
+
+\subsection{PatientSchedule.py} 
+
+\textbf{Description}\\
+
+This is the module in the program that will take in a file containing patients in the clinic, and produce a schedule for them. First we must test if scheduling system can take appropriate inputs.
+
+\quad
+
+\textbf{Criteria}\\
+
+Functions create the patient schedule.
+
+Functions output the
+schedule in a useable form for the rest of the system.\\
+
+\quad
+
+
+	
+	
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & No dataset present & No dataset & No output 
+\\ \hline
+2  & No dataset present & formatted dataset & original dataset 
+\\ \hline
+3  & No dataset present & unformatted dataset & No output 
+\\ \hline
+4  & No dataset present & dataset(no repeats) & original dataset 
+\\ \hline
+5  & No dataset present & dataset(many repeats) & original dataset
+\\ \hline
+\end{tabular}\\
+
+\quad
+
+\quad
+
+		
+\subsection{HealthcareSchedule.py} 
+
+\textbf{Description}\\
+
+This is the module in the program that will take in a file containing the names and times available of the health care workers at the clinic, and it will be able to generate a schedule for them. We should first test to see if the module is able to accept the appropriate input.
+
+\quad
+
+\textbf{Criteria}\\
+
+Functions create the health care schedule.
+
+Functions output the
+schedule in a useable form for the rest of the system.\\
+
+\quad
+
+
+	
+	
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & No dataset present & No dataset & No output 
+\\ \hline
+2  & No dataset present & formatted dataset & original dataset 
+\\ \hline
+3  & No dataset present & unformatted dataset & No output 
+\\ \hline
+4  & No dataset present & dataset(no repeats) & original dataset 
+\\ \hline
+5  & No dataset present & dataset(many repeats) & original dataset
+\\ \hline
+\end{tabular}\\
+
+\quad
+
+\quad
+
+\subsection{Clinic.py} 
+
+\textbf{Description}\\
+
+Clinics can have a variety of modules such as Blood taking or x-ray. Each section can be unique or have multiples. This program module uses clinic information from a data file, which will be read into the system when a simulation is run for that clinic.
+
+\quad
+
+\textbf{Criteria}\\
+
+Functions in this program module create a valid network of modules for the clinic. \\
+
+\quad
+
+
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & No dataset present & No dataset & No output 
+\\ \hline
+2  & No dataset present & formatted dataset & original dataset 
+\\ \hline
+3  & No dataset present & unformatted dataset & No output 
+\\ \hline
+4  & No dataset present & dataset(no repeats) & original dataset 
+\\ \hline
+5  & No dataset present & dataset(many repeats) & original dataset
+\\ \hline
+\end{tabular}\\
+
+\quad
+
+\quad
+
+
+
+\subsection{SimulationEngine.py} 
+
+\textbf{Description}\\
+
+The system relies on the simulation engine to generate any results. This module must be able to take in the previous schedules and data, and use that to run a discrete event simulation using those schedules. We need to test both under normal conditions and under extraordinary conditions. 
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Functions in this program module can output the simulation results close to the actual 
+sample dataset.\\
+
+\quad
+
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & no simulation 
+data stored & Proper datasets under
+normal conditions. 25
+patients in simulation. & Ouputs close to sample dataset, no more than 10 minutes 
+\\ \hline
+2  & no simulation 
+data stored & Proper datasets under
+normal conditions. 50
+patients in simulation. & Ouputs close to sample dataset, no more than 10 minutes 
+\\ \hline
+3  & no simulation 
+data stored & Proper datasets under
+normal conditions. Only 2
+flexable workers. & Ouputs close to sample dataset, no more than 10 minutes 
+\\ \hline
+4  & no simulation 
+data stored & Proper datasets, but all
+breaks are simulataneous. & Ouputs close to sample dataset, no more than 10 minutes 
+\\ \hline
+5  & no simulation 
+data stored & Changed datasets to
+larger numbers. & Ouputs close to sample dataset, no more than 10 minutes 
+\\ \hline
+\end{tabular}\\
+
+\quad
+
+\quad
+
+		
+\subsection{Summary Output} 
+
+\textbf{Description}\\
+
+The final goal of this product is to generate output which aids clinic employees in decision making. For this, the output must be formatted in a way which conveys a quick and thorough understanding of simulation results and recommended schedule. There will be multiple formats, including visualizations of components as well as formats in text.
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Functions in this program module can output properly formatted text results.\\
+
+
+\quad
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & No previous output & Genuine data & Original output 
+\\ \hline
+2  & No previous output & Skewed data & No output 
+\\ \hline
+3  & No previous output & Invalid data & No output 
+\\ \hline
+4  & No previous output & Missing Data & No output 
+\\ \hline
+\end{tabular}\\
+
+\quad
+
+\quad
+
+\subsection{User Interface}
+
+\textbf{Description}\\
+
+The target users of this product includes clinic managers and/or other organizations with similar scheduling goals. The user interface should be clean and intuitive as some of these users might not have extensive knowledge in software products. When the user attempts to make illegal operations,the interface should respond accordingly and direct the user towards correct behaviour.
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Functions in this program module can response to the valid user inputs.\\
+
+
+\quad
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & no previous interactions & Base case & normal response 
+\\ \hline
+2  & no previous interactions & Invalid interaction & No response 
+\\ \hline
+3  & no previous interactions & Aberrant user behaviour & No response 
+\\ \hline
+\end{tabular}\\
+
+\quad
+
+
+\quad
+		
+
+\subsection{Data Storage}
+
+\textbf{Description}\\
+
+It is important that the data is able to be saved and recalled. Detailed simulations take vital time, and users would wish to compare with previous results to evaluate the sensitivity of the system to variables. Storage errors should also not interfere with previously stored data.
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Functions in this program module can successfully save the valid dataset.\\
+
+
+\quad
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & no current data stored & Valid simulation output data & data successfully stored 
+\\ \hline
+2  & no current data stored & Missing data & data unsuccessfully stored 
+\\ \hline
+3  & no current data stored & Incorrectly formatted data input & data unsuccessfully stored 
+\\ \hline
+\end{tabular}\\
+
+
+
+
+%------------------------------------------------------------------------------
+
+
+\newpage
+
+
+
+\section{System Testing}
+
+
+
+
+
+\subsection{Login} 
+
+
+\textbf{Description}\\
+
+The purpose of user login is to ensure that only valid users allowed to in access the system. There are two types of account. One is the  administrator account which has full authority to manipulate the data and control all operable functions of the system. Another one is the viewer account which only can view the information.  Testing retrieves the input account and password and match with the account information in an existing database to determine whether the user is valid and what the user can do.
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Meet the expected outputs. \\
+
+
+\quad
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & Login Page Empty input
+field of account and
+password.
+Click login. & Empty input of
+one of the input
+fields or both. & Stay at same
+page and error
+message of
+empty input.
+\\ \hline
+2  & Login Page Empty input
+field of account and
+password. & Valid input of
+account and
+password of
+administrator
+account. Click
+login. & Redirect to the
+main page of
+the application,
+and give user
+full authority of
+control. 
+\\ \hline
+3  & Login Page Empty input
+field of account and
+password. & Valid input of
+account and
+password of
+viewer account .
+Click login. & Redirect to the
+main page of the
+application, user
+only allowed to
+view the data
+and schedule. 
+\\ \hline
+4  & Login Page Empty input
+field of account and
+password. & Invalid of
+account or
+invalid
+password. Click
+login. & Stay at the
+same page and
+present an error
+message of the
+invalid login. 
+\\ \hline
+5  & Application main page & Click logout. & Redirect to the
+login page. 
+\\ \hline
+\end{tabular}\\
+
+
+\newpage
+
+
+
+
+
+\subsection{Insertion and Storage of Data} 
+
+
+\textbf{Description}\\
+
+The application should allow administrator account user to insert data such as patient procedure, doctor and nurse shift hours and other necessary data into corresponding databases. The testing will compare the inserted data with the data stored in database. There exists a checking module to validate the input values.
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Meet the expected outputs. \\
+
+
+\quad
+
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & Application main page,
+admin account. & Click Add Data. & Redirect to the
+Application
+adding data
+page. 
+\\ \hline
+2  & Application adding data
+page. & Add the
+inexistent data
+to target
+database with
+correct data
+type. Click
+submit. & Stay in same
+page and all
+inputs are
+cleaned. Data
+appear in the
+corresponding
+database. 
+\\ \hline
+3  & Application adding data
+page. & Add the data to
+target database
+with incorrect
+data type or
+incorrect
+pattern. Click
+submit. & Stay in same
+page and save
+valid data.
+Error messages
+indicate the
+invalid inputs. 
+\\ \hline
+4  & Application adding data
+page. & Add the data
+which already
+existed in target
+database. Click
+submit. & Stay in same
+page and save
+data. Error
+message
+indicates the
+redundancy of
+data.
+\\ \hline
+5  & Application adding data
+page. & Add data which
+out of domain
+(such as
+reservation date
+in past days) to
+target database.
+Click submit. & Stay in same
+page and save
+data. Error
+message
+indicates that
+the data out of
+valid range. 
+\\ \hline
+6  & Application main page,
+viewer account. & Click Add Data. & Error message. 
+\\ \hline
+\end{tabular}\\
+
+
+
+
+
+
+\subsection{View, Modify and Delete Data} 
+
+\textbf{Description}\\
+
+Administrator account user can view, modify and delete existed data in database. Viewer account user only can read the data in the database.  According to the selection of user, retrieve corresponding database and display the content on user interface. Changes and deletion created by administrator account user should be stored into database. Testing checks whether the application display right data, and  whether the changes synchronize with database. Test the validation of the database when unexpected actions happen.
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Meet the expected outputs. \\
+
+
+\quad
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & Application main page,
+admin and viewer account & Click View
+Data. & Redirect to the
+View Data page. 
+\\ \hline
+2  & Application view data
+page, admin and viewer
+account. & Select target
+database, click
+view. & Stay at same
+page. Display
+the content of
+all data from
+corresponding
+database. 
+\\ \hline
+3  & Application view data
+page, admin and view
+account. & Select target
+database and
+give specific
+condition, click
+view. & Stay at same
+page. Display
+the content of
+target data from
+corresponding
+database. 
+\\ \hline
+4  & Application view data
+page, admin account. & Modify the
+displayed data
+and change the
+value by another
+valid value.
+Click save. & Stay at same
+page. The value
+in display area
+and database
+have been
+changed. 
+\\ \hline
+5  & Application view data
+page, admin account. & Modify the
+displayed data
+and change the
+value by invalid
+value( empty for
+required value
+or out of valid
+range). Click
+save. & Stay at same
+page, no change
+happen in
+displayed data
+or database.
+Error messages
+indicate the
+unexpected
+changes. 
+\\ \hline
+\end{tabular}\\
+
+\newpage
+
+
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+6  & Application view data
+page, admin account. & Delete whole
+one row of data
+by clicking
+deletion button
+at end of the
+row. Click save. & Stay at same
+page. The
+deleted row
+disappear and
+the data in
+database is
+deleted as well. 
+\\ \hline
+7  & Application view data
+page, admin account. & Delete whole
+one row of data
+if the data is
+expected to use
+in future
+(Patient
+reservation in
+next few days).
+Click save. & Stay at same
+page. Pop up a
+deletion
+confirmation
+window.
+Confirming the
+deletion will
+remove the row
+from the list.
+Cancel deletion
+will save the
+data. 
+\\ \hline
+8  & Application view data
+page, viewer account. & Modify the
+displayed data. & Stay at same
+page. Data is
+not editable. 
+\\ \hline
+9  & Application view data
+page, viewer account. & Click delete
+button. & Stay at same
+page. Deletion
+button does not
+exist.
+\\ \hline
+10  & Application view data
+page, viewer account. & Click save. & Stay at same
+page. Save
+button does not
+exist. 
+\\ \hline
+\end{tabular}\\
+
+
+\newpage
+
+\subsection{View Schedule and Modify Schedule}
+
+
+\textbf{Description}\\
+
+The application allows administrator account user and viewer account user to view the schedules. Administrator account user also has the permission to adjust the schedule. Testing ensures that the changed schedule doesn’t have conflicts. 
+
+\quad
+
+
+\textbf{Criteria}\\
+
+Meet the expected outputs. \\
+
+
+\quad
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & Application main page,
+admin and viewer
+account. & Click view
+schedule. & Redirect to the
+view schedule
+page. 
+\\ \hline
+2  & Application view schedule
+page, admin and viewer
+account. & Select type and
+date of the
+schedule. Click
+view. & Stay at same
+page. The page
+displays the
+existing
+schedule. 
+\\ \hline
+3  & Application view schedule
+page, admin account. & Click adding
+button and add
+a new reserved
+time into blank
+area of schedule.
+Click save. & Stay at same
+page. The new
+time period is
+added into
+schedule.The
+new schedule is
+saved into
+database. 
+\\ \hline
+4  & Application view schedule, page admin account. & Click on adding 
+button on a
+reserved area.
+Click save & If no error
+happens , stay
+at same page.
+No adding
+button on a
+reserved area. 
+\\ \hline
+5  & Application view schedule
+page, admin account & Click on moving
+button on a
+reserved area
+and choose an
+empty area.
+Click save. & If no error
+happens stay at
+same page. The
+selected time
+period is set at
+new area. The
+new schedule is
+saved into
+database. 
+\\ \hline
+\end{tabular}\\
+
+
+\newpage
+
+
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+6  & Application view schedule
+page, admin account & Click on moving
+button on a
+reserved area
+and choose a
+reserved area.
+Switch the
+reservation.
+Click save. & If no error
+happens, stay at
+same page. The
+selected time
+period is
+switched with
+another one.
+The new
+schedule is
+saved into
+database. 
+\\ \hline
+7  & Application view schedule
+page, admin account. & Application
+validates the
+changes of
+schedule. & Checks on the
+sequences of
+procedures in
+clinic. If adding,
+moving, and
+switching
+violate the the
+sequence, show
+error message. 
+\\ \hline
+8  & Application view schedule
+page, admin account. & Click delete
+button to
+remove a
+reservation.
+Click save. & Pop up a
+window for
+deletion
+confirmation. If
+continue to
+delete, remove
+the reservation.
+Save the new
+schedule to
+database. 
+\\ \hline
+9  & Application view schedule
+page, viewer account. & Click adding or
+click moving or
+click delete or
+click save. & Stay at same
+page. No adding
+button, no
+moving button,
+no deletion
+button, no save
+button. 
+\\ \hline
+\end{tabular}\\
+
+
+\newpage
+
+
+\section{Non-Functional Requirements Testing}
+
+\subsection{Usability}
+
+\textbf{Description}
+
+\vspace{-2pt}
+\begin{itemize}
+\setlength{\parskip}{4pt}
+\setlength{\itemsep}{2pt}
+\item We will list the most frequently performed tasks, and the development
+		team will use the product to complete them. We count the number of
+		mouse clicks.
+\item We will invite five doctors and five nurses to use our product and
+		give them a three minutes demonstration on how to complete a certain
+		task. After that, the participants will try to complete the same task.
+\item We will invite five doctors and five nurses to use our product, but
+		we will not give a demonstration on how to complete a certain task.
+		Instead, the participants will try to complete it based
+		on their previous experience and the hints provided by the application.		
+\end{itemize}
+
+
+
+
+\textbf{Criteria}
+
+\vspace{-2pt}
+\begin{itemize}
+\setlength{\parskip}{4pt}
+\setlength{\itemsep}{2pt}
+\item The average number of mouse clicks should be less than five.
+\item The participants can complete the same task correctly in three minutes.
+\item The participants can complete the required tasks in five minutes and
+		they should encounter fewer than three errors.  
+\end{itemize}
+
+\quad
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & Application is running
+ & Performing generate simulation schedule tasks & Less than five mouse clicks 
+\\ \hline
+2  & Application is running & New users with instructions to complete import data task & 
+Complete it in three minutes 
+\\ \hline
+3  & Application is running & New users without instructions to complete import data task & 
+Complete it in three minutes and no more than three errors 
+\\ \hline
+\end{tabular}
+
+\newpage
+
+
+
+\subsection{Performance Testing}
+
+
+\textbf{Description}
+
+\vspace{-2pt}
+\begin{itemize}
+\setlength{\parskip}{4pt}
+\setlength{\itemsep}{2pt}
+\item The development team will use the product to complete the most frequently performed tasks.
+		We will calculate the time from the start-up of the application to the completion of the work.
+\item The development team will generate 100000 data points, which is ten times more
+		than the expected data points. We will input those data points into our
+		application. Next, we will input 100 times more data points into the application.
+\item The development team will generate random data points, which contain problems such as
+		incorrect formatting data and illegal characters. We will input those data points into
+		our application.
+\end{itemize}
+
+
+
+
+\textbf{Criteria}
+
+\vspace{-2pt}
+\begin{itemize}
+\setlength{\parskip}{4pt}
+\setlength{\itemsep}{2pt}
+\item The average time should be less than five minutes. 
+\item The application does not crash, and there are no obvious latencies
+		(less than 5 seconds for each task) when performing
+		the common tasks in the first case. The application can crash in the second case.  
+\item The application does not crash and prompts the users that the input data is not
+		correct and how they could correct it.  
+\end{itemize}
+
+\quad
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} 
+\\ \hline
+1  & Application is not running
+ & Start application and generate simulation schedule & Less than five minutes
+\\ \hline
+2  & Application is running & import 100 thousand data & not crash 
+\\ \hline
+3  & Application is running & import 10000 thousand data & crash 
+\\ \hline
+\end{tabular}
+
+
+
+
+
+\end{document}
