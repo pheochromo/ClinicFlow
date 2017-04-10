@@ -1,0 +1,872 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{tabularx}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{caption}
+
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{multirow}
+\captionsetup[table]{skip=2pt}
+
+
+\usepackage{geometry}                                       
+\geometry{left=1.5cm, right=2cm, top=2.5cm, bottom=2.5cm} 
+
+\newcounter{TestCounter}
+\setcounter{TestCounter}{0}
+
+\newcounter{ResultCounter}
+\setcounter{ResultCounter}{0}
+
+\title{
+ClinicFlow
+\\\vspace{10mm}
+\Large \textbf{Test Report}
+\vspace{40mm}
+}
+\author{ Maxim Vasiliev (400043983)
+\\
+Susie Yu \quad (000955758)
+\\
+Karl Knopf \quad (001437217)
+\\
+Weilin Hu \quad (001150873)
+\\
+Yunfeng Li \quad (001335650)
+}
+\date{\today}
+
+% Document adapted from https://github.com/studouglas/GEANT4-GPU/blob/master/Documentation/TestPlan/Test%20Plan.tex 
+% and http://itq.ch/pdf/Roadmap%20for%20Testing.pdf
+
+\hypersetup{
+bookmarks=true, 
+colorlinks=true, 
+linkcolor=black, 
+citecolor=green, 
+filecolor=magenta, 
+urlcolor=cyan 
+}
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\setlength\parindent{0pt}
+
+
+\section{Introduction}
+
+Testing is conducted adhere to the newest Test Plan by testing team. 
+
+Testing cases includes unit testing, 
+system testing, non-functional requirements testing and automated testing. 
+
+Test Report covers all the testing cases and their results. 
+
+Test descriptions and criteria refer to Test Plan. 
+
+\quad
+
+\quad
+
+\quad
+
+\quad
+
+\section{Unit Testing}
+
+\quad
+
+
+\subsection{PatientSchedule.py}
+
+
+\vspace{-5pt}
+
+Patient Schedule
+
+\vspace{10pt}
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & No dataset present & No dataset & No output & As expected & Pass
+\\ \hline
+2  & No dataset present & formatted dataset & original dataset & As expected & Pass
+\\ \hline
+3  & No dataset present & unformatted dataset & No output & As expected & Pass
+\\ \hline
+4  & No dataset present & dataset(no repeats) & original dataset & As expected & Pass
+\\ \hline
+5  & No dataset present & dataset(many repeats) & original dataset & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+
+%----------------------------------------------------------------------------
+
+\quad
+
+\quad
+
+\quad
+
+
+
+\subsection{HealthcareSchedule.py}
+
+
+\vspace{-5pt}
+
+HealthCare Schedule
+
+\vspace{10pt}
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & No dataset present & No dataset & No output & As expected & Pass
+\\ \hline
+2  & No dataset present & formatted dataset & original dataset & As expected & Pass
+\\ \hline
+3  & No dataset present & unformatted dataset & No output & As expected & Pass
+\\ \hline
+4  & No dataset present & dataset(no repeats) & original dataset & As expected & Pass
+\\ \hline
+5  & No dataset present & dataset(many repeats) & original dataset & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+
+%----------------------------------------------------------------------------
+
+
+\quad
+
+\quad
+
+\quad
+
+
+
+\subsection{Clinic.py}
+
+
+\vspace{-5pt}
+
+Clinic Modules
+
+\vspace{10pt}
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & No dataset present & No dataset & No output & As expected & Pass
+\\ \hline
+2  & No dataset present & formatted dataset & original dataset & As expected & Pass
+\\ \hline
+3  & No dataset present & unformatted dataset & No output & As expected & Pass
+\\ \hline
+4  & No dataset present & dataset(no repeats) & original dataset & As expected & Pass
+\\ \hline
+5  & No dataset present & dataset(many repeats) & original dataset & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+%----------------------------------------------------------------------------
+
+
+\quad
+
+\quad
+
+\quad
+
+
+\subsection{SimulationEngine.py}
+
+
+\vspace{-5pt}
+
+Simulation Engine
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & no simulation 
+data stored & Proper datasets under
+normal conditions. 25
+patients in simulation. & Outputs close to sample dataset, no more than 10 minutes & As expected & Pass
+\\ \hline
+2  & no simulation 
+data stored & Proper datasets under
+normal conditions. 50
+patients in simulation. & Outputs close to sample dataset, no more than 10 minutes & As expected & Pass
+\\ \hline
+3  & no simulation 
+data stored & Proper datasets under
+normal conditions. Only 2
+flexable workers. & Outputs close to sample dataset, no more than 10 minutes & As expected & Pass
+\\ \hline
+4  & no simulation 
+data stored & Proper datasets, but all
+breaks are simulataneous. & Outputs close to sample dataset, no more than 10 minutes & As expected & Pass
+\\ \hline
+5  & no simulation 
+data stored & Changed datasets to
+larger numbers. & Outputs close to sample dataset, no more than 10 minutes & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+%----------------------------------------------------------------------------
+
+
+\quad
+
+\quad
+
+\quad
+
+\newpage
+
+\subsection{Summary Output}
+
+
+\vspace{-5pt}
+
+Summary Output
+
+\vspace{10pt}
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & No previous output & Genuine data & Formatted output & As expected & Pass
+\\ \hline
+2  & No previous output & Skewed data & No output & As expected & Pass
+\\ \hline
+3  & No previous output & Invalid data & No output & As expected & Pass
+\\ \hline
+4  & No previous output & Missing Data & No output & As expected & Pass
+\\ \hline
+\end{tabular}\\
+		
+%----------------------------------------------------------------------------
+
+
+\quad
+
+\quad
+
+\quad
+
+
+\subsection{User Interface}
+
+
+\vspace{-5pt}
+
+User Interface
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & no previous interactions & Base case & normal response & As expected & Pass
+\\ \hline
+2  & no previous interactions & Invalid interaction & No response & As expected & Pass
+\\ \hline
+3  & no previous interactions & Aberrant user behaviour & No response & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+%----------------------------------------------------------------------------
+
+
+\quad
+
+\quad
+
+\quad
+
+
+
+\subsection{Data Storage}
+
+
+\vspace{-5pt}
+
+Data Storage
+
+\vspace{10pt}
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & no current data stored & Valid simulation output data & data successfully stored  & As expected & Pass
+\\ \hline
+2  & no current data stored & Missing data & data unsuccessfully stored & As expected & Pass
+\\ \hline
+3  & no current data stored & Incorrectly formatted data input & data unsuccessfully stored & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+
+
+		
+\newpage
+
+	
+\section{System Testing}
+
+
+
+
+\subsection{Login}
+
+
+\vspace{-5pt}
+
+Login
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & Login Page Empty input
+field of account and
+password.
+Click login. & Empty input of
+one of the input
+fields or both. & Stay at same
+page and error
+message of
+empty input.& As expected & Pass
+\\ \hline
+2  & Login Page Empty input
+field of account and
+password. & Valid input of
+account and
+password of
+administrator
+account. Click
+login. & Redirect to the
+main page of
+the application,
+and give user
+full authority of
+control. & As expected & Pass
+\\ \hline
+3  & Login Page Empty input
+field of account and
+password. & Valid input of
+account and
+password of
+viewer account .
+Click login. & Redirect to the
+main page of the
+application, user
+only allowed to
+view the data
+and schedule. & As expected & Pass
+\\ \hline
+4  & Login Page Empty input
+field of account and
+password. & Invalid of
+account or
+invalid
+password. Click
+login. & Stay at the
+same page and
+present an error
+message of the
+invalid login. & As expected & Pass
+\\ \hline
+5  & Application main page & Click logout. & Redirect to the
+login page. & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+%----------------------------------------------------------------------------
+
+\quad
+
+\quad
+
+\quad
+
+\newpage
+
+
+\subsection{Insertion and Storage of Data}
+
+
+\vspace{-5pt}
+
+Insertion and Storage of Data
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & Application main page,
+admin account. & Click Add Data. & Redirect to the
+Application
+adding data
+page. & As expected & Pass
+\\ \hline
+2  & Application adding data
+page. & Add the
+inexistent data
+to target
+database with
+correct data
+type. Click
+submit. & Stay in same
+page and all
+inputs are
+cleaned. Data
+appear in the
+corresponding
+database. & As expected & Pass
+\\ \hline
+3  & Application adding data
+page. & Add the data to
+target database
+with incorrect
+data type or
+incorrect
+pattern. Click
+submit. & Stay in same
+page and save
+valid data.
+Error messages
+indicate the
+invalid inputs. & As expected & Pass
+\\ \hline
+4  & Application adding data
+page. & Add the data
+which already
+existed in target
+database. Click
+submit. & Stay in same
+page and save
+data. Error
+message
+indicates the
+redundancy of
+data. & As expected & Pass
+\\ \hline
+5  & Application adding data
+page. & Add data which
+out of domain
+(such as
+reservation date
+in past days) to
+target database.
+Click submit. & Stay in same
+page and save
+data. Error
+message
+indicates that
+the data out of
+valid range. & As expected & Pass
+\\ \hline
+6  & Application main page,
+viewer account. & Click Add Data. & Error message. & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+%----------------------------------------------------------------------------
+
+\quad
+
+\quad
+
+\quad
+
+\newpage
+
+
+\subsection{View, Modify and Delete Data}
+
+
+\vspace{-5pt}
+
+View, Modify and Delete Data
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & Application main page,
+admin and viewer account & Click View
+Data. & Redirect to the
+View Data page. & As expected & Pass
+\\ \hline
+2  & Application view data
+page, admin and viewer
+account. & Select target
+database, click
+view. & Stay at same
+page. Display
+the content of
+all data from
+corresponding
+database. & As expected & Pass
+\\ \hline
+3  & Application view data
+page, admin and view
+account. & Select target
+database and
+give specific
+condition, click
+view. & Stay at same
+page. Display
+the content of
+target data from
+corresponding
+database. & As expected & Pass
+\\ \hline
+4  & Application view data
+page, admin account. & Modify the
+displayed data
+and change the
+value by another
+valid value.
+Click save. & Stay at same
+page. The value
+in display area
+and database
+have been
+changed. & As expected & Pass
+\\ \hline
+5  & Application view data
+page, admin account. & Modify the
+displayed data
+and change the
+value by invalid
+value( empty for
+required value
+or out of valid
+range). Click
+save. & Stay at same
+page, no change
+happen in
+displayed data
+or database.
+Error messages
+indicate the
+unexpected
+changes. & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+\newpage
+
+View, Modify and Delete Data
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+6  & Application view data
+page, admin account. & Delete whole
+one row of data
+by clicking
+deletion button
+at end of the
+row. Click save. & Stay at same
+page. The
+deleted row
+disappear and
+the data in
+database is
+deleted as well. & As expected & Pass
+\\ \hline
+7  & Application view data
+page, admin account. & Delete whole
+one row of data
+if the data is
+expected to use
+in future
+(Patient
+reservation in
+next few days).
+Click save. & Stay at same
+page. Pop up a
+deletion
+confirmation
+window.
+Confirming the
+deletion will
+remove the row
+from the list.
+Cancel deletion
+will save the
+data. & As expected & Pass
+\\ \hline
+8  & Application view data
+page, viewer account. & Modify the
+displayed data. & Stay at same
+page. Data is
+not editable. & As expected & Pass
+\\ \hline
+9  & Application view data
+page, viewer account. & Click delete
+button. & Stay at same
+page. Deletion
+button does not
+exist. & As expected & Pass
+\\ \hline
+10  & Application view data
+page, viewer account. & Click save. & Stay at same
+page. Save
+button does not
+exist. & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+
+
+\newpage
+
+\subsection{View Schedule and Modify Schedule}
+
+\vspace{-5pt}
+
+View Schedule and Modify Schedule
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & Application main page,
+admin and viewer
+account. & Click view
+schedule. & Redirect to the
+view schedule
+page. & As expected & Pass
+\\ \hline
+2  & Application view schedule
+page, admin and viewer
+account. & Select type and
+date of the
+schedule. Click
+view. & Stay at same
+page. The page
+displays the
+existing
+schedule. & As expected & Pass
+\\ \hline
+3  & Application view schedule
+page, admin account. & Click adding
+button and add
+a new reserved
+time into blank
+area of schedule.
+Click save. & Stay at same
+page. The new
+time period is
+added into
+schedule.The
+new schedule is
+saved into
+database. & As expected & Pass
+\\ \hline
+4  & Application view schedule, page admin account. & Click on adding 
+button on a
+reserved area.
+Click save & If no error
+happens , stay
+at same page.
+No adding
+button on a
+reserved area. & As expected & Pass
+\\ \hline
+5  & Application view schedule
+page, admin account & Click on moving
+button on a
+reserved area
+and choose an
+empty area.
+Click save. & If no error
+happens stay at
+same page. The
+selected time
+period is set at
+new area. The
+new schedule is
+saved into
+database. & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+\newpage
+
+View Schedule and Modify Schedule
+
+\vspace{10pt}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+6  & Application view schedule
+page, admin account & Click on moving
+button on a
+reserved area
+and choose a
+reserved area.
+Switch the
+reservation.
+Click save. & If no error
+happens, stay at
+same page. The
+selected time
+period is
+switched with
+another one.
+The new
+schedule is
+saved into
+database. & As expected & Pass
+\\ \hline
+7  & Application view schedule
+page, admin account. & Application
+validates the
+changes of
+schedule. & Checks on the
+sequences of
+procedures in
+clinic. If adding,
+moving, and
+switching
+violate the the
+sequence, show
+error message. & As expected & Pass
+\\ \hline
+8  & Application view schedule
+page, admin account. & Click delete
+button to
+remove a
+reservation.
+Click save. & Pop up a
+window for
+deletion
+confirmation. If
+continue to
+delete, remove
+the reservation.
+Save the new
+schedule to
+database. & As expected & Pass
+\\ \hline
+9  & Application view schedule
+page, viewer account. & Click adding or
+click moving or
+click delete or
+click save. & Stay at same
+page. No adding
+button, no
+moving button,
+no deletion
+button, no save
+button. & As expected & Pass
+\\ \hline
+\end{tabular}\\
+
+
+
+\newpage
+
+\section{Non-Functional Requirements Testing}
+
+
+
+\subsection{Usability Testing}
+
+
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & Application is running
+ & Performing generate simulation schedule tasks & Less than five mouse clicks & As expected & Pass
+\\ \hline
+2  & Application is running & New users with instructions to complete import data task & 
+Complete it in three minutes & As expected & Pass
+\\ \hline
+3  & Application is running & New users without instructions to complete import data task & 
+Complete it in three minutes and no more than three errors & As expected & Pass
+\\ \hline
+\end{tabular}
+
+\quad
+
+\quad
+
+\quad
+
+\subsection{Performance Testing}
+
+\begin{tabular}{|C{0.8cm}|C{2.5cm}|C{4.5cm}|C{4cm}|C{3cm}|C{1.5cm}|}
+\hline
+\textbf{No.}  & \textbf{Initial State} & \textbf{Input} & \textbf{Expected Output} & \textbf{Actual Output} & \textbf{Result}
+\\ \hline
+1  & Application is not running
+ & Start application and generate simulation schedule & Less than five minutes & As expected & Pass
+\\ \hline
+2  & Application is running & import 100 thousand data & not crash & As expected & Pass
+\\ \hline
+3  & Application is running & import 10000 thousand data & crash & As expected & Pass
+\\ \hline
+\end{tabular}
+
+
+
+
+
+\end{document}
