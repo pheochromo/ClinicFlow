@@ -22,11 +22,12 @@ from simengine.views import *
 
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
-    url(r'^$', schedule, name='schedule'),
+    #url(r'^$', schedule, name='schedule'),
+    url(r'^$', schedulelists, name='schedulelists'),
     url(r'^login$', login, name='login'),
     url(r'^manage$', manage, name='manage'),
     url(r'^viewer$', viewer, name='viewer'),
-    url(r'^schedule$', schedule, name='schedule'),
+    #url(r'^schedule$', schedule, name='schedule'),
     url(r'^setting$', setting, name='setting'),
     url(r'^schedulelists$', schedulelists, name='schedulelists'),
     url(r'^singleschedule$', singleschedule, name='singleschedule'),

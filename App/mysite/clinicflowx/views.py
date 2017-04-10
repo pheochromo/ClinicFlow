@@ -72,7 +72,7 @@ def singleschedule(request):
             if request.POST.get("DeletePatient"): # if delete patients
                 the_select = request.POST.get('the_patient')
                 patientdate.delete_one({'Name': the_select})
-
+            return  HttpResponseRedirect("/singleschedule?date="+date)
         patients = patientdate.find()# display the patient reserved at that day
         for single in patients:
             patient.append(single)

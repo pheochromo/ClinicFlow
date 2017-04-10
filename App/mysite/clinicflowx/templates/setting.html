@@ -1,22 +1,26 @@
  {% extends "base.html" %} {% load staticfiles%} {% block content %}
+<script src="../static/js/validateSetting.js"></script>
 <article class="settings">
   <h1>Schedule Settings</h1>
   <section class="settings-section">
-    <form method="post" class="form" id="setting-form">
+    <form method="post" class="form" name="setting-form" id="setting-form">
       <div class="setting-form-div">
         {% csrf_token %}
         <label for="provider">Providers: </label>
         <br>
-        <input class="form-input" id="provider-list" type="text" name="Clinic_Provider" value="{{provider}}">
-        <a class="form-input" id="change-provider-button" href="http://127.0.0.1:8000/schedule">Change Providers</a>
+        <input class="form-input" id="provider-list" name="Provider_List" type="text" name="Clinic_Provider" value="{{provider}}">
+        <input type="submit" id="change-provider-button" name="Change_Provider" value="Change Provider" class="form-input" onclick="return checkChangeProvider();">
+        <!-- <a class="form-input" id="change-provider-button" href="http://127.0.0.1:8000/schedule">Change Providers</a>  -->
         <br>
+        <span id="provider-list_error_alert"></span>
         <br>
         <label for="provider">Create a schedule for date: </label>
         <br> {% csrf_token %}
-        <input class="form-input" type="date" name="Schedule_Date" placeholder="Date">
+        <input class="form-input" type="date" name="Schedule_Date" id="date" placeholder="Date mm/dd/yyyy or yyyy-mm-dd">
+        <span id="date_error_alert"></span>
         <br>
       </div>
-      <input class="general-button" id="setting-create-button" type="submit" name="Create_Schedule" value="Create">
+      <input class="general-button" id="setting-create-button" type="submit" name="Create_Schedule" value="Create" onclick="return checkDate();">
     </form>
     {% endblock %}
   </section>

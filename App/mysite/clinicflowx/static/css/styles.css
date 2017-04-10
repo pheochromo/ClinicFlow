@@ -107,7 +107,7 @@ body {
 .content {
   width: 76%;
   height: 100%;
-  padding: 130px 50px 50px 300px;
+  padding: 130px 50px 50px 19%;
   background-color: white;
 }
 
@@ -347,6 +347,155 @@ h2 {
 }
 
 
+/*----------------- simulation -----------------*/
+
+.simulation {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  padding: 30px 10px 30px 10px;
+}
+
+#simulation-list {
+  padding: 15px 10px 15px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 105%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#each-simulation-list {
+  display: inline;
+}
+
+
+/*----------------- passport -----------------*/
+
+.passport {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  padding: 30px 10px 25px 10px;
+}
+
+.passport-form {
+  padding: 15px 10px 15px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 105%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.timeRangeForm {
+  font-size: 70%;
+}
+
+#passport-timesearch {
+  padding: 8px 25px;
+}
+
+#new-pass-btn {
+  float: right;
+  margin-right: 20px;
+  position: relative;
+  top: -60px;
+}
+
+.passport-table {
+  display: block;
+  overflow: auto;
+  min-height: 100px;
+  width: 93%;
+  border-collapse: collapse;
+  margin: 20px 0 30px 0;
+  padding: 15px 10px 15px 15px;
+  background-color: #f9f9f7;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.passport-table,
+.passport-table tr,
+.passport-table th {
+  border: 1px solid black;
+  padding: 7px 30px;
+}
+
+#passportModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.passport-post {
+  position: fixed;
+  left: 20%;
+  top: 13%;
+  height: 80%;
+  width: 70%;
+  padding: 20px 0 0 30px;
+  background-color: #f9f9f7;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+
+.pass-mod-close {
+  color: #aaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+  position: relative;
+  top: -15px;
+  margin-right: 5px;
+}
+
+.pass-mod-close:hover,
+.pass-mod-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+fieldset {
+  float: left;
+  width: 300px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+#passport-col {
+  margin-left: 30px;
+}
+
+.passport-add {
+  margin-top: 100px;
+}
+
+.passport-input {
+  margin: 3px 0 7px 0;
+  border-radius: 5px;
+  border: 2px solid #0b9cd5;
+  padding: 3px;
+}
+
+
 /*----------------- footer -----------------*/
 
 .footer {
@@ -359,11 +508,10 @@ h2 {
   background-color: #808080;
 }
 
-
 textarea {
   border: 1px solid black;
 }
 
- .passbox {
+.passbox {
   border: 1px solid black;
- }
+}

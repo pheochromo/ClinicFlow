@@ -1,17 +1,17 @@
-{% extends "base.html" %}
-{% load staticfiles%}
-
-{% block content %}
-<h1>Clinic schedule lists</h1>
-    <ul>
-      {% for each in date %}
-        <li><a href="http:////127.0.0.1:8000/simengine?date={{each}}"> {{each}} </a>
-            <form action="" method="post">
-             {% csrf_token %}
-                <input type="hidden" name="the_date" value="{{each}}">
-            </form>
-         {% endfor %}
-         </ul>
-      <br>
-      <a href="http://127.0.0.1:8000/setting">to_setting</a>
+{% extends "base.html" %} {% load staticfiles%} {% block content %}
+<article class="simulation">
+  <h1>Clinic schedule lists</h1>
+  <ul id="simulation-list">
+    {% for each in date %}
+    <li><a href="http:////127.0.0.1:8000/simengine?date={{each}}"> {{each}} </a>
+      <form action="" method="post" class="each-simulation-list">
+        {% csrf_token %}
+        <input class="form-input" type="hidden" name="the_date" value="{{each}}">
+      </form>
+      {% endfor %}
+  </ul>
+  <br>
+  <a class="general-button" href="http://127.0.0.1:8000/setting">Settings</a>
+</article>
 {% endblock %}
+

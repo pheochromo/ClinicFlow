@@ -1,20 +1,25 @@
  {% extends "base.html" %} {% load staticfiles%} {% block content %}
+<script src="../static/js/validateSingleSchedule.js"></script>
 <article class="singleschedule">
   <h1 id="singleschedule-h1">Clinic Single Schedule</h1>
   <br>
   <section class="singleschedule-section">
     <h2> Add Patient</h2>
-    <form method='post' class="form">
+    <form onsubmit="return checkSingleSchedule();" method='post' class="form" name="patientinfo_form">
       {% csrf_token %}
       <label for="name">Name: </label>
       <input class="form-input" type="text" id="name" name="Name" placeholder="Name">
+      <span id="name_error_alert"></span>
       </br>
       <label for="time">Time: &nbsp </label>
       <input class="form-input" type="time" id="time" name="Time" placeholder="Time">
+      <span id="time_error_alert"></span>
       </br>
       <label for="visit">Visit: &nbsp&nbsp</label>
       {% for value in information.provider%}
       <input class="form-input" type="checkbox" id="visit" name="Providers" value="{{value}}"> {{value}} {% endfor %}
+      </br>
+      <span id="visit_error_alert"></span>
       </br>
       <input class="form-input" id="singleschedule-submit" type="submit" name="AddPatient" value="Submit">
     </form>
@@ -34,7 +39,7 @@
     <h2> predict result </h2>
     <br>
     <div id="toschedule-button-div">
-      <a class="general-button" href="http://127.0.0.1:8000/schedulelists">to schedule lists</a> {% endblock %}
+      <a class="general-button" href="http://127.0.0.1:8000/schedulelists">Schedule Lists</a> {% endblock %}
     </div>
   </section>
 </article>
