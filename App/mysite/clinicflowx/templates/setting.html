@@ -8,7 +8,7 @@
         {% csrf_token %}
         <label for="provider">Providers: </label>
         <br>
-        <input class="form-input" id="provider-list" name="Provider_List" type="text" name="Clinic_Provider" value="{{provider}}">
+        <input class="form-input" id="provider-list" name="Provider_List" type="text" name="Clinic_Provider" value="{{provider}}" placeholder="Registration/RN Interview/ECG/Bloodwork/Anesthesiologist/X-ray/">
         <input type="submit" id="change-provider-button" name="Change_Provider" value="Change Provider" class="form-input" onclick="return checkChangeProvider();">
         <!-- <a class="form-input" id="change-provider-button" href="http://127.0.0.1:8000/schedule">Change Providers</a>  -->
         <br>
