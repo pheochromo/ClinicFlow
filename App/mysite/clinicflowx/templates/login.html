@@ -1,13 +1,23 @@
-{% extends 'base1.html' %}
-{% load staticfiles%}
+{% extends 'base1.html' %} {% load staticfiles%} {% block title %}Login{% endblock %} {% block content %}
+<div class="loginpage">
 
-{% block title %}Login{% endblock %}
+  <div class="login-header">
+    <img class="logo-image" alt="clinicflow logo" src="/static/images/logo.png">
+  </div>
 
-{% block content %}
-  <h2>Login</h2>
-  <form method="post">
+  <form class="loginform" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+    <!-- {{ form.as_p }} -->
+    <label>{{ form.username.label }}</label>
+    <div class="form-input">{{ form.username }}</div>
+    <label>{{ form.password.label }}</label>
+    <div class="form-input">{{ form.password }}</div>{% if form.erros %}
+    <div>
+      incorrect username or password
+    </div>
+    {% endif %}
+    <button class="general-button loginbtn" type="submit">Login</button>
   </form>
+</div>
 {% endblock %}
+
