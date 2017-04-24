@@ -25,8 +25,8 @@ SECRET_KEY = 'hlwioty(c^+9=iwa-#@lqv_ar=)ziv))gloigr9@%s#ck0a324'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.205.53.34']
-
+ALLOWED_HOSTS = ['127.0.0.1']
+# 34.205.53.34
 
 # Application definition
 
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mod_wsgi.server',
+    # 'mod_wsgi.server',
     'clinicflowx',
     'simengine',
 ]
@@ -122,39 +122,39 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/home/ec2-user/envClinicFlow/ClinicFlow/clinicflow.log',
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers':['file'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-        'clinicflowx': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        },
-        'simengine': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        }
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+#             'datefmt' : "%d/%b/%Y %H:%M:%S"
+#         },
+#         'simple': {
+#             'format': '%(levelname)s %(message)s'
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': '/home/ec2-user/envClinicFlow/ClinicFlow/clinicflow.log',
+#             'formatter': 'verbose'
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers':['file'],
+#             'propagate': True,
+#             'level':'DEBUG',
+#         },
+#         'clinicflowx': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#         },
+#         'simengine': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#         }
+#     }
+# }

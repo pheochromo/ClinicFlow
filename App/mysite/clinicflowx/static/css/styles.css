@@ -79,6 +79,14 @@ body {
   cursor: pointer;
 }
 
+.nav-link {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  padding: 50px;
+  margin: -50px;
+}
+
 .side-nav:hover {
   border-radius: 10px;
   background-color: #f3f3f3;
@@ -111,6 +119,35 @@ body {
   background-color: white;
 }
 
+
+/*----------------- login page -----------------*/
+
+.loginpage {
+  width: 100%;
+  height: 100vh;
+  background-color: #edecec;
+}
+
+.login-header {
+  width: 100%;
+  height: 60px;
+  margin: auto;
+  padding-top: 15px;
+  background-color: white;
+  box-shadow: 0px 2px 10px #bdbdbd;
+}
+
+.loginform {
+  width: 300px;
+  margin: auto;
+  padding: 10px;
+  padding-top: 130px;
+  /*background-color: white;*/
+}
+
+.loginbtn {
+  margin: 20px 0 0 180px;
+}
 
 /*----------------- single schedule -----------------*/
 
