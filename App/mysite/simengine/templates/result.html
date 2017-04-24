@@ -16,18 +16,21 @@
     <p>Average time spent in clinic: {{ averageClinicTime }} </p> <br>
     <p>Average down time: {{ averageDownTime }} </p>
     </div>
-</div>
+</div><br><br>
 
-    <div class="simresult" id="example5.1"></div>
+<h2>Timeline</h2>
+<div id="timelineGraph"></div>
 
 <script type="text/javascript">
   google.charts.load("current", {packages:["timeline"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
 
-    var container = document.getElementById('example5.1');
+    var container = document.getElementById('timelineGraph');
     var chart = new google.visualization.Timeline(container);
     var dataTable = new google.visualization.DataTable();
+    var rowHeight = 41;
+    var chartHeight = (dataTable.getNumberOfRows() + 1) * rowHeight;
     dataTable.addColumn({ type: 'string', id: 'Patient' });
     dataTable.addColumn({ type: 'string', id: 'Station' });
     dataTable.addColumn({ type: 'date', id: 'Start' });
@@ -49,7 +52,7 @@
 
     var options = {
       timeline: { colorByRowLabel: true },
-      'height': 500
+      'height': chartHeight
     };
 
     chart.draw(dataTable, options);
