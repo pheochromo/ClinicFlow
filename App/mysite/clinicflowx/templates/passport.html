@@ -16,17 +16,11 @@
       <span id="time1_error_alert"></span><span id="time2_error_alert"></span>
       </br>
     </form>
-    <form method="post" name="upload-passport" enctype="multipart/form-data">
-    {% csrf_token %}
-        <input type="file" name="uploadedfile" placeholder="upload passport for analysising">
-        <input type="submit" name="Upload" value="Upload" class="general-button">
-        <span>Upload refined csv passport</span>
+    <form method="post" name="clean-passport">
+      {% csrf_token %}
+      <input type="submit" name="Clean" value="Clear All" class="general-button" id="cleanall-btn">
     </form>
 
-     <form method="post" name="clean-passport">
-      {% csrf_token %}
-        <input type="submit" name="Clean" value="Clean All" class="general-button">
-      </form>
     <button class="general-button" id="new-pass-btn" onclick="openModal()">Add New Passport</button>
 
     <table class="passport-table">
@@ -69,8 +63,19 @@
     <div id="passportModal">
       <div class="passport-post">
         <span onclick="hide()" class="pass-mod-close">&times;</span>
-        <h2>New Passport</h2>
+        <!-- <h2>New Passport</h2> -->
         <br>
+        <h2>Upload from File</h2>
+        <form method="post" name="upload-passport" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="file" name="uploadedfile" placeholder="upload passport for analysising">
+          <input type="submit" name="Upload" value="Upload" class="general-button">
+          <span>Upload refined csv passport</span>
+        </form>
+        <br>
+        <h2>Or</h2>
+        <br>
+        <h2>Input Data</h2>
         <form method="post">
           <fieldset>
             {% csrf_token %} Reason for Visit
@@ -116,3 +121,4 @@
 </article>
 
 {% endblock %}
+

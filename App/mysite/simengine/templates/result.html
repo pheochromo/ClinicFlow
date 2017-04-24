@@ -5,14 +5,21 @@
 
 {% block content %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<h1>Simulation Results</h1>
-{% csrf_token %}
-<!-- {% for time in patientinfo %}
-<p>    {{ time }}</p>
-{% endfor %} -->
-<p>Average time spent in clinic: {{ averageClinicTime }} </p>
-<p>Average down time: {{ averageDownTime }} </p>
-<div id="example5.1"></div>
+
+<div class="simresult">
+    <h1>Simulation Results</h1>
+    <div class="simsection">
+    {% csrf_token %}
+    <!-- {% for time in patientinfo %}
+    <p>    {{ time }}</p>
+    {% endfor %} -->
+    <p>Average time spent in clinic: {{ averageClinicTime }} </p> <br>
+    <p>Average down time: {{ averageDownTime }} </p>
+    </div>
+</div>
+
+    <div class="simresult" id="example5.1"></div>
+
 <script type="text/javascript">
   google.charts.load("current", {packages:["timeline"]});
   google.charts.setOnLoadCallback(drawChart);
