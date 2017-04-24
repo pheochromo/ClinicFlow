@@ -44,16 +44,15 @@ def Simulation(env,clinic,workerSchedule,patientSchedule,outfile):
         averageClinicTime = averageClinicTime + person.completionTime
     averageClinicTime = averageClinicTime / (len(patientSchedule.patients))
 
+    # Average Idle time for a patient
     averageDownTime = 0
     for person in patientSchedule.patients:
         averageDownTime = averageDownTime + (person.completionTime - person.timeInService)
     averageDownTime = averageDownTime / (len(patientSchedule.patients))
-    #write statistics to file
-    f = open(outfile, 'a')
-    f.write('Average Time in Clinic: %d  Average Idle Time for a patient: %d \n' % (averageClinicTime,averageDownTime))
+
+    #write statistics to DB
     clinicStats = {"Name":"clinicStats", "averageClinicTime":averageClinicTime, "averageDownTime":averageDownTime}
     db[patientSchedule.date+"result"].insert_one(clinicStats)
-    f.close()
 
 
     #NEED TO Give patient requests priority over worker breaks, so that if they occur at the same time the worker stays

@@ -1,5 +1,5 @@
  {% extends "base.html" %} {% load staticfiles%} {% block content %}
-<script src="../static/js/validateSingleSchedule.js"></script>
+<script src="/static/js/validateSingleSchedule.js"></script>
 <article class="singleschedule">
   <h1 id="singleschedule-h1">Clinic Single Schedule</h1>
   <br>
@@ -39,7 +39,7 @@
     <!-- <h2> predict result </h2> -->
     <br>
     <div id="toschedule-button-div">
-      <a class="general-button" href="http://127.0.0.1:8000/schedulelists">To Schedule Lists</a> {% endblock %}
+      <a class="general-button" href="/schedulelists">To Schedule Lists</a> {% endblock %}
     </div>
   </section>
 </article>

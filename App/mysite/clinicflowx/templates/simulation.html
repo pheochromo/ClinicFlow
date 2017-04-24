@@ -3,7 +3,7 @@
   <h1>Clinic schedule lists</h1>
   <ul id="simulation-list">
     {% for each in date %}
-    <li><a href="http:////127.0.0.1:8000/simengine?date={{each}}"> {{each}} </a>
+    <li><a href="/simengine?date={{each}}"> {{each}} </a>
       <form action="" method="post" class="each-simulation-list">
         {% csrf_token %}
         <input class="form-input" type="hidden" name="the_date" value="{{each}}">
@@ -11,7 +11,7 @@
       {% endfor %}
   </ul>
   <br>
-  <a class="general-button" href="http://127.0.0.1:8000/setting">Settings</a>
+  <a class="general-button" href="/setting">Settings</a>
 </article>
 {% endblock %}
 
