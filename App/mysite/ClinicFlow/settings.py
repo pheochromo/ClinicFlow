@@ -25,8 +25,8 @@ SECRET_KEY = 'hlwioty(c^+9=iwa-#@lqv_ar=)ziv))gloigr9@%s#ck0a324'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
-# 34.205.53.34
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -53,6 +53,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ClinicFlow.urls'
+
+LOGIN_REDIRECT_URL = 'schedulelists'
 
 TEMPLATES = [
     {

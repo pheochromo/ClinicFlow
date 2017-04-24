@@ -25,7 +25,7 @@ from simengine.views import *
 urlpatterns = [
     url(r'^$', auth_views.login, {'template_name': 'login.html'}, name='login'),
 #    url(r'^$', schedulelists, name='schedulelists'),
-#    url(r'^login/', auth_views.login, {'template_name': 'login.html'}, name='login'),
+   url(r'^login/', auth_views.login, {'template_name': 'login.html'}, name='login'),
 #    url(r'^login$', login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^manage$', manage, name='manage'),
