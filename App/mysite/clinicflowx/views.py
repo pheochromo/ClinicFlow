@@ -17,9 +17,9 @@ result = db.result # temporarily store the data of simulation
 schedule_list = db.schedulelist # a list of schedule, contain date and settings
 
 def setting(request):
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
+    if not request.user.is_staff:
+        raise PermissionDenied
+    else:
         if request.method =='POST': #if post/submit
             if request.POST.get("Change_Provider"):
                 data = request.POST.get('Clinic_Provider') # change clinic setting
@@ -42,9 +42,9 @@ def setting(request):
         return render(request, 'setting.html', {"provider":providers})
 
 def schedulelists(request): #display the list of existed schedules based on date
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
+    if not request.user.is_staff:
+        raise PermissionDenied
+    else:
         if request.method =='POST':
             if request.POST.get("DeleteSchedule"): #delete a schedule based on the date
                 theDate = request.POST.get('the_date')
@@ -62,9 +62,9 @@ def schedulelists(request): #display the list of existed schedules based on date
 
 
 def singleschedule(request):
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
+    if not request.user.is_staff:
+         raise PermissionDenied
+    else:
         date=''
         patient =[]
         result1 ={}
@@ -82,9 +82,29 @@ def singleschedule(request):
                     providers = request.POST.getlist('Providers')
                     one_patient = {'Name':name,'Time':time,'Visit':providers}
                     patientdate.insert_one(one_patient)
-                if request.POST.get("DeletePatient"): # if delete patients
+                elif request.POST.get("DeletePatient"): # if delete patients
                     the_select = request.POST.get('the_patient')
-                    patientdate.delete_one({'Name': the_select})
+                    patientdate.delete_one({'Name': the_select})                   
+                elif request.FILES['uploadedfile'] and request.POST.get('Upload'):
+                    import csv
+                    import io 
+                    paramFile = io.StringIO(request.FILES['uploadedfile'].read().decode('utf-8').strip())
+                    data = csv.DictReader(paramFile)
+                    for row in data:
+                        times = row['Time'].split(':')
+                        hour = int(times[0])
+                        if 'pm' in times[2] or 'PM' in times[2]:
+                            if hour <12:
+                                hour=hour+12
+                        time=str(hour)+":"+times[1]
+                        one_patient={'Name':row['Name'],'Time':time}
+                        providers=[]
+                        for each in result1['provider']:
+                            if row[each] != '':
+                                providers.append(each)
+                        one_patient.update({'Visit':providers}) 
+                    patientdate.insert_one(one_patient)
+                return HttpResponseRedirect("/singleschedule?date="+str(date))
 
             patients = patientdate.find()# display the patient reserved at that day
             for single in patients:
@@ -93,9 +113,9 @@ def singleschedule(request):
         return render(request,'singleschedule.html',{'patientinfo':patient,"information": result1})
 
 def passport(request):
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
+    if not request.user.is_staff:
+        raise PermissionDenied
+    else:
         provider_from_set = settings.find_one({"object":"patient"}) #get settings
         providers =provider_from_set["provider"]
         timebound1=0
@@ -115,11 +135,13 @@ def passport(request):
             #timebound2 = int(date[0])*100+int(date[1])+int(date[2])*10000
             timebound2 = int(date[1])*100+int(date[2])+int(date[0])*10000
         passport = db.passport
-        print(timebound1)
-        print(timebound2)
+       
         if request.method =='POST':
 
-             if request.POST.get("Add_Passport"):
+             if request.POST.get('Clean'):
+                passport.delete_many({})    
+            
+             elif request.POST.get("Add_Passport"):
                  reason=request.POST.get('Reason')
                  reasons = reason.splitlines()
                  service = request.POST.get('Service')
@@ -178,6 +200,38 @@ def passport(request):
                      passport.insert(one_patient)
                      i=i+1
 
+             elif request.FILES['uploadedfile'] and request.POST.get('Upload'):
+                import csv
+                import io 
+                paramFile = io.StringIO(request.FILES['uploadedfile'].read().decode('utf-8').strip())
+                data = csv.DictReader(paramFile)
+                for row in data:
+                    one_patient = {}
+                    reason={'Reason':row['Reason for Visit']}
+                    one_patient.update(reason)
+                    service={'Service':row['Service']}
+                    one_patient.update(service)
+                    single=row['Date'].split('/')
+                    value = int(single[0])*100+int(single[1])+int(single[2])*10000
+                    date={'Date':value}
+                    one_patient.update(date)
+                    schedule_time={'Scheduled_Time':row['Scheduled Appointment Time']}
+                    one_patient.update(schedule_time)
+                    arrive_time={'Arrival_Time':row['Arrival Time']}
+                    one_patient.update(arrive_time)
+                    surgery_type={'Surgery_Type':row['Day Surgery/ Admitted Surgery']}
+                    one_patient.update(surgery_type)
+                    depart_time={'Departure_time':row['Departure Time']}
+                    one_patient.update(depart_time)
+                    for each in providers:
+                        eachin= each+' Time In'
+                        one_patient.update({each+'_Time_In':row[eachin]})
+                        eachout= each+' Time Out'
+                        one_patient.update({each+'_Time_Out':row[eachout]})
+                        eachcomment = each+' Comments'
+                        one_patient.update({each+'_Comment':row[eachcomment]})
+                    passport.insert_one(one_patient)
+                    
              if timebound1 !=0 and timebound2 != 0:
                  time11=timebound1%100
                  timebound1 = int(timebound1/100)

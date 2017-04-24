@@ -16,7 +16,17 @@
       <span id="time1_error_alert"></span><span id="time2_error_alert"></span>
       </br>
     </form>
+    <form method="post" name="upload-passport" enctype="multipart/form-data">
+    {% csrf_token %}
+        <input type="file" name="uploadedfile" placeholder="upload passport for analysising">
+        <input type="submit" name="Upload" value="Upload" class="general-button">
+        <span>Upload refined csv passport</span>
+    </form>
 
+     <form method="post" name="clean-passport">
+      {% csrf_token %}
+        <input type="submit" name="Clean" value="Clean All" class="general-button">
+      </form>
     <button class="general-button" id="new-pass-btn" onclick="openModal()">Add New Passport</button>
 
     <table class="passport-table">

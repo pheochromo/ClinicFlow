@@ -15,9 +15,12 @@
     <!-- header -->
     <header class="header">
       <div class="logo">
-        <a href="./index.html">
+        <!-- header  <a href="./index.html">-->
           <img class="logo-image" alt="clinicflow logo" src="/static/images/logo.png">
-        </a>
+        <!--</a>-->
+      </div>
+      <div>
+        <a href="{% url 'logout' %}">Logout</a>      
       </div>
       <div class="user">
         {% if request.user.is_authenticated %}
@@ -30,7 +33,7 @@
       <!-- sidebar -->
       <aside class="side-bar">
         <section class="side-nav">
-          <a class="nav-link" href="./">Schedules</a>
+          <a class="nav-link" href="./schedulelists">Schedules</a>
         </section>
         <section class="side-nav">
           <a class="nav-link" href="/simulation">Simulation</a>

@@ -24,6 +24,13 @@
       <input class="form-input" id="singleschedule-submit" type="submit" name="AddPatient" value="Submit">
     </form>
     <br>
+    <h2> Uppload Patient Information From Refined CSV File</h2>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+      <input type="file" name="uploadedfile" placeholder="upload patient information from csv file">
+      <input type="submit" name="Upload" value="Upload" class="general-button">
+    </form>
+    <br>
     <h2>Existing Patient</h2>
     <ul id="singleschedule-list">
       {% for value in patientinfo %}
