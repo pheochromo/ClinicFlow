@@ -41,7 +41,7 @@ class ClinicStation:
         if(self.varianceType == "normal"):
             return int(round(random.normal(self.mean,self.var)))
         if(self.varianceType == "exponential"):
-            return int(round( np.random.exponential(1/self.mean)))
+            return int(round( np.random.exponential(self.mean)))
         else:
             return 0
                 

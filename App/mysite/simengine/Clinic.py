@@ -24,13 +24,13 @@ class Clinic:
 
 
 #Test Harness
-def main():
-   file = "ClinicFile1.txt"
-   newClinic = Clinic(file)
-   for station in newClinic.stations:
-       print(station.name, station.prerequesites, station.maximum, station.minimum,station.varianceType, station.mean, station.var)
+#def main():
+#   file = "ClinicFile1.txt"
+#   newClinic = Clinic(file)
+#   for station in newClinic.stations:
+#       print(station.name, station.prerequesites, station.maximum, station.minimum,station.varianceType, station.mean, station.var)
 
-if __name__ == "__main__": main()
+#if __name__ == "__main__": main()
 
 
 ## ability to add constraints to optimization schedules
