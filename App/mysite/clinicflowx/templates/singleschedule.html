@@ -16,8 +16,8 @@
       <span id="time_error_alert"></span>
       </br>
       <label for="visit">Visit: &nbsp&nbsp</label>
-      {% for value in information.provider%}
-      <input class="form-input" type="checkbox" id="visit" name="Providers" value="{{value}}"> {{value}} {% endfor %}
+      {% for each in information%}
+      <input class="form-input" type="checkbox" id="visit" name="Providers" value="{{each.name}}"> {{each.name}} {% endfor %}
       </br>
       <span id="visit_error_alert"></span>
       </br>

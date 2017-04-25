@@ -1,4 +1,0 @@
-
-This version is based on Susie's work pushed the most recently. 
-
-Authentication is integrated in this version, please work on it. 

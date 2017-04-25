@@ -14,15 +14,18 @@
     <p>    {{ time }}</p>
     {% endfor %} -->
     <p>Average time spent in clinic: {{ averageClinicTime }} </p> <br>
-    <p>Average down time: {{ averageDownTime }} </p>
+    <p>Average wait time: {{ averageDownTime }} </p>
     </div>
 </div><br><br>
+
+<h2>Hourly Waiting Time</h2>
+<div id="top_x_div" ></div> <br>
 
 <h2>Timeline</h2>
 <div id="timelineGraph"></div>
 
 <script type="text/javascript">
-  google.charts.load("current", {packages:["timeline"]});
+  google.charts.load("current", {packages:["timeline", "bar"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
 
@@ -36,7 +39,7 @@
     dataTable.addColumn({ type: 'date', id: 'Start' });
     dataTable.addColumn({ type: 'date', id: 'End' });
     var durations = {{durations|safe}};
-    console.log(durations);
+    // console.log(durations);
     durations.forEach(function(duration) {
         console.log([[duration[0], duration[1], Date.apply(this, duration[2]), Date.apply(this, duration[3])]]);
         dataTable.addRows([[duration[0], duration[1], new (Function.prototype.bind.apply(Date, [null].concat(duration[2]))), new (Function.prototype.bind.apply(Date, [null].concat(duration[3])))]]);
@@ -60,5 +63,49 @@
     // console.log({{durations|safe}})
   }
 
+
+
+
+// google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawStuff);
+
+    function drawStuff() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn({ type: 'number', id: 'Time' });
+        data.addColumn({ type: 'number', id: 'WaitTime' });
+        var durations = {{durations|safe}};
+
+        durations.forEach(function(duration) {
+            var hour = parseInt(duration[2][3]);
+            if (duration[3][3] > duration[2][3]) {
+                var waitingtime = parseInt(parseInt(duration[3][4]) + parseInt(60-duration[2][4]));
+            } else {
+                var waitingtime = parseInt(((duration[3][3]+duration[3][4]) - (duration[2][3]+duration[2][4]))%60);
+            }
+            // console.log(duration[3][3]+duration[3][4] + "      " + duration[2][3]+duration[2][4] + "      " + waitingtime)
+            data.addRows([[hour, waitingtime]]);
+        });
+
+        var options = {
+          legend: { position: 'none' },
+          vAxis: { title: "Waiting Time (mins)" },
+          axes: {
+            x: {0: { side: 'bottom', label: 'Time (24 hours)'}}
+          },
+          bar: { groupWidth: "100%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    };
+
+
+
+
 </script>
+
+
+
 {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base1.html" %}
+{% load staticfiles%}
+
+
+{% block content %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <label>{{ form.username.label }}</label>
+        {{ form.username }}
+
+        <label>{{ form.password.label }}</label>
+        {{ form.password }}
+
+        {% if form.erros %}
+            <div class="">
+                not correct
+            </div>
+        {% endif %}
+        <input type="hidden" name="next" value="{% url 'schedulelists' %}" />
+        <input type="submit" value="login"/>
+    </form>
+{% endblock %}

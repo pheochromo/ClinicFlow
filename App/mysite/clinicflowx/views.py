@@ -18,9 +18,7 @@ schedule_list = db.schedulelist # a list of schedule, contain date and settings
 
 @login_required
 def setting(request):
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
+    currentSettings = settings.currentSettings
     if request.method =='POST': #if post/submit
         if request.POST.get("Change_Provider"):
             data = request.POST.get('Clinic_Provider') # change clinic setting
@@ -30,23 +28,47 @@ def setting(request):
             old = settings.find_one({"object":"patient"})
             new ={"object":"patient", "attribute1":"Name", "attribute2":"Date", "attribute3":"Time", "provider":strings}
             settings.replace_one(old,new) # replace the change in database
+
         if request.POST.get("Create_Schedule"): # create a new schedule based on date
             datedate = request.POST.get('Schedule_Date')
             patientsetting = settings.find_one({"object":"patient"})
             schedule = {"Date":datedate, "setting1": patientsetting} # store in schedule list
             schedule_list.update_one({"Date":datedate}, {'$set':schedule},upsert=True) #prevent duplicate
 
+        if request.POST.get("addProvider"): # create a new schedule based on date
+            currentSettings.insert_one({"object":"provider", "name":"", "preReqs": "", "maxNum":"", "minNum":"", "varType":"", "avg":"", "dev":""})
+
+        if request.POST.get("deleteProvider"):
+            currentSettings.delete_one({"name": request.POST.get("deleteProvider").split(" ")[1]})
+
+        if request.POST.get("updateClinicSettings"):
+            providerNames = request.POST.getlist('providername')
+            providerpreReqs = request.POST.getlist('providerpreReqs')
+            providermaxNum = request.POST.getlist('providermaxNum')
+            providerminNum = request.POST.getlist('providerminNum')
+            providervarType = request.POST.getlist('providervarType')
+            provideravg = request.POST.getlist('provideravg')
+            providerdev = request.POST.getlist('providerdev')
+
+            currentSettings.delete_many({'object': 'provider'})
+            print("heree:     " + str(len(providerNames)))
+
+            for i in range(0, len(providerNames)):
+                currentSettings.insert_one({"object":"provider", "name":providerNames[i], "preReqs":providerpreReqs[i].split(","), "maxNum":providermaxNum[i], "minNum":providerminNum[i], "varType":providervarType[i], "avg":provideravg[i], "dev":providerdev[i]})
+
+
+
     result2 = settings.find_one({"object":"patient"}) #get settings
     providers =""
     for single in result2["provider"]:
         providers=providers+single+"/" # get teh value from database and store into template
-    return render(request, 'setting.html', {"provider":providers})
+
+    clinicSettings = currentSettings.find({"object":"provider"})
+
+    return render(request, 'setting.html', {"provider":providers, "clinicSettings":clinicSettings})
 
 @login_required
 def schedulelists(request): #display the list of existed schedules based on date
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
     if request.method =='POST':
         if request.POST.get("DeleteSchedule"): #delete a schedule based on the date
             theDate = request.POST.get('the_date')
@@ -62,12 +84,8 @@ def schedulelists(request): #display the list of existed schedules based on date
     datearray.sort()
     return render(request, 'schedulelists.html', {"date":datearray})
 
-
 @login_required
 def singleschedule(request):
-    # if not request.user.is_staff:
-    #      raise PermissionDenied
-    # else:
     date=''
     patient =[]
     result1 ={}
@@ -106,20 +124,20 @@ def singleschedule(request):
                         if row[each] != '':
                             providers.append(each)
                     one_patient.update({'Visit':providers})
-                patientdate.insert_one(one_patient)
+                    patientdate.insert_one(one_patient)
             return HttpResponseRedirect("/singleschedule?date="+str(date))
 
         patients = patientdate.find()# display the patient reserved at that day
         for single in patients:
             patient.append(single)
 
-    return render(request,'singleschedule.html',{'patientinfo':patient,"information": result1})
+    currentSettings = settings.currentSettings
+    clinicSettings = currentSettings.find({"object":"provider"})
+
+    return render(request,'singleschedule.html',{'patientinfo':patient,"information": clinicSettings})
 
 @login_required
 def passport(request):
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
     provider_from_set = settings.find_one({"object":"patient"}) #get settings
     providers =provider_from_set["provider"]
     timebound1=0
@@ -293,13 +311,12 @@ def get_date(date):
     newdate =  str(date)+'/'+str(month)+'/'+str(day)
     return newdate
 
-@login_required
 def schedule(request): #sample of changing setting
-    # if not request.user.is_staff:
-    #     raise PermissionDenied
-    # else:
-    result1 = settings.find_one({"object":"patient"})
-    return render(request, 'schedule.html', {"result": result1})
+    if not request.user.is_staff:
+        raise PermissionDenied
+    else:
+        result1 = settings.find_one({"object":"patient"})
+        return render(request, 'schedule.html', {"result": result1})
 
 def manage(request):
     return render(request, 'manage.html')

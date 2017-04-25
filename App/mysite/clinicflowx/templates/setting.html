@@ -1,19 +1,25 @@
  {% extends "base.html" %} {% load staticfiles%} {% block content %}
+ {% load clinicflowx_extras %}
+
 <script src="/static/js/validateSetting.js"></script>
 <article class="settings">
   <h1>Schedule Settings</h1>
   <section class="settings-section">
+
+
+
+
+
     <form method="post" class="form" name="setting-form" id="setting-form">
       <div class="setting-form-div">
         {% csrf_token %}
-        <label for="provider">Providers: </label>
-        <br>
+        <!-- <br>
         <input class="form-input" id="provider-list" name="Provider_List" type="text" name="Clinic_Provider" value="{{provider}}" placeholder="Registration/RN Interview/ECG/Bloodwork/Anesthesiologist/X-ray/">
         <input type="submit" id="change-provider-button" name="Change_Provider" value="Change Provider" class="form-input" onclick="return checkChangeProvider();">
-        <!-- <a class="form-input" id="change-provider-button" href="/schedule">Change Providers</a>  -->
+        <a class="form-input" id="change-provider-button" href="/schedule">Change Providers</a>
         <br>
         <span id="provider-list_error_alert"></span>
-        <br>
+        <br> -->
         <label for="provider">Create a schedule for date: </label>
         <br> {% csrf_token %}
         <input class="form-input" type="date" name="Schedule_Date" id="date" placeholder="Date mm/dd/yyyy or yyyy-mm-dd">
@@ -22,6 +28,30 @@
       </div>
       <input class="general-button" id="setting-create-button" type="submit" name="Create_Schedule" value="Create" onclick="return checkDate();">
     </form>
+
+    <br/>
+
+    <form method="post" class="form" name="clinicSettingsForm" id="setting-form">
+    {% csrf_token %}
+    <label for="provider">Providers: </label>
+    <br/>
+      {% for each in clinicSettings %}
+        <input class="form-input" id="provider-list" name="providername" type="text" value="{{each.name}}">
+        <input class="form-input" id="provider-list" name="providerpreReqs" type="text" value="{{each.preReqs|filterPreReqs}}">
+        <input class="form-input" id="provider-list" name="providermaxNum" type="text" value="{{each.maxNum}}">
+        <input class="form-input" id="provider-list" name="providerminNum" type="text" value="{{each.minNum}}">
+        <input class="form-input" id="provider-list" name="providervarType" type="text" value="{{each.varType}}">
+        <input class="form-input" id="provider-list" name="provideravg" type="text" value="{{each.avg}}">
+        <input class="form-input" id="provider-list" name="providerdev" type="text" value="{{each.dev}}">
+        <input class="general-button" type="submit" name="deleteProvider" value="Delete {{each.name}}">
+        <br/>
+        <br/>
+      {% endfor %}
+        <input class="general-button" type="submit" name="updateClinicSettings" value="Update">
+        <input class="general-button" type="submit" name="addProvider" value="Add Provider">
+    </form>
+
+
     {% endblock %}
   </section>
 </article>

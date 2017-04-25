@@ -39,8 +39,7 @@ class PatientSchedule:
             appttime = 60*int(hrs)+int(mins)
             print("appt time: " + str(appttime))
             print("arrmean, var:" +str(arrMean) + str(arrVar))
-            arrTime = (appttime-360) + int(float(arrMean))+ NP.random.randint(-1 * float(arrVar)/2,float(arrVar)/2);
-                            #360 means the start time
+            arrTime = (appttime-480) + int(float(arrMean))+ NP.random.randint(-1 * float(arrVar)/2,float(arrVar)/2);
             print("arrTime: " + str(arrTime))
             temp = Patient(patient["Name"], patient["Visit"])
             temp.assignTime(arrTime)

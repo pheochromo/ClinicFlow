@@ -47,7 +47,7 @@ def simengine(request):
     #f.write(patient)
     #f.close()
     db[date+'result'].delete_many({})
-    mysim = SimulationEngine("ClinicFile1.txt", "Worker1.txt", date, "generated", "generated", "outFile1.txt")
+    mysim = SimulationEngine("Worker1.txt", date, "generated", "generated", "outFile1.txt")
 
     stats = db[date+'result'].find_one({"Name":"clinicStats"})
     # test = db[date+'result'].find_one({"Name":"stationDuration"})
