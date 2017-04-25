@@ -18,7 +18,7 @@ class ClinicStation:
         self.mean = float(avg)
         self.var = float(dev)
         self.active = False
-       
+
     def activate(self):
         if(self.count < self.maximum):
             self.count = self.count + 1
@@ -26,7 +26,7 @@ class ClinicStation:
                 self.active = True
             else:
                 self.active= False
-        
+
         #else:
             #throw error message, as station is already full
     def deactivate(self):
@@ -34,28 +34,28 @@ class ClinicStation:
             self.count = self.count - 1
             if(self.count < self.minimum):
                 self.active = False
-    
+
     def getRandomness(self):
         if(self.varianceType == "uniform"):
             return (self.mean +random.randint(0,self.var))
         if(self.varianceType == "normal"):
             return int(round(random.normal(self.mean,self.var)))
         if(self.varianceType == "exponential"):
-            return int(round( np.random.exponential(1/self.mean)))
+            return int(round( np.random.exponential(self.mean)))
         else:
             return 0
-                
+
     def __repr__(self):
         return "<Station name:%s size: %d and is %s>" % (self.name, self.maximum,self.active)
 
     def __str__(self):
         return "Station %s, has size %d and is %s"  % (self.name, self.maximum,self.active)
-    
-    
-            
-    
-            
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+

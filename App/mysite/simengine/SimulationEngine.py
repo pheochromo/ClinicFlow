@@ -19,11 +19,12 @@ settings = db.application_setting #data of setting
 result = db.result # temporarily store the data of simulation
 schedule_list = db.schedulelist # a list of schedule, contain date and settings
 
-startTime = (8*60)
-endTime = (17*60)
+startTime = (6*60)          #start time of simulation
+workerStartTime = (8*60)    #start time when workers arrive
+endTime = (20*60)           #end time of simulation
 
-patientCount = 0
-patientCompleted = 0
+patientCount = 0            #check to see how many patients there have been
+patientCompleted = 0        #check to see how many patients have completed the clinic
 
 
 def Simulation(env,clinic,workerSchedule,patientSchedule,outfile):
@@ -48,11 +49,13 @@ def Simulation(env,clinic,workerSchedule,patientSchedule,outfile):
     averageDownTime = 0
     for person in patientSchedule.patients:
         averageDownTime = averageDownTime + (person.completionTime - person.timeInService)
+        print(person.completionTime)
 
         personwait = {"Name":"personWaitTime", "patientName":person.name, "startTime":(person.completionTime - person.timeInService)}
         db[patientSchedule.date+"result"].insert_one(personwait)
 
     averageDownTime = averageDownTime / (len(patientSchedule.patients))
+
 
     #write statistics to DB
     clinicStats = {"Name":"clinicStats", "averageClinicTime":averageClinicTime, "averageDownTime":averageDownTime}
@@ -63,7 +66,7 @@ def Simulation(env,clinic,workerSchedule,patientSchedule,outfile):
 
 def workerRun(env,worker,clinic,resources):
     global patientCount; global patientCompleted;
-    yield env.timeout(worker.scheduledTime)
+    yield env.timeout(worker.scheduledTime + (workerStartTime - startTime)) ##start the worker at their start time
     print('%s arriving at %s' % (worker.name, prettyTime(startTime,env.now)))
     while(patientCompleted < patientCount):
         found = False
@@ -95,12 +98,10 @@ def workerRun(env,worker,clinic,resources):
 
 def patientRun(env, patient,clinic,resources, patientSchedule):
     global patientCount; global patientCompleted;
-    yield env.timeout(patient.arrivalTime)
+    yield env.timeout(patient.arrivalTime + (workerStartTime - startTime)) ## start the patient at their scheudled start time
     print('%s arriving at %s' % (patient.name, prettyTime(startTime,env.now)))
     while(len(patient.locations) > 0 ):
         for i in range(0,len(resources)):
-            print("here")
-            print(patient.locations)
             if (clinic.stations[i].name in patient.locations) :
                 with resources[i].request(priority=1) as req:
                     if(clinic.stations[i].active == True) and (len(set(patient.locations) - set(clinic.stations[i].prerequesites)) == (len(patient.locations) -1)):
